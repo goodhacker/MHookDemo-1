@@ -60,7 +60,6 @@ bool My_dvmLoadNativeCode(char* pathName, void* classLoader, char** detail){
 	}
 	//配置文件不存在，直接退出
 	if(Config == NULL)return _dvmLoadNativeCode(pathName,classLoader,detail);
-
 	//判断配置文件中是否有进程名，有进行HOOK
 	if((strstr(Config,mName)!= NULL)){
 		LOGD("dvmLoadNativeCode Hook_Main");

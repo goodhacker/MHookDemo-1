@@ -381,8 +381,8 @@ static int writeAdd128_Limit(unsigned char* inAddr,u4 inData){
 ************************************************************
 */
 	size_t AlignAdd(size_t inAddr,size_t inAli){
-		size_t mSzie = inAli - inAddr&(inAli-1);
-		return  inAddr+mSzie;
+		size_t mSzie = (inAddr+inAli-1)&(~(inAli-1));
+		return  mSzie;
 	}
 /*
 ************************************************************

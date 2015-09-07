@@ -324,7 +324,7 @@ public:
 		//获取debug模块内存，没有就新建
 		str_ModMem* modList =inMem->getByName("ClassData");
 		if(NULL == modList){
-			modList = inMem->newNameMem("ClassData",AlignAdd(GetSize(ClassD),0x100));
+			modList = inMem->newNameMem("ClassData",AlignAdd(GetSize(ClassD),0x04));
 		}
 		DEXLOG("[File]ClassD %08x %08x",modList->Offset,modList->Length);
 		//
@@ -381,7 +381,9 @@ public:
 		mCode->Size_Code =*(u4*)mMem;mMem += 4;
 		//获取整个方法代码宽度、然后对齐、定方位代码尾端，查看是否有其他数据
 		mCode->CodeSize =(mCode->Size_Code*2+3)&(~3);
-		mCode->CodeInfo = (void*)mMem;
+		mCode->CodeInfo = (char*)malloc(mCode->CodeSize);
+		memcpy(mCode->CodeInfo,mMem,mCode->CodeSize);
+//		mCode->CodeInfo = (void*)mMem;
 		mMem += mCode->CodeSize;
 		//判断是否存在Try 和Catch,然后获取异常宽度
 		if(mCode->Size_Tries != 0){

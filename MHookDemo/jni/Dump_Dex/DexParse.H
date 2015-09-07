@@ -124,7 +124,7 @@ public:
 			encoded = new Dex_Encoded(inDex,maps);
 		}
 		if(maps->getTypeItem(kDexTypeDebugInfoItem) != NULL){
-		//	debug = new Dex_Debug(inDex,maps);
+			debug = new Dex_Debug(inDex,maps);
 		}
 		//包含了 Class_Def、Class_Code、Code
 		Dexclass = new Dex_Class();

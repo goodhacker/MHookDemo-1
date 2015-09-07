@@ -1,5 +1,10 @@
 #ifndef __DexDebug_H_
 #define __DexDebug_H_
+#include <stdio.h>
+#include <unistd.h>
+#include "HFile/NativeLog.h"
+#include "Dump_Dex.H"
+#include "Module_Mem.H"
 #include "DexUtil.H"
 struct DebugItem{
 	DebugItem* 	next;
@@ -34,29 +39,47 @@ public:
 	Dex_Debug(DexFile* inDex,Dex_Maps* inMap){
 		DEXLOG("[Parse]Dex_Debug");
 		mapsItem* inMapsItem = inMap->getTypeItem(kDexTypeDebugInfoItem);
+		mapsItem* nextMaps = inMap->getTypeItem(kDexTypeCodeItem);
 		if(inMapsItem == NULL)return;
 		u4	mMemStart =(u4)inDex->pHeader + inMapsItem->offset;
 		u1* mMem =(u1*)mMemStart;
-		for(int m_i = 0;m_i < inMapsItem->size;m_i++){
+		DebugList* _debug = NULL;
+		debug = (DebugList*)Alloc(sizeof(DebugList));
+		debug->BS.SetLoad((u4)inDex->pHeader,inMapsItem->offset);
+		debug->BS.MemSize = nextMaps->offset -inMapsItem->offset;
+	/*	for(int m_i = 0;m_i < inMapsItem->size;m_i++){
 			DebugList* _List = (DebugList*)Alloc(sizeof(DebugList));
-			_List->BS.SetLoadOffset((u4)mMem-(u4)inDex->pHeader);
+			_List->BS.SetLoad((u4)inDex->pHeader,(u4)mMem);
 			mMem = readLeb128(mMem,&_List->number);
 			mMem = readLeb128(mMem,&_List->Size_Reg);
-			DEXLOG("Dex_Debug number:%08x",_List->number);
-//			Parse("Dex_Debug Size_Reg:%08x",_List->Size_Reg);
-			u4 mData = 0;
-			do{
+			DEXLOG("Dex_Debug %p %p",_List->number,_List->Size_Reg);
+			//获取parameter name
+			for(int m_j = 0;m_j < _List->Size_Reg;m_j++){
+				u4 mData = 0;
 				mMem = readLeb128(mMem,&mData);
-				if(mData != 0){
-					DebugItem* _Item = (DebugItem*)Alloc(sizeof(DebugItem));
-					_Item->param_name = mData;
-					DEXLOG("Dex_Debug param_name:%08x",mData);
-					_List->Item = (DebugItem*)AddToLast(_List->Item,_Item);
+			}
+			bool isOver = false;
+			u4 oldData = 0;
+			do{
+				u4 mData =*mMem++;
+				if(mData == 0){
+					if((oldData != 3)&&(oldData != 4)&&(oldData != 5)){
+						isOver = true;
+					}
 				}
-			}while(mData != 0);
+				if((oldData == 5)&&(mData == 5)){
+					mData = 0;
+				}
+				oldData = mData;
+			}while(!isOver);
 			_List->BS.MemSize = SubAddr3(mMem,_List->BS.Offset_Load,inDex->pHeader);
-			debug =  (DebugList*)AddToLast(debug,_List);
-		}
+			if(NULL == _debug){
+				debug =  (DebugList*)AddToLast(debug,_List);
+				_debug =  (DebugList*)GetLastLink(debug);
+			}else{
+				_debug =  (DebugList*)AddLink(_debug,_List);
+			}
+		}/**/
 	}
 /*
 ************************************************************
@@ -74,6 +97,15 @@ public:
 		DEXLOG("Dex_Debug DatatoFile");
 		str_ModMem* modList =inMem->getByName("DebugInfo");
 		if(NULL == modList){
+			modList = inMem->newNameMem("DebugInfo",AlignAdd(debug->BS.MemSize,0x04));
+			DEXLOG("debug %08x %08x",modList->Offset,modList->Length);
+		}
+		memcpy(modList->Addr,(u1*)debug->BS.GetLoad(),debug->BS.MemSize);
+		debug->BS.Offset_File = modList->Offset;
+		return ;
+		/*
+		str_ModMem* modList =inMem->getByName("DebugInfo");
+		if(NULL == modList){
 			modList = inMem->newNameMem("DebugInfo",AlignAdd(GetSize(debug),0x04));
 			DEXLOG("debug %08x %08x",modList->Offset,modList->Length);
 		}
@@ -85,7 +117,9 @@ public:
 		DebugList* _List =debug;
 		while(NULL != _List){
 			_List->BS.Offset_File = AddAddr2(modList->Offset,SubAddr2(mMem,modList->Addr));
-			mMem = writeL128(mMem,_List->number);
+			memcpy(mMem,(u1*)_List->BS.GetLoad(),_List->BS.MemSize);
+			mMem += _List->BS.MemSize;
+			/*mMem = writeL128(mMem,_List->number);
 			mMem = writeL128(mMem,_List->Size_Reg);
 			DebugItem* _Item = _List->Item;
 			while(NULL != _Item){
@@ -93,7 +127,7 @@ public:
 				_Item = _Item->next;
 			}
 			_List = _List->next;
-		}
+		}/**/
 	}
 /*
 ************************************************************
@@ -103,14 +137,17 @@ public:
 */
 	size_t LoadToFile(size_t inLoad){
 		if(inLoad == 0)return 0;
+		size_t mSize = inLoad - debug->BS.Offset_Load;
+		mSize +=debug->BS.Offset_File;
+		/*
 		DebugList* mList = debug;
 		while(mList != NULL){
 			if(mList->BS.Offset_Load == inLoad){
 				return mList->BS.Offset_File;
 			}
 			mList = mList->next;
-		}
-		return inLoad;
+		}/**/
+		return mSize;
 	}
 };
 

@@ -137,23 +137,6 @@ public:
 *从DexFile中读取Annot类
 ************************************************************
 */
-	Annot_List* DexAnnot_Annot(DexFile* inDex,u4 inOffset){
-		//获取基本数据
-
-
-
-
-
-
-
-		return NULL;
-	}
-/*
-************************************************************
-*				Dex_Annot
-*从DexFile中读取Annot类
-************************************************************
-*/
 	void DexAnnot(DexFile* inDex,Dex_Maps* maps){
 		if(NULL == maps->getTypeItem(kDexTypeAnnotationItem)){
 			DEXLOG("[Parse]No Have Annot");
@@ -175,7 +158,7 @@ public:
 			mAnnotAddr = readLeb128(mAnnotAddr,&mAnnot->Visibility);
 			mAnnotAddr = readLeb128(mAnnotAddr,&mAnnot->Type);
 			mAnnotAddr = readLeb128(mAnnotAddr,&mAnnot->Count);
-			DEXLOG("DexAnnot %p: %p %p %p",m_i,mAnnot->Visibility,mAnnot->Type,mAnnot->Count);
+//			DEXLOG("DexAnnot %p: %p %p %p",m_i,mAnnot->Visibility,mAnnot->Type,mAnnot->Count);
 			for(int m_j = 0;m_j < mAnnot->Count;m_j++){
 				Annot_List* mList =(Annot_List*)Alloc(sizeof(Annot_List));
 				u4	mType = 0 ;
@@ -185,17 +168,28 @@ public:
 				mAnnotAddr = readLeb128(mAnnotAddr,&mList->Ele_Type);
 				if(kDexAnnotationAnnotation == mList->Ele_Type){
 					Annot_List* mSonList =(Annot_List*)Alloc(sizeof(Annot_List));
-					mAnnotAddr = readLeb128(mAnnotAddr,&mList->Ele_Type);
-					mAnnotAddr = readLeb128(mAnnotAddr,&mList->Ele_Size);
-					for(int m_k  = 0;m_k < mList->Ele_Size;m_k++){
-
-
-
-
-
+					mAnnotAddr = readLeb128(mAnnotAddr,&mSonList->Ele_Type);
+					mAnnotAddr = readLeb128(mAnnotAddr,&mSonList->Ele_Size);
+//					DEXLOG("DexAnnot kDex  %p %p ",mSonList->Ele_Type,mSonList->Ele_Size);
+					for(int m_k  = 0;m_k < mSonList->Ele_Size;m_k++){
+						u4	k_Type = 0;
+						u4	k_Size = 0;
+						mAnnotAddr = readLeb128(mAnnotAddr,&k_Type);
+						k_Type = *mAnnotAddr++;
+//						DEXLOG("DexAnnot kDex2  %p  ",k_Type);
+						if(kDexAnnotationArray == k_Type){
+							Annot_Element* mEle = NULL;
+							mAnnotAddr = readLeb128(mAnnotAddr,&k_Size);
+//							DEXLOG("DexAnnot kDex3  %p  ",k_Size);
+							if(mSonList->Ele_Size != NULL)
+								mSonList->Item  = DexAnnot_Element(inDex,mAnnotAddr,k_Size);
+							mAnnotAddr += GetSize(mList->Item);
+						}else{
+//							DEXLOG("DexAnnot kDex4  %p  ",getValueLen(k_Type));
+							mAnnotAddr += getValueLen(k_Type);
+						}
 					}
-
-
+					mList->son = mSonList;
 				}else if(kDexAnnotationArray == mList->Ele_Type){//Array
 					Annot_Element* mEle = NULL;
 					mList->Ele_Type = mType;
@@ -205,7 +199,6 @@ public:
 					mAnnotAddr += GetSize(mList->Item);
 				}else{
 					//NoArray
-//					Parse("DexAnnot 未出现Array %08x",mList->Ele_Type);
 					mList->EleValue_Len = getValueLen(mList->Ele_Type);
 					switch(mList->EleValue_Len){
 					case 4:
@@ -440,12 +433,12 @@ public:
 		Annot* m_Annot = annot;
 		u1* annot_Addr = (u1*)modList->Addr;
 		//设置Annot
-		DEXLOG("[File]Annot Code");
 		while(NULL != m_Annot){
 			//设置偏移
 			m_Annot->BS.Offset_File = AddAddr2(modList->Offset,SubAddr2(annot_Addr,modList->Addr));
+//			DEXLOG("[File]Annot_Item %08x %08x ",m_Annot->BS.GetLoad(),m_Annot->BS.MemSize);
 			memcpy(annot_Addr,(u1*)m_Annot->BS.GetLoad(),m_Annot->BS.MemSize);
-			annot_Addr +=m_Annot->BS.MemSize;
+			annot_Addr += m_Annot->BS.MemSize;
 			m_Annot = m_Annot->next;
 			/*
 			annot_Addr = writeL128(annot_Addr,m_Annot->Visibility);

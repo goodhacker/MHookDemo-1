@@ -10,6 +10,7 @@
 typedef struct Encoded_Item{
 	struct Encoded_Item* next;
 	u4	type;
+	u4	HValue;
 	u4	Value;
 	u4 	KeyLen;
 	u4 	ValueLen;
@@ -74,23 +75,24 @@ public:
 		mapsItem* _mapsItem =inmaps->getTypeItem(kDexTypeEncodedArrayItem);
 		DEXLOG("[Parse]Dex_Encoded %08x %08x",_mapsItem->offset,_mapsItem->size);
 		//设置起始地址
-		u1* encodedIds =(u1*)((u1*)inDex->pHeader + _mapsItem->offset);
+		u1* encodedIds =(u1*)AddAddr2(pHeader,_mapsItem->offset);
 		//遍历全部Encoded_List
 		Encoded_List* _CodeList = NULL;
 		for(int m_i = 0;m_i < _mapsItem->size;m_i++){
 			Encoded_List* mlist = (Encoded_List*)Alloc(sizeof(Encoded_List));
-			mlist->BS.Offset_Load =(u4)encodedIds - (u4)inDex->pHeader;
-			mlist->Itemsize = readLeb128(encodedIds);
-			size_t mOffset = (size_t)encodedIds;
- 			encodedIds = NEXTLeb128(encodedIds);
+			mlist->BS.SetLoad((u4)pHeader,(u4)encodedIds);
+			encodedIds = readLeb128(encodedIds,&mlist->Itemsize);
 			//遍历全部Encoded_Item
 			for(int m_j = 0;m_j < mlist->Itemsize;m_j++){
 				Encoded_Item* mitem = (Encoded_Item*)Alloc(sizeof(Encoded_Item));
-				mitem->type =readLeb128(encodedIds);
-				mitem->KeyLen = readLimitLeb128(encodedIds);
-				encodedIds = NEXTLeb128(encodedIds);
+				mitem->type =*encodedIds++;
 				mitem->ValueLen = getValueLen(mitem->type);
 				switch(mitem->ValueLen){
+					case 8:
+						mitem->HValue = *(encodedIds+7)<<24;
+						mitem->HValue += *(encodedIds+6)<<16;
+						mitem->HValue += *(encodedIds+5)<<8;
+						mitem->HValue += *(encodedIds+4)&0xFF;
 					case 4:
 						mitem->Value+= *(encodedIds+3)<<24;
 					case 3:
@@ -101,10 +103,9 @@ public:
 						mitem->Value += *encodedIds&0xFF;
 				}
 				encodedIds += mitem->ValueLen;
-				mlist->item =(Encoded_Item*)AddToLast(mlist->item,mitem);
+				//mlist->item =(Encoded_Item*)AddToLast(mlist->item,mitem);
 			}
-			mOffset = (size_t)encodedIds - mOffset;
-			mlist->BS.MemSize = mOffset;
+			mlist->BS.SetMemSize(SubAddr3(encodedIds,pHeader,mlist->BS.Offset_Load));
 			//将_item添加到列表中，AddToLast非常耗时
 			if(_CodeList == NULL){
 				CodeList = (Encoded_List*)AddToLast(CodeList,mlist);
@@ -141,24 +142,8 @@ public:
 		while(NULL != mlist){
 			//设置加载地址
 			mlist->BS.Offset_File =AddAddr2(modList->Offset,SubAddr2(mMem,modList->Addr));
-			Encoded_Item* mitem = mlist->item;
-			mMem = writeL128(mMem,mlist->Itemsize);
-			//遍历子项
-			while(mitem != NULL){
-				mMem = writeL128(mMem,mitem->type);
-				switch(mitem->ValueLen){
-				case 4:
-					*(mMem+3) = (mitem->Value>>24) &0xFF;
-				case 3:
-					*(mMem+2) = (mitem->Value>>16) &0xFF;
-				case 2:
-					*(mMem+1) = (mitem->Value>>8) &0xFF;
-				case 1:
-					*mMem = mitem->Value &0xFF;
-				}
-				mMem += mitem->ValueLen;
-				mitem = mitem->next;
-			}
+			memcpy(mMem,(u1*)mlist->BS.GetLoad(),mlist->BS.MemSize);
+			mMem += mlist->BS.MemSize;
 			mlist = mlist->next;
 		}
 	}

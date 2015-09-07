@@ -543,6 +543,7 @@ typedef struct DumpInfo{
 	size_t len;
 	DexFile* Dex;
 	void* BackOldDex;
+	void* DexParse;
 }DumpInfo;
 //
 #endif __DUMPDEX_H_
