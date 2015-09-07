@@ -112,7 +112,6 @@ public:
 		str_ModMem* modIds =inMem->getByName("StringIDS");
 		if(modIds== NULL){
 			modIds = inMem->newNameMem("StringIDS",GetCount(Idsitem)*4);
-
 		}
 		DEXLOG("[File]String_Ids %08x %08x",modIds->Offset,modIds->Length);
 		//修改maps偏移地址

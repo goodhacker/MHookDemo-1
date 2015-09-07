@@ -122,15 +122,15 @@ public:
 ************************************************************
 */
 	void DatatoFile(Mod_Mem* inMem,Dex_Maps* inmaps){
-		DEXLOG("[+]Dex_Encoded DatatoFile");
+		DEXLOG("[File]Dex_Encoded DatatoFile");
 		if(NULL == CodeList){
-			DEXLOG("没有储存数据!");
+			DEXLOG("[ERR]没有储存数据!");
 			return ;
 		}
 		str_ModMem* modList =inMem->getByName("EncodedArray");
 		if(NULL == modList){
 			modList = inMem->newNameMem("EncodedArray",AlignAdd(GetSize(CodeList),0x04));
-			DEXLOG("EncodedArray %08x %08x %08x",modList->Addr,modList->Length,modList->Offset);
+			DEXLOG("[File]EncodedArray %08x %08x",modList->Offset,modList->Length);
 		}
 		//设置MAPS
 		inmaps->getTypeItem(kDexTypeEncodedArrayItem)->offset = modList->Offset;

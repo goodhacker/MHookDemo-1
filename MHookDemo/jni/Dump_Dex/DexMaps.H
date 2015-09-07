@@ -67,6 +67,7 @@ public:
 		//获取Map个数,设置Maps Item 结构起始地址
 		Log(mapStart);
 		Map->mapSize = *((u4*)mapStart);
+		//Map->mapSize = 0x12;
 		DexMapId* MapsIds =(DexMapId*)(mapStart+4);
 		//遍历Map内容
 		for(int m_i = 0;m_i < Map->mapSize;m_i++){
@@ -97,6 +98,27 @@ public:
 	}
 /*
 ************************************************************
+*				setTypeSize
+*设置子模块偏移地址
+************************************************************
+*/
+	void setTypeSize(u2 in_type,u4 inSize){
+		mapsItem* mItem = Map->item;
+		while(mItem != NULL){
+			if(mItem->type == in_type){
+				mItem->size = inSize;
+				return ;
+			}
+			mItem = mItem->next;
+		}
+		Map->mapSize++;
+		mItem = (mapsItem*)Alloc(sizeof(mapsItem));
+		mItem->type = in_type;
+		mItem->size = inSize;
+		Map->item = (mapsItem*)AddToLast(Map->item,mItem);
+	}
+/*
+************************************************************
 *				setTypeOffset
 *设置子模块偏移地址
 ************************************************************
@@ -110,6 +132,11 @@ public:
 			}
 			mItem = mItem->next;
 		}
+		Map->mapSize++;
+		mItem = (mapsItem*)Alloc(sizeof(mapsItem));
+		mItem->type = in_type;
+		mItem->offset = inoffset;
+		Map->item = (mapsItem*)AddToLast(Map->item,mItem);
 	}
 /*
 ************************************************************
@@ -121,7 +148,6 @@ public:
 		//判断是否存在 IDSString段，不存在就添加IDSString段
 		DEXLOG("Dex_Maps IDStoFile");
 		str_ModMem* modIds =inMem->getByName("MapsIDS");
-
 		if(modIds == NULL){
 			modIds = inMem->newNameMem("MapsIDS",Map->mapSize*0xC+4);
 			DEXLOG("Dex_Maps DatatoFile %08x %08x %08x",modIds->Addr,modIds->Length,modIds->Offset);
