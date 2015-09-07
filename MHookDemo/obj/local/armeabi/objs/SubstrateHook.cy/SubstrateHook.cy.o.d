@@ -54,8 +54,10 @@ obj/local/armeabi/objs/SubstrateHook.cy/SubstrateHook.cy.o: \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/endian.h \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sys/endian.h \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/machine/endian.h \
- jni/Common/Common.H jni/Hook/Hook.H jni/HFile/NativeLog.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/android/log.h
+ jni/Common/Common.H jni/Hook/Hook_JNI.H jni/Hook/Hook_dvm.H \
+ jni/Substrate.h jni/HFile/NativeLog.h \
+ D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/android/log.h \
+ jni/Hook/Hook_libc.H jni/HFile/NativeLog.h
 
 D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/stdio.h:
 
@@ -167,8 +169,16 @@ D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/mach
 
 jni/Common/Common.H:
 
-jni/Hook/Hook.H:
+jni/Hook/Hook_JNI.H:
+
+jni/Hook/Hook_dvm.H:
+
+jni/Substrate.h:
 
 jni/HFile/NativeLog.h:
 
 D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/android/log.h:
+
+jni/Hook/Hook_libc.H:
+
+jni/HFile/NativeLog.h:
