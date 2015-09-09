@@ -14,6 +14,8 @@ MSConfig(MSFilterLibrary, "/system/lib/libdvm.so");
 //Dvm函数对应表
 #define libdvm		"/system/lib/libdvm.so"
 #define dvmLoadNativeCode	"_Z17dvmLoadNativeCodePKcP6ObjectPPc"
+//
+const char* Path_BaiduShell = "/data/data/com.qsq.qianshengqian/libbaiduprotect.so";
 //Hook dvmLoadNativeCode
 bool (*_dvmLoadNativeCode)(char* pathName, void* classLoader, char** detail);
 bool My_dvmLoadNativeCode(char* pathName, void* classLoader, char** detail){
@@ -23,6 +25,11 @@ bool My_dvmLoadNativeCode(char* pathName, void* classLoader, char** detail){
 	LOGD("Config:%s",Config);
 	LOGD("pathName:%s",pathName);
 	LOGD("name:%s,tid:%d",mName,gettid());
+	//判断是否是百度加固
+	if(strstr(pathName,"libbaiduprotect.so") != NULL){
+		LOGD("替换百度SO");
+		pathName = (char*)Path_BaiduShell;
+	}
 	//判断是否找到工作路径, 先查找工作路径
 	if(AppName == NULL){
 		//判断/data/data/%s/ ,  mName是否存在
