@@ -6,6 +6,7 @@
 #include "Dump_Dex.H"
 #include "Module_Mem.H" #include "DexMaps.H"
 #include "DexUtil.H"
+namespace Dex{
 //字符串保存列表
 typedef struct stringItem{
 	struct stringItem* next;
@@ -157,5 +158,5 @@ public:
 			mitem = mitem->next;
 		}
 	}
-};
+};};
 #endif

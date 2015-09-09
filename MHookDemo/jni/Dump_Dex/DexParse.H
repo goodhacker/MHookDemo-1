@@ -24,8 +24,10 @@
 namespace Dex{
 class DexParse : DexUtil{
 public:
-	DexFile* dex = NULL;
-	Mod_Mem *mem = NULL;
+	void* 	loadAddr = NULL;
+	size_t	Size = NULL;
+	DexFile*	dex = NULL;
+	Mod_Mem*	mem = NULL;
 //IDS段
 	Dex_Header* 	header = NULL;
 	Dex_String* 	string = NULL;
@@ -39,6 +41,7 @@ public:
 	Dex_Encoded*	encoded = NULL;
 	Dex_Annot* 		annot = NULL;
 	Dex_Debug*		debug = NULL;
+	DexParse(){}
 /*
 ************************************************************
 *				DumpToFile
@@ -103,44 +106,57 @@ public:
 ************************************************************
 */
  	DexParse(void* inAddr,DexFile* inDex){
+ 		loadAddr = inAddr;
+ 		dex = inDex;
+	}
+/*
+************************************************************
+*				Parse
+* 解析DexFile
+* 解析每一个Item，然后在DumpToFile中实现组装
+* 将解析和组装分开做
+* 	1.为了2代以上加固
+* 	2.为了调试添加数据
+*	3.
+************************************************************
+*/
+ 	void Parse(){
  		DEXLOG("DexParse");
- 		// 初始化dex
-		dex = inDex;
 		//Header、maps
-		header = new Dex_Header(inDex);
-		maps = new Dex_Maps(inDex);
+		header = new Dex_Header(dex);
+		maps = new Dex_Maps(dex);
 		//string、types、proto、fileds、methods、Class_Def
-		string = new Dex_String(inDex,maps);
-		types = new Dex_Types(inDex,maps);
-		proto = new Dex_Proto(inDex,maps);
-		fileds = new Dex_Fileds(inDex,maps);
-		methods = new Dex_Methods(inDex,maps);
+		string = new Dex_String(dex,maps);
+		types = new Dex_Types(dex,maps);
+		proto = new Dex_Proto(dex,maps);
+		fileds = new Dex_Fileds(dex,maps);
+		methods = new Dex_Methods(dex,maps);
 		//将Annot分开处理、使用Annot类进行解析
 		//Annot中包含kDexTypeAnnotationSetRefList、kDexTypeAnnotationSetItem、kDexTypeAnnotationItem、kDexTypeAnnotationsDirectoryItem
-		annot = new Dex_Annot(inDex,maps);
+		annot = new Dex_Annot(dex,maps);
 		//下面首先要判断是否存在，然后再去初始化
 		//Encoded、Debug、Dex_Code
 		if(maps->getTypeItem(kDexTypeEncodedArrayItem) != NULL){
-			encoded = new Dex_Encoded(inDex,maps);
+			encoded = new Dex_Encoded(dex,maps);
 		}
 		if(maps->getTypeItem(kDexTypeDebugInfoItem) != NULL){
-			debug = new Dex_Debug(inDex,maps);
+			debug = new Dex_Debug(dex,maps);
 		}
 		//包含了 Class_Def、Class_Code、Code
 		Dexclass = new Dex_Class();
-		Dexclass->Dex_ClassDef(inDex,maps);
+		Dexclass->Dex_ClassDef(dex,maps);
 		//解析ClassData  然后根据内容解析Dex_Code
 		//百度加固就消灭了kDexTypeClassDataItem(数据在只是将Maps从0x12改成0x11),
 		if(NULL != maps->getTypeItem(kDexTypeClassDataItem)){
 			DEXLOG("采用maps，读取Class_data");
-			Dexclass->Dex_ClassCode(inDex,maps);
+			Dexclass->Dex_ClassCode(dex,maps);
 		}else{
 			DEXLOG("不存在kDexTypeClassDataItem,从ClassDef中读取数据");
-			Dexclass->Dex_ClassCode(inDex);
+			Dexclass->Dex_ClassCode(dex);
 		}
 		//通过读取Class_data偏移获取Code
-		Dexclass->Code_AddAll(inDex);
+		Dexclass->Code_AddAll(dex);
 		DEXLOG("[Parse]Over");
-	}
+ 	}
 };};
 #endif

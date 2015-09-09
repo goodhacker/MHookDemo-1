@@ -57,8 +57,16 @@ obj/local/armeabi/objs/SubstrateHook.cy/SubstrateHook.cy.o: \
  jni/Common/Common.H jni/Hook/Hook_JNI.H jni/Hook/Hook_dvm.H \
  jni/Substrate.h jni/HFile/NativeLog.h \
  E:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/android/log.h \
- jni/Common/Utils.H jni/Hook/Hook_libc.H jni/Shell/Shell.H \
- jni/HFile/NativeLog.h \
+ jni/Common/Utils.H jni/Shell/Shell.H jni/Shell/Baidu_Shell.H \
+ jni/Dump_Dex/DexParse.H jni/Dump_Dex/Dump_Dex.H \
+ jni/Dump_Dex/Module_Mem.H \
+ E:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/ctype.h \
+ jni/Dump_Dex/DexUtil.H jni/Dump_Dex/DexHeader.H jni/Dump_Dex/DexString.H \
+ jni/Dump_Dex/DexMaps.H jni/Dump_Dex/DexTypes.H jni/Dump_Dex/DexProto.H \
+ jni/Dump_Dex/DexFields.H jni/Dump_Dex/DexMethods.H \
+ jni/Dump_Dex/Dex_Encoded.H jni/Dump_Dex/Dex_Annot.H \
+ jni/Dump_Dex/DexDebug.H jni/Dump_Dex/DexClass.H jni/Hook/Hook_libc.H \
+ jni/Shell/Shell.H jni/HFile/NativeLog.h \
  E:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/fcntl.h \
  E:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/linux/fadvise.h \
  E:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/linux/fcntl.h \
@@ -186,6 +194,42 @@ jni/HFile/NativeLog.h:
 E:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/android/log.h:
 
 jni/Common/Utils.H:
+
+jni/Shell/Shell.H:
+
+jni/Shell/Baidu_Shell.H:
+
+jni/Dump_Dex/DexParse.H:
+
+jni/Dump_Dex/Dump_Dex.H:
+
+jni/Dump_Dex/Module_Mem.H:
+
+E:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/ctype.h:
+
+jni/Dump_Dex/DexUtil.H:
+
+jni/Dump_Dex/DexHeader.H:
+
+jni/Dump_Dex/DexString.H:
+
+jni/Dump_Dex/DexMaps.H:
+
+jni/Dump_Dex/DexTypes.H:
+
+jni/Dump_Dex/DexProto.H:
+
+jni/Dump_Dex/DexFields.H:
+
+jni/Dump_Dex/DexMethods.H:
+
+jni/Dump_Dex/Dex_Encoded.H:
+
+jni/Dump_Dex/Dex_Annot.H:
+
+jni/Dump_Dex/DexDebug.H:
+
+jni/Dump_Dex/DexClass.H:
 
 jni/Hook/Hook_libc.H:
 

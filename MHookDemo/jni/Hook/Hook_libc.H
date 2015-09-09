@@ -15,13 +15,6 @@
 #define str_ptrace			"ptrace"
 #define str_free			"free"
 #define str_munmap			"munmap"
-//void*dlsym(void*handle,constchar*symbol)
-void* (*_dlsym)(void*handle,const char*symbol);
-void* My_dlsym(void*handle,const char*symbol){
-	LOGD("LibCall dlsym handle:%p,symbol:%s",handle,symbol);
-	return _dlsym(handle,symbol);
-}
-
 //open	int open(const char*pathname,int flags);
 void* (*_open)(const char * path,int flags);
 void* My_open(const char * path,int flags){
@@ -91,15 +84,6 @@ int My_munmap(void *start,size_t length){
 				MSHookFunction(mFun,(void*)&My_munmap,(void**)&_munmap);
 			}/**/
 		}
-		image = MSGetImageByName(str_linker);
-		if(image != NULL){
-			mFun = MSFindSymbol(image,str_dlsym);
-			if(mFun != NULL){
-				LOGD("LibCall _str_dlsym");
-				MSHookFunction(mFun,(void*)&My_dlsym,(void**)&_dlsym);
-			}
-		}
-
 		return 0;
 	}
 #endif

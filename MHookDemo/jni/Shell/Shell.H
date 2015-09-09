@@ -13,6 +13,7 @@
 ************************************************************
 */
 static int encryptClas = UNKnown;
+
 void setencryptClass(char* inLoadSo){
 	if(strstr(inLoadSo,Final_Baidu_Jiagu)){
 		LOGD("加固方式：百度加固");
@@ -21,14 +22,25 @@ void setencryptClass(char* inLoadSo){
 }
 /*
 ************************************************************
-*		Start_UnShell
-*根据加固类型获取加固方式*
+*		BeforeParse_UnShell
+*在解析之前的处理函数*
 ************************************************************
 */
-void Start_UnShell(){
+void BeforeParse_UnShell(void* inAddr,size_t inLen){
 	if(encryptClas == Baidu_Jiagu){
-		//百度加固脱壳
-		Dump_Baidu();
+		BeforeParse_Baidu(inAddr,inLen);
+	}
+}
+/*
+************************************************************
+*		BeforeParse_UnShell
+*在解析后的处理函数
+*比如一些加固需要延时才能让Dex完整
+************************************************************
+*/
+void AfterParse_UnShell(void* inDex){
+	if(encryptClas == Baidu_Jiagu){
+		AfterParse_Baidu(inDex);
 	}
 }
 #endif
