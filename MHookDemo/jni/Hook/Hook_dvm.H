@@ -28,7 +28,7 @@ void* My_dexFileParse(int *inAddr, unsigned int length, int parseFlags){
 /*	if(length > 0x2A00){
 		Dump_DexFile(inAddr,length,Out_DexFile);
 	}/**/
-	Dump_DexFile(inAddr,length,Out_DexFile);
+//	Dump_DexFile(inAddr,length,Out_DexFile);
 	return Out_DexFile;
 }
 //dvmDexFileOpenFromFd
@@ -52,14 +52,17 @@ int Hook_DVM(){
 	MSImageRef image = MSGetImageByName(libdvm);
 	void* mFun = NULL;
 	if(image != NULL){
+		//Hook解析函数
 		mFun = MSFindSymbol(image,dexFileParse);
 		if(mFun != NULL){
 			MSHookFunction(mFun,(void*)&My_dexFileParse,(void**)&_dexFileParse);
 		}
+		//
 		mFun = MSFindSymbol(image,dvmDexFileOpenFromFd);
 		if(mFun != NULL){
 //			MSHookFunction(mFun,(void*)&My_dvmDexFileOpenFromFd,(void**)&_dvmDexFileOpenFromFd);
 		}
+		//
 		mFun = MSFindSymbol(image,dvmDexFileOpenPartial);
 		if(mFun != NULL){
 //			MSHookFunction(mFun,(void*)&My_dvmDexFileOpenPartial,(void**)&_dvmDexFileOpenPartial);

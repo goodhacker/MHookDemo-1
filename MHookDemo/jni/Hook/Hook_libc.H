@@ -6,14 +6,22 @@
 #include "Substrate.h"
 #include "HFile/NativeLog.h"
 //libc
+#define str_linker			"/system/bin/linker"
 #define str_libc			"/system/lib/libc.so"
+#define str_dlsym			"dlsym"
 #define str_open			"open"
 #define str_fopen			"fopen"
 #define str_mmap			"mmap"
 #define str_ptrace			"ptrace"
 #define str_free			"free"
 #define str_munmap			"munmap"
-//
+//void*dlsym(void*handle,constchar*symbol)
+void* (*_dlsym)(void*handle,const char*symbol);
+void* My_dlsym(void*handle,const char*symbol){
+	LOGD("LibCall dlsym handle:%p,symbol:%s",handle,symbol);
+	return _dlsym(handle,symbol);
+}
+
 //open	int open(const char*pathname,int flags);
 void* (*_open)(const char * path,int flags);
 void* My_open(const char * path,int flags){
@@ -59,8 +67,10 @@ int My_munmap(void *start,size_t length){
  */
 	int Hook_Libc(){
 		MSImageRef image = MSGetImageByName(str_libc);
+		void* mFun = NULL;
 		if(image != NULL){
-			void* mFun = MSFindSymbol(image,str_open);
+			/*
+			mFun = MSFindSymbol(image,str_open);
 			if(mFun != NULL){
 				MSHookFunction(mFun,(void*)&My_open,(void**)&_open);
 			}
@@ -79,8 +89,17 @@ int My_munmap(void *start,size_t length){
 			mFun = MSFindSymbol(image,str_munmap);
 			if(mFun != NULL){
 				MSHookFunction(mFun,(void*)&My_munmap,(void**)&_munmap);
+			}/**/
+		}
+		image = MSGetImageByName(str_linker);
+		if(image != NULL){
+			mFun = MSFindSymbol(image,str_dlsym);
+			if(mFun != NULL){
+				LOGD("LibCall _str_dlsym");
+				MSHookFunction(mFun,(void*)&My_dlsym,(void**)&_dlsym);
 			}
 		}
+
 		return 0;
 	}
 #endif
