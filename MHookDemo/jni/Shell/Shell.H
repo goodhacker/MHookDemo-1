@@ -2,6 +2,7 @@
 #define __Shell_H_
 #include <stdio.h>
 #include <unistd.h>
+#include "Baidu_Shell.H"
 #define UNKnown					0
 #define Baidu_Jiagu				1
 #define Final_Baidu_Jiagu		"libbaiduprotect"
@@ -25,12 +26,10 @@ void setencryptClass(char* inLoadSo){
 ************************************************************
 */
 void Start_UnShell(){
-
-
-
-
-
-
+	if(encryptClas == Baidu_Jiagu){
+		//百度加固脱壳
+		Dump_Baidu();
+	}
 }
 #endif
 

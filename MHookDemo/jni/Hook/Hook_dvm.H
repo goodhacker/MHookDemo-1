@@ -5,56 +5,18 @@
 #include <sys/stat.h>
 #include "Substrate.h"
 #include "HFile/NativeLog.h"
+#include "Common/Utils.H"
 //dvm  Hook 段
 #define libdvm			"/system/lib/libdvm.so"
 #define dexFileParse	"_Z12dexFileParsePKhji"
 #define dvmDexFileOpenFromFd "_Z20dvmDexFileOpenFromFdiPP6DvmDex"
 #define dvmDexFileOpenPartial "_Z21dvmDexFileOpenPartialPKviPP6DvmDex"
-//获取LRS
-long GETLR(){
-	long mLR = NULL;
-	__asm__ __volatile__("mov %0, lr\n\t":  "=r"(mLR));
-	return mLR;
-}
+
 //调用外部Dump_DexFile
 extern void Dump_DexFile(void* inAddr,size_t inLen,void* inDex);
 //__________________________________________________________________________________________
 //									Libdvm
 extern JavaVM* GVM;
-//
-static char* jstringTostring(JNIEnv* env, jstring jstr)
-{
-	char* rtn = NULL;
-	jclass clsstring = env->FindClass("java/lang/String");
-	jstring strencode = env->NewStringUTF("utf-8");
-	jmethodID mid = env->GetMethodID(clsstring, "getBytes", "(Ljava/lang/String;)[B");
-	jbyteArray barr= (jbyteArray) env->CallObjectMethod( jstr, mid, strencode);
-	jsize alen = env->GetArrayLength(barr);
-	jbyte* ba = env->GetByteArrayElements(barr, JNI_FALSE);
-	if (alen > 0)
-	{
-		rtn = (char*)malloc(alen + 1);
-		memcpy(rtn, ba, alen);
-		rtn[alen] = 0;
-	}
-	env->ReleaseByteArrayElements(barr, ba, 0);
-	return rtn;
-}
-jstring pcharToJstring(JNIEnv* env, const char* pat, const char* encoding)
-{
-    jstring jencoding;
-    jbyteArray bytes = (env)->NewByteArray(strlen(pat));
-    jclass  gStringClass= (env)->FindClass("java/lang/String");
-    jmethodID  gmidStringInit= (env)->GetMethodID(gStringClass, "<init>", "([BLjava/lang/String;)V");
-
-    (env)->SetByteArrayRegion(bytes, 0, strlen(pat), (jbyte*)pat);
-    if (encoding == NULL)
-        jencoding= (env)->NewStringUTF("utf-8");
-    else
-        jencoding=(env)->NewStringUTF(encoding);
-
-    return (jstring)(env)->NewObject(gStringClass, gmidStringInit, bytes, jencoding);
-}
 //
 static void (*_BaidDu_A_e)(JNIEnv*,jobject,jobject);
 static void $My_BaidDu_A_e(JNIEnv *jni, jobject obj,jobject inStr)
