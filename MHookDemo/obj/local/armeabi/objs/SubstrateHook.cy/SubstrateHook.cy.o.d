@@ -57,7 +57,12 @@ obj/local/armeabi/objs/SubstrateHook.cy/SubstrateHook.cy.o: \
  jni/Common/Common.H jni/Hook/Hook_JNI.H jni/Hook/Hook_dvm.H \
  jni/Substrate.h jni/HFile/NativeLog.h \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/android/log.h \
- jni/Hook/Hook_libc.H jni/HFile/NativeLog.h
+ jni/Hook/Hook_libc.H jni/HFile/NativeLog.h \
+ D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/fcntl.h \
+ D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/linux/fadvise.h \
+ D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/linux/fcntl.h \
+ D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm/fcntl.h \
+ D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm-generic/fcntl.h
 
 D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/stdio.h:
 
@@ -182,3 +187,13 @@ D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/andr
 jni/Hook/Hook_libc.H:
 
 jni/HFile/NativeLog.h:
+
+D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/fcntl.h:
+
+D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/linux/fadvise.h:
+
+D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/linux/fcntl.h:
+
+D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm/fcntl.h:
+
+D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm-generic/fcntl.h:
