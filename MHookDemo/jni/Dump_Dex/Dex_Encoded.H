@@ -25,7 +25,7 @@ typedef struct Encoded_List{
 //
 class Dex_Encoded : DexUtil{
 public:
-	Encoded_List* CodeList = NULL;
+	FastLink<Encoded_List> CodeList;
 /*
 ************************************************************
 *				getValueLen
@@ -50,12 +50,12 @@ public:
 */
 	size_t LoadToFile(size_t inLoad){
 		if(inLoad == NULL)return NULL;
-		Encoded_List* mList = CodeList;
-		while(mList != NULL){
-			if(mList->BS.Offset_Load == inLoad){
-				return mList->BS.Offset_File;
+		CodeList.Reset();
+		while(CodeList.Get() != NULL){
+			if(CodeList.Get()->BS.Offset_Load == inLoad){
+				return CodeList.Get()->BS.Offset_File;
 			}
-			mList = mList->next;
+			CodeList.Next();
 		}
 		return inLoad;
 	}
@@ -77,7 +77,6 @@ public:
 		//设置起始地址
 		u1* encodedIds =(u1*)AddAddr2(pHeader,_mapsItem->offset);
 		//遍历全部Encoded_List
-		Encoded_List* _CodeList = NULL;
 		for(int m_i = 0;m_i < _mapsItem->size;m_i++){
 			Encoded_List* mlist = (Encoded_List*)Alloc(sizeof(Encoded_List));
 			mlist->BS.SetLoad((u4)pHeader,(u4)encodedIds);
@@ -106,13 +105,7 @@ public:
 				//mlist->item =(Encoded_Item*)AddToLast(mlist->item,mitem);
 			}
 			mlist->BS.SetMemSize(SubAddr3(encodedIds,pHeader,mlist->BS.Offset_Load));
-			//将_item添加到列表中，AddToLast非常耗时
-			if(_CodeList == NULL){
-				CodeList = (Encoded_List*)AddToLast(CodeList,mlist);
-				_CodeList = (Encoded_List*)GetLastLink(CodeList);
-			}else{
-				_CodeList = (Encoded_List*)AddLink(_CodeList,mlist);
-			}
+			CodeList.Add(mlist);
 		}
 	}
 /*
@@ -124,27 +117,27 @@ public:
 */
 	void DatatoFile(Mod_Mem* inMem,Dex_Maps* inmaps){
 		DEXLOG("[File]Dex_Encoded DatatoFile");
-		if(NULL == CodeList){
+		if(NULL == CodeList.GetSize()){
 			DEXLOG("[ERR]没有储存数据!");
 			return ;
 		}
 		str_ModMem* modList =inMem->getByName("EncodedArray");
 		if(NULL == modList){
-			modList = inMem->newNameMem("EncodedArray",AlignAdd(GetSize(CodeList),0x04));
+			modList = inMem->newNameMem("EncodedArray",AlignAdd(CodeList.GetMemSize(),0x04));
 			DEXLOG("[File]EncodedArray %08x %08x",modList->Offset,modList->Length);
 		}
 		//设置MAPS
 		inmaps->getTypeItem(kDexTypeEncodedArrayItem)->offset = modList->Offset;
 		//
 		u1* mMem = modList->Addr;
-		Encoded_List* mlist = CodeList;
+		CodeList.Reset();
 		//遍历父项
-		while(NULL != mlist){
+		while(NULL != CodeList.Get()){
 			//设置加载地址
-			mlist->BS.Offset_File =AddAddr2(modList->Offset,SubAddr2(mMem,modList->Addr));
-			memcpy(mMem,(u1*)mlist->BS.GetLoad(),mlist->BS.MemSize);
-			mMem += mlist->BS.MemSize;
-			mlist = mlist->next;
+			 CodeList.Get()->BS.Offset_File =AddAddr2(modList->Offset,SubAddr2(mMem,modList->Addr));
+			memcpy(mMem,(u1*) CodeList.Get()->BS.GetLoad(), CodeList.Get()->BS.MemSize);
+			mMem +=  CodeList.Get()->BS.MemSize;
+			CodeList.Next();
 		}
 	}
 };

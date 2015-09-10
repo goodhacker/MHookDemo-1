@@ -15,7 +15,7 @@ typedef struct FieldsItem{
 }FieldsItem;
 class Dex_Fileds : DexUtil{
 public:
-	FieldsItem* Idsitem = NULL;
+	FastLink<FieldsItem> IDS;
 /*
 ************************************************************
 *				Dex_Fileds
@@ -29,20 +29,14 @@ public:
 		DEXLOG("[Parse]Dex_Fileds %08x %08x",pHeader->fieldIdsOff,pHeader->fieldIdsSize);
 		//按照Fileds保存方式设置头，然后按结构体读取
 		DexFieldId* fieldIds =(DexFieldId*)AddAddr2(pHeader,pHeader->fieldIdsOff);
-		//遍历FieldsItem
-		FieldsItem* _Idsitem = NULL;
+		//遍历添加FieldsItem
 		for(int m_i = 0;m_i < pHeader->fieldIdsSize;m_i++){			FieldsItem* _item = (FieldsItem*)Alloc(sizeof(FieldsItem));
 			_item->classIdx = fieldIds->classIdx;
 			_item->typeIdx = fieldIds->typeIdx;
 			_item->nameIdx = fieldIds->nameIdx;
 			fieldIds++;
 			//将_item添加到列表中，AddToLast非常耗时
-			if(_Idsitem == NULL){
-				Idsitem = (FieldsItem*)AddToLast(Idsitem,_item);
-				_Idsitem = (FieldsItem*)GetLastLink(Idsitem);
-			}else{
-				_Idsitem = (FieldsItem*)AddLink(_Idsitem,_item);
-			}
+			IDS.Add(_item);
 		}
 	}
 /*
@@ -55,22 +49,23 @@ public:
 		//判断是否存在 IDSString段，不存在就添加IDSString段
 		str_ModMem* modIds =inMem->getByName("FiledsIDS");
 		if(modIds== NULL){
-			modIds = inMem->newNameMem("FiledsIDS",GetCount(Idsitem)*8);
+			modIds = inMem->newNameMem("FiledsIDS",IDS.GetSize()*8);
 		}
 		DEXLOG("[File]Fileds_Ids %08x %08x",modIds->Offset,modIds->Length);
 		//修改maps偏移地址
 		inmaps->getTypeItem(kDexTypeFieldIdItem)->offset = modIds->Offset;
-		inmaps->getTypeItem(kDexTypeFieldIdItem)->size = GetCount(Idsitem);
+		inmaps->getTypeItem(kDexTypeFieldIdItem)->size = IDS.GetSize();
 		inheader->Header->fieldIdsOff = modIds->Offset;
-		inheader->Header->fieldIdsSize = GetCount(Idsitem);
+		inheader->Header->fieldIdsSize = IDS.GetSize();
 		//设置Fileds IDS数据
-		FieldsItem* mitem = Idsitem;
+		IDS.Reset();
 		DexFieldId* mID = (DexFieldId*)modIds->Addr;
-		while(mitem != NULL){
-			mID->classIdx = mitem->classIdx;
-			mID->typeIdx = mitem->typeIdx;
-			mID->nameIdx = mitem->nameIdx;
-			mID++;mitem = mitem->next;
+		while(IDS.Get() != NULL){
+			mID->classIdx = IDS.Get()->classIdx;
+			mID->typeIdx = IDS.Get()->typeIdx;
+			mID->nameIdx = IDS.Get()->nameIdx;
+			mID++;
+			IDS.Next();
 		}
 	}
 };

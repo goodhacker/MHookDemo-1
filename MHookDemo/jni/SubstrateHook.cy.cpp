@@ -53,7 +53,7 @@ bool My_dvmLoadNativeCode(char* pathName, void* classLoader, char** detail){
 			free(msrc);
 		}
 		free(mConfig);
-		if(AppName != NULL){
+		if(p != NULL){
 			LOGD("dvmLoadNativeCode Hook_Main");
 			LOGD("AppName:%s",AppName);
 			//判断是否存在JNI_OnLoad

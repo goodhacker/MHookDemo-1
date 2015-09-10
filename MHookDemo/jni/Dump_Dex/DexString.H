@@ -6,6 +6,7 @@
 #include "Dump_Dex.H"
 #include "Module_Mem.H" #include "DexMaps.H"
 #include "DexUtil.H"
+#include "Common/FastLink.H"
 namespace Dex{
 //字符串保存列表
 typedef struct stringItem{
@@ -22,8 +23,31 @@ class Dex_String : DexUtil{
 #define STR_StringIds		"StringIDS"
 #define STR_StringCode		"StringCode"
 public:
-	stringItem* Idsitem = NULL;
+	FastLink<stringItem> IDS;
+/*
+************************************************************
+*				getCodeLen
+*1.获取String Data 数据宽度
+************************************************************
+*/
+	size_t getIDSNo(char* pstr){
+		IDS.Reset();
+		size_t m_No = 0;
+		while(IDS.Get() != NULL){
+			if(strcmp(IDS.Get()->str,pstr) == 0){
+				return m_No;
+			}
+			m_No++;
+			IDS.Next();
+		}
 
+		return 0;
+	}
+	char* getString(int inNo){
+		stringItem* item =IDS.get(inNo);
+		if(item == NULL)return NULL;
+		return item->str;
+	}
 /*
 ************************************************************
 *				getCodeLen
@@ -32,10 +56,10 @@ public:
 */
 	size_t getCodeLen(){
 		size_t mSzie = NULL;
-		stringItem* mitem = Idsitem;
-		while(mitem != NULL){
-			mSzie += mitem->size;
-			mitem = mitem->next;
+		IDS.Reset();
+		while(IDS.Get() != NULL){
+			mSzie += IDS.Get()->size;
+			IDS.Next();
 		}
 		DEXLOG("Dex_String@getCodeLen:0x%08x",mSzie);
 		return mSzie;
@@ -49,7 +73,7 @@ public:
 	void CreateIdsMemory(Mod_Mem* inMem){
 		//判断原先是否存在
 		if(NULL == inMem->getByName(STR_StringIds)){
-			str_ModMem* modIds = inMem->newNameMem(STR_StringIds,GetCount(Idsitem)*4);
+			str_ModMem* modIds = inMem->newNameMem(STR_StringIds,Link::GetCount(IDS.First)*4);
 			DEXLOG("[Create]String_Ids %08x %08x",modIds->Offset,modIds->Length);
 		}
 	}
@@ -72,7 +96,6 @@ public:
 		//获取IDS实际内存地址
 		u4* mMemIds =(u4*)AddAddr2(pHeader,pHeader->stringIdsOff);
 		//遍历字符串
-		stringItem* strItem = NULL;
 		for(int m_i = 0;m_i < pHeader->stringIdsSize;m_i++){			stringItem* _item =(stringItem*)Alloc(sizeof(stringItem));
 			//获取字符串Code 起始地址
 			_item->BS.SetLoad((u4)pHeader,(u4)mMemIds);
@@ -89,16 +112,10 @@ public:
 			_item->str = (char*)mMemCode;
 			_item->size = _item->strLen + _item->L128Len + 1;
 			//将字符串添加到列表中，AddToLast非常耗时
-			if(strItem == NULL){
-				Idsitem = (stringItem*)AddToLast(Idsitem,_item);
-				strItem = (stringItem*)GetLastLink(Idsitem);
-			}else{
-				strItem = (stringItem*)AddLink(strItem,_item);
-			}
+			IDS.Add(_item);
 			//指向下一个字符串
 			mMemIds++;
 		}
-
 	}
 /*
 ************************************************************
@@ -112,13 +129,13 @@ public:
 		//判断是否存在 IDSString段，不存在就添加IDSString段
 		str_ModMem* modIds =inMem->getByName("StringIDS");
 		if(modIds== NULL){
-			modIds = inMem->newNameMem("StringIDS",GetCount(Idsitem)*4);
+			modIds = inMem->newNameMem("StringIDS",Link::GetCount(IDS.First)*4);
 		}
 		DEXLOG("[File]String_Ids %08x %08x",modIds->Offset,modIds->Length);
 		//修改maps偏移地址
 		inmaps->getTypeItem(kDexTypeStringIdItem)->offset = modIds->Offset;
-		inmaps->getTypeItem(kDexTypeStringIdItem)->size = GetCount(Idsitem);
-		inheader->Header->stringIdsSize = GetCount(Idsitem);
+		inmaps->getTypeItem(kDexTypeStringIdItem)->size = Link::GetCount(IDS.First);
+		inheader->Header->stringIdsSize = Link::GetCount(IDS.First);
 	}
 /*
 ************************************************************
@@ -141,21 +158,20 @@ public:
 		//修改maps偏移地址
 		inmaps->setTypeOffset(kDexTypeStringDataItem,memCode->Offset);
 		//填充数据
-		stringItem* mitem = Idsitem;
 		u4* idsAddr =(u4*)memIds->Addr;
 		u1* CodeAddr = (u1*)memCode->Addr;
+		IDS.Reset();
 		size_t offset = 0;
-		while(mitem != NULL){
+		while(IDS.Get() != NULL){
 			//设置IDS数据指向Code偏移内存
 			*idsAddr = (u4)CodeAddr +offset- (u4)memCode->Addr+memCode->Offset;
 			idsAddr++;
 			//将数据写到Code偏移内存
-			writeL128(CodeAddr+offset,mitem->L128Code);
-			memcpy(CodeAddr + offset + mitem->L128Len,mitem->str,mitem->strLen);
-
+			writeL128(CodeAddr+offset,IDS.Get()->L128Code);
+			memcpy(CodeAddr + offset + IDS.Get()->L128Len,IDS.Get()->str,IDS.Get()->strLen);
 			//设置下一个数据
-			offset += mitem->size;
-			mitem = mitem->next;
+			offset += IDS.Get()->size;
+			IDS.Next();
 		}
 	}
 };};

@@ -104,11 +104,14 @@ typedef struct DexCodeL{
 //
 }DexCodeL;
 //
+
+
+//
 class Dex_Class : DexUtil{
 public:
-	ClassDefItem* Idsitem = NULL;
-	DexClassData* ClassD = NULL;
-	DexCodeL* Code = NULL;
+	FastLink<ClassDefItem>	ClassDef;
+	FastLink<DexClassData>	ClassData;
+	FastLink<DexCodeL> 	ClassCode;
 /**
  *初始化Dex_Class
  *没有实现任何功能
@@ -128,7 +131,6 @@ public:
 		//根据DexClassDef的文件结构，设置文件头DexClassDef
 		DexClassDef* Item =(DexClassDef*)AddAddr2(pHeader,pHeader->classDefsOff);
 		//遍历ClassDefItem
-		ClassDefItem* _Idsitem = NULL;
 		for(int m_i = 0;m_i < pHeader->classDefsSize;m_i++){
 			ClassDefItem* _item =(ClassDefItem*)Alloc(sizeof(ClassDefItem));
 			_item->classIdx = Item->classIdx;
@@ -141,13 +143,7 @@ public:
 			_item->staticValuesOff = Item->staticValuesOff;
 			//指向下一个ClassDefItem数据
 			Item++;
-			//将_item添加到列表中，AddToLast非常耗时
-			if(_Idsitem == NULL){
-				Idsitem = (ClassDefItem*)AddToLast(Idsitem,_item);
-				_Idsitem = (ClassDefItem*)GetLastLink(Idsitem);
-			}else{
-				_Idsitem = (ClassDefItem*)AddLink(_Idsitem,_item);
-			}
+			ClassDef.Add(_item);
 		}
 	}
 /*
@@ -162,14 +158,14 @@ public:
 		//判断是否存在 IDSString段，不存在就添加IDSString段
 		str_ModMem* modIds =inMem->getByName("ClassDef");
 		if(modIds== NULL){
-			modIds = inMem->newNameMem("ClassDef",GetCount(Idsitem)*0x20);
+			modIds = inMem->newNameMem("ClassDef",ClassDef.GetSize()*0x20);
 		}
 		DEXLOG("[File]ClassDefine %08x %08x",modIds->Offset,modIds->Length);
 		//修改maps偏移地址
 		inmaps->getTypeItem(kDexTypeClassDefItem)->offset = modIds->Offset;
-		inmaps->getTypeItem(kDexTypeClassDefItem)->size = GetCount(Idsitem);
+		inmaps->getTypeItem(kDexTypeClassDefItem)->size = ClassDef.GetSize();
 		inheader->Header->classDefsOff = modIds->Offset;
-		inheader->Header->classDefsSize = GetCount(Idsitem);
+		inheader->Header->classDefsSize =ClassDef.GetSize();
 		 return ;
 	}
 /*
@@ -184,23 +180,23 @@ public:
 		str_ModMem* modIds =inMem->getByName("ClassDef");
 		if(modIds== NULL){
 			DEXLOG("DatatoFile 设置原先没有数据，这里申请数据可能会出错,也不自动修复Header和MAPS");
-			modIds = inMem->newNameMem("ClassDef",GetCount(Idsitem)*0x20);
+			modIds = inMem->newNameMem("ClassDef",ClassDef.GetSize()*0x20);
 			DEXLOG("ClassDef DatatoFile %08x %08x ",modIds->Offset,modIds->Length);
 		}
 		//设置Fileds IDS数据
-		ClassDefItem* mitem = Idsitem;
+		ClassDef.Reset();
 		DexClassDef* dexItem =(DexClassDef*)(modIds->Addr);
-		while(mitem != NULL){
-			dexItem->classIdx = mitem->classIdx;
-			dexItem->accessFlags = mitem->accessFlags;
-			dexItem->superclassIdx = mitem->superclassIdx;
-			dexItem->interfacesOff = types->LoadToFile(mitem->interfacesOff);
-			dexItem->sourceFileIdx = mitem->sourceFileIdx;
-			dexItem->annotationsOff = annot->LoadToFile(mitem->annotationsOff);
-			dexItem->classDataOff = LoadToFile(mitem->classDataOff);
-			dexItem->staticValuesOff = encoded->LoadToFile(mitem->staticValuesOff);
+		while(ClassDef.Get() != NULL){
+			dexItem->classIdx = ClassDef.Get()->classIdx;
+			dexItem->accessFlags = ClassDef.Get()->accessFlags;
+			dexItem->superclassIdx = ClassDef.Get()->superclassIdx;
+			dexItem->interfacesOff = types->LoadToFile(ClassDef.Get()->interfacesOff);
+			dexItem->sourceFileIdx = ClassDef.Get()->sourceFileIdx;
+			dexItem->annotationsOff = annot->LoadToFile(ClassDef.Get()->annotationsOff);
+			dexItem->classDataOff = LoadToFile(ClassDef.Get()->classDataOff);
+			dexItem->staticValuesOff = encoded->LoadToFile(ClassDef.Get()->staticValuesOff);
 			dexItem++;
-			mitem = mitem->next;
+			ClassDef.Next();
 		}
 	}
 //
@@ -218,21 +214,28 @@ public:
 		inAddr = readLeb128(inAddr,&mList->header.instanceFieldsSize);
 		inAddr = readLeb128(inAddr,&mList->header.directMethodsSize);
 		inAddr = readLeb128(inAddr,&mList->header.virtualMethodsSize);
+
+		FastLink<DexField> mFL_Field;
 		size_t msize =mList->header.staticFieldsSize + mList->header.instanceFieldsSize;
 		for(int m_j =0;m_j < msize;m_j++){
 			DexField* mField = (DexField*)Alloc(sizeof(DexField));
 			inAddr = readLeb128(inAddr,&mField->fieldIdx);
 			inAddr = readLeb128(inAddr,&mField->accessFlags);
-			mList->Fields =(DexField*)AddToLast(mList->Fields,mField);
+			mFL_Field.Add(mField);
 		}
+		mList->Fields = mFL_Field.First;
+
+		FastLink<DexMethod> mFL_Method;
 		msize =mList->header.directMethodsSize + mList->header.virtualMethodsSize;
 		for(int m_j =0;m_j < msize ;m_j++){
 			DexMethod* mMethod = (DexMethod*)Alloc(sizeof(DexMethod));
 			inAddr = readLeb128(inAddr,&mMethod->methodIdx);
 			inAddr = readLeb128(inAddr,&mMethod->accessFlags);
 			inAddr = readLeb128(inAddr,&mMethod->codeOff);
-			mList->Methods =(DexMethod*)AddToLast(mList->Methods,mMethod);
+			mFL_Method.Add(mMethod);
 		}
+		mList->Methods = mFL_Method.First;
+
 		mList->BS.MemSize = (u4)inAddr - mList->BS.Offset_Load - (u4)in_pheader;
 		return mList;
 	}
@@ -247,21 +250,15 @@ public:
 		DexHeader*  pHeader = (DexHeader*)inDex->pHeader;
 		DEXLOG("[Parse]Dex_ClassCode ClassDef");
 		int MethodNum = 0;
-		ClassDefItem* _DefItem = Idsitem;
-		DexClassData* _DataList = NULL;
-		while(NULL != _DefItem){
-			if(NULL != _DefItem->classDataOff){
-				u1* _Addr = (u1*)AddAddr2(pHeader,_DefItem->classDataOff);
+		ClassDef.Reset();
+		while(NULL != ClassDef.Get()){
+			if(NULL != ClassDef.Get()->classDataOff){
+				u1* _Addr = (u1*)AddAddr2(pHeader,ClassDef.Get()->classDataOff);
 				DexClassData* _List = ClassCode_ConvertList(_Addr,pHeader);
-				if(_DataList == NULL){
-					ClassD = (DexClassData*)AddToLast(ClassD,_List);
-					_DataList = (DexClassData*)GetLastLink(ClassD);
-				}else{
-					_DataList = (DexClassData*)AddLink(_DataList,_List);
-				}
+				ClassData.Add(_List);
 				MethodNum++;
 			}
-			_DefItem = _DefItem->next;
+			ClassDef.Next();
 		}
 		DEXLOG("[Parse]Dex_ClassCode ClassDef Size %08x",MethodNum);
 	}
@@ -287,27 +284,30 @@ public:
 			mCodeAddr = readLeb128(mCodeAddr,&mList->header.instanceFieldsSize);
 			mCodeAddr = readLeb128(mCodeAddr,&mList->header.directMethodsSize);
 			mCodeAddr = readLeb128(mCodeAddr,&mList->header.virtualMethodsSize);
+
+			FastLink<DexField> mFL_Field;
 			size_t msize =mList->header.staticFieldsSize + mList->header.instanceFieldsSize;
 			for(int m_j =0;m_j < msize;m_j++){
 				DexField* mField = (DexField*)Alloc(sizeof(DexField));
 				mCodeAddr = readLeb128(mCodeAddr,&mField->fieldIdx);
 				mCodeAddr = readLeb128(mCodeAddr,&mField->accessFlags);
-				mList->Fields =(DexField*)AddToLast(mList->Fields,mField);
+				mFL_Field.Add(mField);
 			}
+			mList->Fields = mFL_Field.First;
+
+			FastLink<DexMethod> mFL_DexMethod;
 			msize =mList->header.directMethodsSize + mList->header.virtualMethodsSize;
 			for(int m_j =0;m_j < msize ;m_j++){
 				DexMethod* mMethod = (DexMethod*)Alloc(sizeof(DexMethod));
 				mCodeAddr = readLeb128(mCodeAddr,&mMethod->methodIdx);
 				mCodeAddr = readLeb128(mCodeAddr,&mMethod->accessFlags);
 				mCodeAddr = readLeb128(mCodeAddr,&mMethod->codeOff);
-				mList->Methods =(DexMethod*)AddToLast(mList->Methods,mMethod);
-			/*	if(mMethod->codeOff != 0){
-					Code_Add(inDex,mMethod->codeOff);
-					MethodNum++;
-				}*/
+				mFL_DexMethod.Add(mMethod);
 			}
+			mList->Methods = mFL_DexMethod.First;
+
 			mList->BS.MemSize = (u4)mCodeAddr - mList->BS.Offset_Load - (u4)inDex->pHeader;
-			ClassD = (DexClassData*)AddToLast(ClassD,mList);
+			ClassData.Add(mList);
 		}
 	}
 /*
@@ -317,48 +317,44 @@ public:
 ************************************************************
 */
 	void ClassCode_DatatoFile(Mod_Mem* inMem,Dex_Maps* inmaps){
-		if(NULL == ClassD){
+		if(NULL == ClassData.GetSize()){
 			DEXLOG("[ERR]没有存在ClassD数据,直接退出!");
 			return ;
 		}
 		//获取debug模块内存，没有就新建
 		str_ModMem* modList =inMem->getByName("ClassData");
 		if(NULL == modList){
-			modList = inMem->newNameMem("ClassData",AlignAdd(GetSize(ClassD),0x04));
+			modList = inMem->newNameMem("ClassData",AlignAdd(ClassData.GetMemSize(),0x04));
 		}
 		DEXLOG("[File]ClassD %08x %08x",modList->Offset,modList->Length);
 		//
 		inmaps->setTypeOffset(kDexTypeClassDataItem,modList->Offset);
-		inmaps->setTypeSize(kDexTypeClassDataItem,GetCount(ClassD));
+		inmaps->setTypeSize(kDexTypeClassDataItem,ClassData.GetSize());
 		//
-		DexClassData* mList = ClassD;
+		DexClassData* mData = ClassData.First;
 		u1* mAddr = modList->Addr;
-		while(mList != NULL){
+		while(mData != NULL){
 			//
-			mList->BS.Offset_File = modList->Offset +(u4)mAddr - (u4)modList->Addr;
-			mAddr = writeL128(mAddr,mList->header.staticFieldsSize);
-			mAddr = writeL128(mAddr,mList->header.instanceFieldsSize);
-			mAddr = writeL128(mAddr,mList->header.directMethodsSize);
-			mAddr = writeL128(mAddr,mList->header.virtualMethodsSize);
-			DexField* mField = mList->Fields;
+			mData->BS.Offset_File = modList->Offset +(u4)mAddr - (u4)modList->Addr;
+			mAddr = writeL128(mAddr,mData->header.staticFieldsSize);
+			mAddr = writeL128(mAddr,mData->header.instanceFieldsSize);
+			mAddr = writeL128(mAddr,mData->header.directMethodsSize);
+			mAddr = writeL128(mAddr,mData->header.virtualMethodsSize);
+			DexField* mField = mData->Fields;
 			while(mField != NULL){
 				mAddr = writeL128(mAddr,mField->fieldIdx);
 				mAddr = writeL128(mAddr,mField->accessFlags);
 				mField = mField->next;
 			}
-			DexMethod* mMethod = mList->Methods;
+			DexMethod* mMethod = mData->Methods;
 			while(mMethod != NULL){
 				mAddr = writeL128(mAddr,mMethod->methodIdx);
 				mAddr = writeL128(mAddr,mMethod->accessFlags);
 				//Load To File
-				if(Code != NULL){
-					mAddr = writeL128(mAddr,LoadToFile(mMethod->codeOff));
-				}else{
-					mAddr = writeL128(mAddr,mMethod->codeOff);
-				}
+				mAddr = writeL128(mAddr,Code_LoadToFile(mMethod->codeOff));
 				mMethod = mMethod->next;
 			}
-			mList = mList->next;
+			mData = mData->next;
 		}
 	}
 /*
@@ -397,7 +393,7 @@ public:
 					mMem += 2;
 					mTry->Offset_Handler =*(u2*)mMem;
 					mMem += 2;
-					mCode->Try =  (DexTryL*)AddToLast(mCode->Try,mTry);
+					mCode->Try =  (DexTryL*)Link::AddToLast(mCode->Try,mTry);
 			}
 			// # Number of catch handler blocks: 0x2
 			mMem = readLeb128(mMem,&mCode->CatchBlocks);
@@ -417,13 +413,13 @@ public:
 						DexCatchItemL* _Item = (DexCatchItemL*)Alloc(sizeof(DexCatchItemL));
 						mMem = readLeb128(mMem,&_Item->Type);
 						mMem = readLeb128(mMem,&_Item->Byte_Addr);
-						mList->Item =  (DexCatchItemL*)AddToLast(mList->Item,_Item);
+						mList->Item =  (DexCatchItemL*)Link::AddToLast(mList->Item,_Item);
 					}
 					if(mList->Size_Handler >= 0x80000000){
 						mMem = readLeb128(mMem,&mList->catch_all);
 					}
 				}
-				mCode->Catch =  (DexCatchListL*)AddToLast(mCode->Catch,mList);
+				mCode->Catch =  (DexCatchListL*)Link::AddToLast(mCode->Catch,mList);
 			}
 			//设置内存大小，必须对齐,
 			mMem = (u1*)((u4)(mMem+3)&(~3));
@@ -443,24 +439,19 @@ public:
 	void Code_AddAll(DexFile* inDex){
 		//获取基本数据
 		DexHeader*  pHeader = (DexHeader*)inDex->pHeader;
-		//
 		DexCodeL* _Code = NULL;
-		DexClassData* _ClassD = ClassD;
-		while(NULL != _ClassD){
-			DexMethod* mMethod = _ClassD->Methods;
+		ClassCode.First = NULL;
+		ClassData.Reset();
+		while(NULL != ClassData.Get()){
+			DexMethod* mMethod = ClassData.Get()->Methods;
 			while(NULL != mMethod){
 				if(NULL != mMethod->codeOff){
 					DexCodeL* _item = Code_ConvertList(inDex,mMethod->codeOff);
-					if(NULL ==  _Code){
-						Code = (DexCodeL*)AddToLast(Code,_item);
-						_Code =  (DexCodeL*)GetLastLink(Code);
-					}else{
-						_Code =  (DexCodeL*)AddLink(_Code,_item);
-					}
+					ClassCode.Add(_item);
 				}
 				mMethod = mMethod->next;
 			}
-			_ClassD = _ClassD->next;
+			ClassData.Next();
 		}
 	}
 /*
@@ -470,20 +461,20 @@ public:
 ************************************************************
 */
 	void Code_DatatoFile(Mod_Mem* inMem,Dex_Maps* inmaps,Dex_Debug* debug){
-		if(NULL == Code){
+		if(NULL == ClassCode.GetSize()){
 			DEXLOG("[ERR]没有存在Code数据,直接退出!");
 			return ;
 		}
 		//获取Code模块内存，没有就新建
 		str_ModMem* modList =inMem->getByName("Code");
 		if(NULL == modList){
-			modList = inMem->newNameMem("Code",AlignAdd(GetSize(Code),0x1000));
+			modList = inMem->newNameMem("Code",AlignAdd(ClassCode.GetMemSize(),0x1000));
 		}
 		DEXLOG("[File]Code DatatoFile %08x %08x",modList->Offset,modList->Length);
 		inmaps->setTypeOffset(kDexTypeCodeItem,modList->Offset);
-		inmaps->setTypeSize(kDexTypeCodeItem,GetCount(Code));
+		inmaps->setTypeSize(kDexTypeCodeItem,ClassCode.GetSize());
 		//
-		DexCodeL* mCode = Code;
+		DexCodeL* mCode = ClassCode.First;
 		u1* mMem = modList->Addr;
 		int m_i = 0;
 		while(NULL != mCode){
@@ -512,36 +503,44 @@ public:
 		}
 	}
 //
-	u4 LoadToFile(u4 inAddr){
-		DexClassData* _ClassD = ClassD;
-		while(NULL != _ClassD){
-			if(_ClassD->BS.Offset_Load == inAddr){
-				return _ClassD->BS.Offset_File;
+	u4 Data_LoadToFile(u4 inAddr){
+		DexClassData* mdata = ClassData.First;
+		while(NULL != mdata){
+			if(mdata->BS.Offset_Load == inAddr){
+				return mdata->BS.Offset_File;
 			}
-			_ClassD = _ClassD->next;
-		}
-		DexCodeL* _Code  = Code;
-		while(NULL != _Code){
-			if(_Code->BS.Offset_Load == inAddr){
-				return _Code->BS.Offset_File;
-			}
-			_Code = _Code->next;
+			mdata = mdata->next;
 		}
 		return inAddr;
 	}
-};
-
-
-
-
-
-
-
-
-
-
-
-
-
-};
+//
+	u4 Code_LoadToFile(u4 inAddr){
+		DexCodeL* mCode = ClassCode.First;
+		while(NULL != mCode){
+			if(mCode->BS.Offset_Load == inAddr){
+				return mCode->BS.Offset_File;
+			}
+			mCode = mCode->next;
+		}
+		return inAddr;
+	}
+//
+	u4 LoadToFile(u4 inAddr){
+		DexClassData* mdata = ClassData.First;
+		while(NULL != mdata){
+			if(mdata->BS.Offset_Load == inAddr){
+				return mdata->BS.Offset_File;
+			}
+			mdata = mdata->next;
+		}
+		DexCodeL* mCode = ClassCode.First;
+		while(NULL != mCode){
+			if(mCode->BS.Offset_Load == inAddr){
+				return mCode->BS.Offset_File;
+			}
+			mCode = mCode->next;
+		}
+		return inAddr;
+	}
+};};
 #endif

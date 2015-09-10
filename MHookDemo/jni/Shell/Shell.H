@@ -28,6 +28,7 @@ void setencryptClass(char* inLoadSo){
 */
 void BeforeParse_UnShell(void* inAddr,size_t inLen){
 	if(encryptClas == Baidu_Jiagu){
+		LOGD("BeforeParse_UnShell：百度加固");
 		BeforeParse_Baidu(inAddr,inLen);
 	}
 }
@@ -40,6 +41,7 @@ void BeforeParse_UnShell(void* inAddr,size_t inLen){
 */
 void AfterParse_UnShell(void* inDex){
 	if(encryptClas == Baidu_Jiagu){
+		LOGD("AfterParse_UnShell：百度加固");
 		AfterParse_Baidu(inDex);
 	}
 }

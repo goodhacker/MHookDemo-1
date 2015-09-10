@@ -127,7 +127,7 @@ public:
 			}
 //			Parse("%08x：%08x",mEleItem->Type,mEleItem->Value);
 			mEleItem->BS.MemSize = SubAddr3(mAddr,inDex->pHeader,mEleItem->BS.Offset_Load);
-			Ele = (Annot_Element*)AddToLast(Ele,mEleItem);
+			Ele = (Annot_Element*)Link::AddToLast(Ele,mEleItem);
 		}
 		return Ele;
 	}
@@ -183,7 +183,7 @@ public:
 //							DEXLOG("DexAnnot kDex3  %p  ",k_Size);
 							if(mSonList->Ele_Size != NULL)
 								mSonList->Item  = DexAnnot_Element(inDex,mAnnotAddr,k_Size);
-							mAnnotAddr += GetSize(mList->Item);
+							mAnnotAddr += Link::GetSize(mList->Item);
 						}else{
 //							DEXLOG("DexAnnot kDex4  %p  ",getValueLen(k_Type));
 							mAnnotAddr += getValueLen(k_Type);
@@ -196,7 +196,7 @@ public:
 					mAnnotAddr = readLeb128(mAnnotAddr,&mList->Ele_Size);
 //					Parse("DexAnnot 出现Array %08x",mList->Ele_Size);
 					mList->Item  = DexAnnot_Element(inDex,mAnnotAddr,mList->Ele_Size);
-					mAnnotAddr += GetSize(mList->Item);
+					mAnnotAddr += Link::GetSize(mList->Item);
 				}else{
 					//NoArray
 					mList->EleValue_Len = getValueLen(mList->Ele_Type);
@@ -212,15 +212,15 @@ public:
 						mAnnotAddr+=mList->EleValue_Len;
 					}
 				}
-				mAnnot->List = (Annot_List*)AddToLast(mAnnot->List,mList);
+				mAnnot->List = (Annot_List*)Link::AddToLast(mAnnot->List,mList);
 			}
 			mAnnot->BS.MemSize = SubAddr3(mAnnotAddr,mAnnot->BS.Offset_Load,pHeader);
 			//将_item添加到列表中，AddToLast非常耗时
 			if(_Annot == NULL){
-				annot = (Annot*)AddToLast(annot,mAnnot);
-				_Annot = (Annot*)GetLastLink(annot);
+				annot = (Annot*)Link::AddToLast(annot,mAnnot);
+				_Annot = (Annot*)Link::GetLastLink(annot);
 			}else{
-				_Annot = (Annot*)AddLink(_Annot,mAnnot);
+				_Annot = (Annot*)Link::AddLink(_Annot,mAnnot);
 			}
 		}
 	}
@@ -253,15 +253,15 @@ public:
 			for(int m_j = 0;m_j< mAnSRL->Size;m_j++){
 				Annot_SRL_Item* mItem = (Annot_SRL_Item*)Alloc(sizeof(Annot_SRL_Item));
 				mItem->Offset  =*mAnnoSRL;mAnnoSRL++;
-				mAnSRL->iTem = (Annot_SRL_Item*)AddToLast(mAnSRL->iTem,mItem);
+				mAnSRL->iTem = (Annot_SRL_Item*)Link::AddToLast(mAnSRL->iTem,mItem);
 			}
 			mAnSRL->BS.MemSize = SubAddr3(mAnnoSRL,pHeader,mAnSRL->BS.Offset_Load);
 			//将_item添加到列表中，AddToLast非常耗时
 			if(_SRL == NULL){
-				SRL = (Annot_SRL*)AddToLast(SRL,mAnSRL);
-				_SRL = (Annot_SRL*)GetLastLink(SRL);
+				SRL = (Annot_SRL*)Link::AddToLast(SRL,mAnSRL);
+				_SRL = (Annot_SRL*)Link::GetLastLink(SRL);
 			}else{
-				_SRL = (Annot_SRL*)AddLink(_SRL,mAnSRL);
+				_SRL = (Annot_SRL*)Link::AddLink(_SRL,mAnSRL);
 			}
 		}
 	}
@@ -295,15 +295,15 @@ public:
 			for(int m_j = 0;m_j< mAnSet->Size;m_j++){
 				Annot_Set_Item* mItem = (Annot_Set_Item*)Alloc(sizeof(Annot_Set_Item));
 				mItem->Offset_Annot =*mAnnoSet;mAnnoSet++;
-				mAnSet->Item = (Annot_Set_Item*)AddToLast(mAnSet->Item,mItem);
+				mAnSet->Item = (Annot_Set_Item*)Link::AddToLast(mAnSet->Item,mItem);
 			}
 			mAnSet->BS.MemSize =SubAddr3(mAnnoSet,pHeader,mAnSet->BS.Offset_Load);
 			//将_item添加到列表中，AddToLast非常耗时
 			if(_AnSet == NULL){
-				anSet = (Annot_Set*)AddToLast(anSet,mAnSet);
-				_AnSet = (Annot_Set*)GetLastLink(anSet);
+				anSet = (Annot_Set*)Link::AddToLast(anSet,mAnSet);
+				_AnSet = (Annot_Set*)Link::GetLastLink(anSet);
 			}else{
-				_AnSet = (Annot_Set*)AddLink(_AnSet,mAnSet);
+				_AnSet = (Annot_Set*)Link::AddLink(_AnSet,mAnSet);
 			}
 		}
 	}
@@ -345,16 +345,16 @@ public:
 				mItem->Offset_Annot = *mAnnoDir;
 		//		DEXLOG("[Parse]mItem->Offset_Annot %p",	mItem->Offset_Annot);
 				mAnnoDir++;
-				mAnDir->item = (AnnotDir_Item*)AddToLast(mAnDir->item,mItem);
+				mAnDir->item = (AnnotDir_Item*)Link::AddToLast(mAnDir->item,mItem);
 			}
 			//设置内存宽度、将数据
 			mAnDir->BS.MemSize = SubAddr3(mAnnoDir,pHeader,mAnDir->BS.Offset_Load);
 			//将_item添加到列表中，AddToLast非常耗时
 			if(_anDir == NULL){
-				anDir = (AnnotDir*)AddToLast(anDir,mAnDir);
-				_anDir = (AnnotDir*)GetLastLink(anDir);
+				anDir = (AnnotDir*)Link::AddToLast(anDir,mAnDir);
+				_anDir = (AnnotDir*)Link::GetLastLink(anDir);
 			}else{
-				_anDir = (AnnotDir*)AddLink(_anDir,mAnDir);
+				_anDir = (AnnotDir*)Link::AddLink(_anDir,mAnDir);
 			}
 		}
 	}
@@ -424,7 +424,7 @@ public:
 		//获取Annot模块内存，没有就新建
 		str_ModMem* modList = inMem->getByName("AnnotItem");
 		if(NULL == modList){
-			modList = inMem->newNameMem("AnnotItem",AlignAdd(GetSize(annot),0x04));
+			modList = inMem->newNameMem("AnnotItem",AlignAdd(Link::GetSize(annot),0x04));
 		}
 		DEXLOG("[File]Annot_Item %08x %08x ",modList->Offset,modList->Length);
 		//设置MAPS
@@ -461,7 +461,7 @@ public:
 		//获取AnnotSRL模块内存，没有就新建
 		str_ModMem* modList =inMem->getByName("AnnotSRL");
 		if(NULL == modList){
-			modList = inMem->newNameMem("AnnotSRL",AlignAdd(GetSize(SRL),0x04));
+			modList = inMem->newNameMem("AnnotSRL",AlignAdd(Link::GetSize(SRL),0x04));
 		}
 		DEXLOG("[File]AnnotSRL %p %p",modList->Offset,modList->Length);
 		//设置MAPS
@@ -494,7 +494,7 @@ public:
 		//获取AnnotSet模块内存，没有就新建
 		str_ModMem* modList =inMem->getByName("AnnotSet");
 		if(NULL == modList){
-			modList = inMem->newNameMem("AnnotSet",AlignAdd(GetSize(anSet),0x04));
+			modList = inMem->newNameMem("AnnotSet",AlignAdd(Link::GetSize(anSet),0x04));
 		}
 		DEXLOG("[File]AnnotSetToData %08x %08x",modList->Offset,modList->Length);
 		//设置MAPS
@@ -528,7 +528,7 @@ public:
 		//获取AnnotDir模块内存，没有就新建
 		str_ModMem* modList =inMem->getByName("Annot_Dir");
 		if(NULL == modList){
-			modList = inMem->newNameMem("Annot_Dir",AlignAdd(GetSize(anDir),0x04));
+			modList = inMem->newNameMem("Annot_Dir",AlignAdd(Link::GetSize(anDir),0x04));
 		}
 		DEXLOG("[File]Annot Dir %p %p",modList->Offset,modList->Length);
 		//设置MAPS

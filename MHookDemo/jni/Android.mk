@@ -18,12 +18,6 @@ LOCAL_SRC_FILES := Common/Common.cpp
 include $(BUILD_STATIC_LIBRARY)
 
 
-# HookJNI静态库
-include $(CLEAR_VARS)
-LOCAL_MODULE    := lib-Hook_JNI
-LOCAL_SRC_FILES := Hook/Hook_JNI.cpp
-include $(BUILD_STATIC_LIBRARY)
-
 #DumpDex静态库
 include $(CLEAR_VARS)
 LOCAL_MODULE    := lib-Dump_Dex

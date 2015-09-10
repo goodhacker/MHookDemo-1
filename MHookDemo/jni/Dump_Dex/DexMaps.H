@@ -26,7 +26,7 @@ typedef struct maplist{
 */
 class Dex_Maps : DexUtil{
 public:
-	maplist* Map = NULL;
+	FastLink<mapsItem> IDS;
 /*
 ************************************************************
 *				Log_Maps
@@ -63,21 +63,20 @@ public:
 		DEXLOG("[Parse]Dex_Maps");
 		//获取起始地址和初始化Map结构
 		u1*	mapStart =(u1*)AddAddr2(inDex->pHeader,inDex->pHeader->mapOff);
-		Map = (maplist*)Alloc(sizeof(maplist));
 		//获取Map个数,设置Maps Item 结构起始地址
 		Log(mapStart);
-		Map->mapSize = *((u4*)mapStart);
+		size_t mapSize = *((u4*)mapStart);
 		//Map->mapSize = 0x12;
 		DexMapId* MapsIds =(DexMapId*)(mapStart+4);
 		//遍历Map内容
-		for(int m_i = 0;m_i < Map->mapSize;m_i++){
+		for(int m_i = 0;m_i < mapSize;m_i++){
 			mapsItem* _item = (mapsItem*)Alloc(sizeof(mapsItem));
 			_item->type = MapsIds->type;
 			_item->unused = MapsIds->unused;
 			_item->size = MapsIds->size;
 			_item->offset = MapsIds->offset;
 			MapsIds++;
-			Map->item = (mapsItem*)AddToLast(Map->item,_item);
+			IDS.Add(_item);
 		}
 	}
 /*
@@ -87,12 +86,12 @@ public:
 ************************************************************
 */
 	mapsItem* getTypeItem(u2 in_type){
-		mapsItem* mItem = Map->item;
-		while(mItem != NULL){
-			if(mItem->type == in_type){
-				return mItem;
+		IDS.Reset();
+		while(IDS.Get() != NULL){
+			if(IDS.Get()->type == in_type){
+				return IDS.Get();
 			}
-			mItem = mItem->next;
+			IDS.Next();
 		}
 		return NULL;
 	}
@@ -103,19 +102,18 @@ public:
 ************************************************************
 */
 	void setTypeSize(u2 in_type,u4 inSize){
-		mapsItem* mItem = Map->item;
-		while(mItem != NULL){
-			if(mItem->type == in_type){
-				mItem->size = inSize;
+		IDS.Reset();
+		while(IDS.Get()  != NULL){
+			if(IDS.Get() ->type == in_type){
+				IDS.Get() ->size = inSize;
 				return ;
 			}
-			mItem = mItem->next;
+			IDS.Next();
 		}
-		Map->mapSize++;
-		mItem = (mapsItem*)Alloc(sizeof(mapsItem));
+		mapsItem* mItem = (mapsItem*)Alloc(sizeof(mapsItem));
 		mItem->type = in_type;
 		mItem->size = inSize;
-		Map->item = (mapsItem*)AddToLast(Map->item,mItem);
+		IDS.Add(mItem);
 	}
 /*
 ************************************************************
@@ -124,19 +122,18 @@ public:
 ************************************************************
 */
 	void setTypeOffset(u2 in_type,u4 inoffset){
-		mapsItem* mItem = Map->item;
-		while(mItem != NULL){
-			if(mItem->type == in_type){
-				mItem->offset = inoffset;
+		IDS.Reset();
+		while(IDS.Get()  != NULL){
+			if(IDS.Get() ->type == in_type){
+				IDS.Get() ->offset = inoffset;
 				return ;
 			}
-			mItem = mItem->next;
+			IDS.Next();
 		}
-		Map->mapSize++;
-		mItem = (mapsItem*)Alloc(sizeof(mapsItem));
+		mapsItem* mItem = (mapsItem*)Alloc(sizeof(mapsItem));
 		mItem->type = in_type;
 		mItem->offset = inoffset;
-		Map->item = (mapsItem*)AddToLast(Map->item,mItem);
+		IDS.Add(mItem);
 	}
 /*
 ************************************************************
@@ -149,24 +146,24 @@ public:
 		DEXLOG("Dex_Maps IDStoFile");
 		str_ModMem* modIds =inMem->getByName("MapsIDS");
 		if(modIds == NULL){
-			modIds = inMem->newNameMem("MapsIDS",Map->mapSize*0xC+4);
+			modIds = inMem->newNameMem("MapsIDS",IDS.GetSize()*0xC+4);
 			DEXLOG("Dex_Maps DatatoFile %08x %08x %08x",modIds->Addr,modIds->Length,modIds->Offset);
 		}
 		//设置头系统文件中的数据
 		getTypeItem(kDexTypeMapList)->offset = modIds->Offset;
-		getTypeItem(kDexTypeMapList)->size = Map->mapSize;
+		getTypeItem(kDexTypeMapList)->size = IDS.GetSize();
 		inheader->Header->mapOff =modIds->Offset;
 		//遍历设置数据
-		*((u4*)modIds->Addr) =Map->mapSize;
-		mapsItem* mitem = Map->item;
+		*((u4*)modIds->Addr) =IDS.GetSize();
+		IDS.Reset();
 		DexMapId* mapIds =(DexMapId*)(modIds->Addr+4);
-		while(mitem != NULL){
-			mapIds->type = mitem->type;
-			mapIds->unused = mitem->unused;
-			mapIds->size = mitem->size;
-			mapIds->offset = mitem->offset;
+		while(IDS.Get() != NULL){
+			mapIds->type = IDS.Get()->type;
+			mapIds->unused = IDS.Get()->unused;
+			mapIds->size = IDS.Get()->size;
+			mapIds->offset = IDS.Get()->offset;
 			mapIds++;
-			mitem = mitem->next;
+			IDS.Next();
 		}
 	}
 };

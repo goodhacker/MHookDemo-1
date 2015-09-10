@@ -30,7 +30,7 @@ static void* My_dexFileParse(int *inAddr, unsigned int length, int parseFlags){
 /*	if(length > 0x2A00){
 		Dump_DexFile(inAddr,length,Out_DexFile);
 	}/**/
-	Dump_DexFile(inAddr,length,Out_DexFile);
+	//Dump_DexFile(inAddr,length,Out_DexFile);
 	return Out_DexFile;
 }
 //	dvmDexFileOpenFromFd

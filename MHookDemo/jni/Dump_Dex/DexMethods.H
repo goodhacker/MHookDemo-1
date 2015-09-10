@@ -15,7 +15,8 @@ typedef struct MethodsItem{
 }MethodsItem;
 class Dex_Methods : DexUtil{
 public:
-	MethodsItem* Idsitem = NULL;
+	FastLink<MethodsItem> IDS;
+
 /*
 ************************************************************
 *				Dex_Methods
@@ -38,13 +39,7 @@ public:
 			_item->nameIdx = MethodIds->nameIdx;
 			//指向下一个数据、将数据添加到链表
 			MethodIds++;
-			//将_item添加到列表中，AddToLast非常耗时
-			if(_Idsitem == NULL){
-				Idsitem = (MethodsItem*)AddToLast(Idsitem,_item);
-				_Idsitem = (MethodsItem*)GetLastLink(Idsitem);
-			}else{
-				_Idsitem = (MethodsItem*)AddLink(_Idsitem,_item);
-			}
+			IDS.Add(_item);
 		}
 	}
 /*
@@ -57,24 +52,24 @@ public:
 		//判断是否存在 IDSString段，不存在就添加IDSString段
 		str_ModMem* modIds =inMem->getByName("MethodsIDS");
 		if(modIds== NULL){
-			modIds = inMem->newNameMem("MethodsIDS",GetCount(Idsitem)*8);
+			modIds = inMem->newNameMem("MethodsIDS",IDS.GetSize()*8);
 		}
 		DEXLOG("[File]Methods_Ids %08x %08x",modIds->Offset,modIds->Length);
 		//修改maps偏移地址
 		inmaps->getTypeItem(kDexTypeMethodIdItem)->offset = modIds->Offset;
-		inmaps->getTypeItem(kDexTypeMethodIdItem)->size = GetCount(Idsitem);
+		inmaps->getTypeItem(kDexTypeMethodIdItem)->size = IDS.GetSize();
 		inheader->Header->methodIdsOff = modIds->Offset;
-		inheader->Header->methodIdsSize = GetCount(Idsitem);
+		inheader->Header->methodIdsSize = IDS.GetSize();
 		//设置Fileds IDS数据
-		MethodsItem* mitem = Idsitem;
+		IDS.Reset();
 		DexMethodId* mID = (DexMethodId*)modIds->Addr;
 		//设置数据
-		while(mitem != NULL){
-			mID->classIdx = mitem->classIdx;
-			mID->protoIdx = mitem->protoIdx;
-			mID->nameIdx = mitem->nameIdx;
+		while(IDS.Get() != NULL){
+			mID->classIdx = IDS.Get()->classIdx;
+			mID->protoIdx = IDS.Get()->protoIdx;
+			mID->nameIdx = IDS.Get()->nameIdx;
 			mID++;
-			mitem = mitem->next;
+			IDS.Next();
 		}
 	}
 };

@@ -4,7 +4,7 @@
 #include <unistd.h>
 #include "HFile/NativeLog.h"
 #include "Dump_Dex.H"
-#include "Module_Mem.H" 
+#include "Module_Mem.H" 
 #include "DexUtil.H"
 #include "DexTypes.H"
 //__________________________________________________________
@@ -16,7 +16,7 @@ typedef struct ProtoItem{
 }ProtoItem;
 class Dex_Proto : DexUtil{
 public:
-	ProtoItem* Idsitem = NULL;
+	FastLink<ProtoItem> IDS;
 /*
 ************************************************************
 *				Dex_Proto
@@ -39,14 +39,8 @@ public:
 			_item->shortyIdx = protoItem->shortyIdx;
 			_item->returnTypeIdx = protoItem->returnTypeIdx;
 			_item->parametersOff = protoItem->parametersOff;
-			protoItem++;/**/
-			//将_item添加到列表中，AddToLast非常耗时
-			if(_Idsitem == NULL){
-				Idsitem = (ProtoItem*)AddToLast(Idsitem,_item);
-				_Idsitem = (ProtoItem*)GetLastLink(Idsitem);
-			}else{
-				_Idsitem = (ProtoItem*)AddLink(_Idsitem,_item);
-			}
+			protoItem++;
+			IDS.Add(_item);
 		}
 	}
 /*
@@ -59,14 +53,14 @@ public:
 		//判断是否存在 IDSString段，不存在就添加IDSString段
 		str_ModMem* modIds =inMem->getByName("ProtoIDS");
 		if(modIds== NULL){
-			modIds = inMem->newNameMem("ProtoIDS",GetCount(Idsitem)*0xC);
+			modIds = inMem->newNameMem("ProtoIDS",IDS.GetSize()*0xC);
 		}
 		DEXLOG("[File]Proto_Ids %08x %08x",modIds->Offset,modIds->Length);
 		//修改maps偏移地址
 		inmaps->getTypeItem(kDexTypeProtoIdItem)->offset = modIds->Offset;
-		inmaps->getTypeItem(kDexTypeProtoIdItem)->size = GetCount(Idsitem);
+		inmaps->getTypeItem(kDexTypeProtoIdItem)->size = IDS.GetSize();
 		inheader->Header->protoIdsOff = modIds->Offset;
-		inheader->Header->protoIdsSize = GetCount(Idsitem);
+		inheader->Header->protoIdsSize = IDS.GetSize();
 	}
 /*
 ************************************************************
@@ -79,26 +73,25 @@ public:
 		DEXLOG("[File]Dex_Proto");
 		str_ModMem* modIds =inMem->getByName("ProtoIDS");
 		if(modIds == NULL){
-			modIds = inMem->newNameMem("ProtoIDS",GetCount(Idsitem)*12);
+			modIds = inMem->newNameMem("ProtoIDS",IDS.GetSize()*12);
 			DEXLOG("[File]Proto Ids %08x %08x",modIds->Offset,modIds->Length);
 		}
 		//修改maps偏移地址
 		inmaps->getTypeItem(kDexTypeProtoIdItem)->offset = modIds->Offset;
-		inmaps->getTypeItem(kDexTypeProtoIdItem)->size = GetCount(Idsitem);
+		inmaps->getTypeItem(kDexTypeProtoIdItem)->size = IDS.GetSize();
 		inheader->Header->protoIdsOff = modIds->Offset;
-		inheader->Header->protoIdsSize =GetCount(Idsitem);
+		inheader->Header->protoIdsSize =IDS.GetSize();
 		DEXLOG("[File]Dex_Proto Code");
 		//设置Proto IDS数据
-		ProtoItem* mitem = Idsitem;
+		IDS.Reset();
 		DexProtoId* mID = (DexProtoId*)modIds->Addr;
-		while(mitem != NULL){
-			mID->shortyIdx = mitem->shortyIdx;
-			mID->returnTypeIdx = mitem->returnTypeIdx;
-			mID->parametersOff = inType->LoadToFile(mitem->parametersOff);
-			mitem = mitem->next;
+		while(IDS.Get() != NULL){
+			mID->shortyIdx = IDS.Get()->shortyIdx;
+			mID->returnTypeIdx = IDS.Get()->returnTypeIdx;
+			mID->parametersOff = inType->LoadToFile(IDS.Get()->parametersOff);
+			IDS.Next();
 			mID++;
 		}
 	}
 };
-/**/
 #endif

@@ -5,8 +5,9 @@
 #include "HFile/NativeLog.h"
 #include "Dump_Dex.H"
 #include "Module_Mem.H" 
+
+#include "Common/FastLink.H"
 //
-#include "DexUtil.H"
 #include "DexHeader.H"
 #include "DexString.H"
 #include "DexTypes.H"
@@ -19,8 +20,13 @@
 #include "DexDebug.H"
 #include "DexClass.H"
 /*
- *						解析Dex文件格式
- */
+*									解析Dex文件格式
+*1.此类为全部脱壳最基本类，此类主要分析Dex文件内容
+*2.将全部的数据分段处理
+*3.然后通过合并将Dex合并在一起
+*4.但是注意，Code代码要进行特殊处理，在优化之前能收集的代码就可以不再进行更新，防止代码OAT或ODEX化
+*5.但是特殊加固需要特殊处理
+*/
 namespace Dex{
 class DexParse : DexUtil{
 public:
@@ -42,6 +48,23 @@ public:
 	Dex_Annot* 		annot = NULL;
 	Dex_Debug*		debug = NULL;
 	DexParse(){}
+/*
+************************************************************
+*				ParseAllIds
+* 解析全部ParseAllIds，
+*这样保存ParseAllIds数据防止后续发生更改，尤其是Header
+************************************************************
+*/
+	void ParseAllIds(){
+		header = new Dex_Header(dex);
+		maps = new Dex_Maps(dex);
+		string = new Dex_String(dex,maps);
+		types = new Dex_Types(dex,maps);
+		proto = new Dex_Proto(dex,maps);
+		fileds = new Dex_Fileds(dex,maps);
+		methods = new Dex_Methods(dex,maps);
+		Dexclass->Dex_ClassDef(dex,maps);
+	}
 /*
 ************************************************************
 *				DumpToFile
@@ -108,6 +131,7 @@ public:
  	DexParse(void* inAddr,DexFile* inDex){
  		loadAddr = inAddr;
  		dex = inDex;
+ 		Parse();
 	}
 /*
 ************************************************************

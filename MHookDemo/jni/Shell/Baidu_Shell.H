@@ -1,8 +1,12 @@
 #ifndef __Baidu_Shell_H_
 #define __Baidu_Shell_H_
 #include "Dump_Dex/DexParse.H"
+#include <sys/time.h>
+#include <unistd.h>
+#include <pthread.h>
 using namespace Dex;
 extern JavaVM* GVM;
+extern char* AppName;
 DexParse* BaiduDex = NULL;
 /*
 *									百度加固说明
@@ -36,66 +40,29 @@ static void $My_BaidDu_A_d(JNIEnv *jni, jobject obj,jobject inStr)
 }
 //将传入参数，直接解密
 static void RestoreCode_1(JNIEnv* env,char* pstr){
-	jstring msrt = pcharToJstring(env,pstr,NULL);
+	char* m_str = (char*)malloc(1024);
+	//组建字符串
+	memset(m_str,0,1024);
+	sprintf(m_str,"%s->onCreate001(Landroid/os/Bundle;)V",pstr);
+	jstring msrt = pcharToJstring(env,m_str,NULL);
 	$BaidDu_A_d(env,NULL,msrt);
-}
-//解密全部函数
-static void RestoreCode(JNIEnv* env){
-	RestoreCode_1(env,"Lcom/qsq/qianshengqian/AboutActivity;->onCreate001(Landroid/os/Bundle;)V");
-	RestoreCode_1(env,"Lcom/qsq/qianshengqian/AccountBalanceWillDepositActivity;->onCreate001(Landroid/os/Bundle;)V");
-	RestoreCode_1(env,"Lcom/qsq/qianshengqian/AccountBalanceWillWithdrawActivity;->onCreate001(Landroid/os/Bundle;)V");
-	RestoreCode_1(env,"Lcom/qsq/qianshengqian/AccountsBalanceActivity;->onCreate001(Landroid/os/Bundle;)V");
-	RestoreCode_1(env,"Lcom/qsq/qianshengqian/AccountsBalanceTransactionsActivity;->onCreate001(Landroid/os/Bundle;)V");
-	RestoreCode_1(env,"Lcom/qsq/qianshengqian/AllDetailActivity;->onCreate001(Landroid/os/Bundle;)V");
-	RestoreCode_1(env,"Lcom/qsq/qianshengqian/AddBankActivity;->onCreate001(Landroid/os/Bundle;)V");
-
-	RestoreCode_1(env,"Lcom/qsq/qianshengqian/BankcardsActivity;->onCreate001(Landroid/os/Bundle;)V");
-	RestoreCode_1(env,"Lcom/qsq/qianshengqian/BankcardsRestrictActivity;->AccountsBalonCreate001anceActivity(Landroid/os/Bundle;)V");
-	RestoreCode_1(env,"Lcom/qsq/qianshengqian/BankcardsSafetyActivity;->onCreate001(Landroid/os/Bundle;)V");
-	RestoreCode_1(env,"Lcom/qsq/qianshengqian/BuyModeActivity;->onCreate001(Landroid/os/Bundle;)V");
-	RestoreCode_1(env,"Lcom/qsq/qianshengqian/BuySuccessActivity;->onCreate001(Landroid/os/Bundle;)V");
-
-	RestoreCode_1(env,"Lcom/qsq/qianshengqian/FeedbackActivity;->onCreate001(Landroid/os/Bundle;)V");
-	RestoreCode_1(env,"Lcom/qsq/qianshengqian/ForgetPwdActivity;->onCreate001(Landroid/os/Bundle;)V");
-	RestoreCode_1(env,"Lcom/qsq/qianshengqian/GestureLockActivity;->onCreate001(Landroid/os/Bundle;)V");
-	RestoreCode_1(env,"Lcom/qsq/qianshengqian/LoginActivity;->onCreate001(Landroid/os/Bundle;)V");
-	RestoreCode_1(env,"Lcom/qsq/qianshengqian/NewsActivity;->onCreate001(Landroid/os/Bundle;)V");
-	RestoreCode_1(env,"Lcom/qsq/qianshengqian/NotificationDetailActivity;->onCreate001(Landroid/os/Bundle;)V");
-	RestoreCode_1(env,"Lcom/qsq/qianshengqian/NotificationsActivity;->onCreate001(Landroid/os/Bundle;)V");
-	RestoreCode_1(env,"Lcom/qsq/qianshengqian/ProductsDetailActivity;->onCreate001(Landroid/os/Bundle;)V");
-	RestoreCode_1(env,"Lcom/qsq/qianshengqian/QsqMainActivity;->onCreate001(Landroid/os/Bundle;)V");
-	RestoreCode_1(env,"Lcom/qsq/qianshengqian/RegisterActivity;->onCreate001(Landroid/os/Bundle;)V");
-
-	RestoreCode_1(env,"Lcom/qsq/qianshengqian/SafetySettingActivity;->onCreate001(Landroid/os/Bundle;)V");
-	RestoreCode_1(env,"Lcom/qsq/qianshengqian/SelectBankActivity;->onCreate001(Landroid/os/Bundle;)V");
-	RestoreCode_1(env,"Lcom/qsq/qianshengqian/SelectVoucherActivity;->onCreate001(Landroid/os/Bundle;)V");
-	RestoreCode_1(env,"Lcom/qsq/qianshengqian/ServerActivity;->onCreate001(Landroid/os/Bundle;)V");
-	RestoreCode_1(env,"Lcom/qsq/qianshengqian/SetLockActivity;->onCreate001(Landroid/os/Bundle;)V");
-	RestoreCode_1(env,"Lcom/qsq/qianshengqian/SetLockConfirmActivity;->onCreate001(Landroid/os/Bundle;)V");
-	RestoreCode_1(env,"Lcom/qsq/qianshengqian/SetPwdActivity;->onCreate001(Landroid/os/Bundle;)V");
-	RestoreCode_1(env,"Lcom/qsq/qianshengqian/SplashActivity;->onCreate001(Landroid/os/Bundle;)V");
-
-	RestoreCode_1(env,"Lcom/qsq/qianshengqian/VoucherActivity;->onCreate001(Landroid/os/Bundle;)V");
-
-	RestoreCode_1(env,"Lcom/qsq/qianshengqian/WealthAssetsListActivity;->onCreate001(Landroid/os/Bundle;)V");
-	RestoreCode_1(env,"Lcom/qsq/qianshengqian/WealthDetailActivity;->onCreate001(Landroid/os/Bundle;)V");
-	RestoreCode_1(env,"Lcom/qsq/qianshengqian/WealthInterestListActivity;->onCreate001(Landroid/os/Bundle;)V");
-	RestoreCode_1(env,"Lcom/qsq/qianshengqian/WealthWillwithdrawActivity;->onCreate001(Landroid/os/Bundle;)V");
-	RestoreCode_1(env,"Lcom/qsq/qianshengqian/WealthWithdrawActivity;->onCreate001(Landroid/os/Bundle;)V");
-	RestoreCode_1(env,"Lcom/qsq/qianshengqian/WebActivity;->onCreate001(Landroid/os/Bundle;)V");
-	RestoreCode_1(env,"Lcom/qsq/qianshengqian/WilldepositActivity;->onCreate001(Landroid/os/Bundle;)V");
-
-	RestoreCode_1(env,"Lcom/tencent/android/tpush/XGPushActivity;->onCreate001(Landroid/os/Bundle;)V");
-	RestoreCode_1(env,"Lcom/umeng/socialize/view/ShareActivity;->onCreate001(Landroid/os/Bundle;)V");
-	RestoreCode_1(env,"Lcom/yintong/secure/activity/BaseActivity;->onCreate001(Landroid/os/Bundle;)V");
+	free(m_str);
 }
 //___________________________________________________________________________________________________________________
+/**
+ *
+ */
+void* Baidu_DumpToFile(void* inp){
+	BaiduDex->DumpToFile(AppName,DexUtil::GetTimeName("Demo3"));
+	return NULL;
+}
 /**
  *BeforeParse_Baidu	->系统解析之前调用
  *初始化加载地址和加载宽度
  *至于解析还是放到系统解析完毕后在解析
  */
 void BeforeParse_Baidu(void* inAddr,size_t inLen){
+	LOGD("BeforeParse_Baidu");
 	BaiduDex = new DexParse();
 	BaiduDex->loadAddr = inAddr;
 	BaiduDex->Size = inLen;
@@ -106,8 +73,10 @@ void BeforeParse_Baidu(void* inAddr,size_t inLen){
  *
  */
 void AfterParse_Baidu(void* inDex){
+	LOGD("AfterParse_Baidu");
 	BaiduDex->dex = (DexFile*)inDex;
-	//解密时候数据分段必须非常犀利,不能额报错产生
+	//解密时候数据分段必须非常犀利,不能额报错产生,解析全部Ids头,主要是获取ClassDef
+	//然后遍历onCreate001,有onCreate001则直接使用解密函数进行解密
 	BaiduDex->Parse();
 	//判断是否存在修复类，就显示修复
 	JNIEnv* env = NULL; //注册时在JNIEnv中实现的，所以必须首先获取它
@@ -132,12 +101,47 @@ void AfterParse_Baidu(void* inDex){
 				}else{
 					MSJavaHookMethod(env,cls1,clsmid,(void*)&$My_BaidDu_A_e,(void**)&$BaidDu_A_e);
 				}
-				//恢复代码，低级恢复
-				RestoreCode(env);
+				//遍历METHODS,获取需要解析的类，还原代码，
+				Dex_Methods* method = BaiduDex->methods;
+				Dex_Types* types = BaiduDex->types;
+				Dex_String* string = BaiduDex->string;
+				//获取onCreate方法名
+				size_t onCreate = string->getIDSNo("onCreate");
+				size_t onCreate001 = string->getIDSNo("onCreate001");
+				LOGD("onCreate ：%d",onCreate);
+				LOGD("onCreate001 ：%d",onCreate001);
+				//遍历查找方法名为onCreate001的method
+				method->IDS.Reset();
+				while(NULL != method->IDS.Get()){
+					if(onCreate001 == method->IDS.Get()->nameIdx){
+						//查找到onCreate001方法，获取类名
+						size_t classIdx = method->IDS.Get()->classIdx;
+						//从类名中获取字符串
+						size_t inType = types->getIdxNoType(classIdx);
+						char* mString = string->getString(inType);
+						LOGD("onCreate001 :%s",mString);
+						RestoreCode_1(env,mString);
+					}
+					method->IDS.Next();
+				}
+				//更换String onCreate  onCreate001
+				/*
+				stringItem*	str1 = (stringItem*)malloc(sizeof(stringItem));
+				stringItem* strOncreat = string->IDS.get(onCreate);
+				stringItem* strOncreat001 = string->IDS.get(onCreate001);
+				memcpy(str1,strOncreat,sizeof(stringItem));
+				memcpy(strOncreat,strOncreat001,sizeof(stringItem));
+				memcpy(strOncreat001,str1,sizeof(stringItem));/**/
+				/**/
+				//更新全部代码
+				BaiduDex->Dexclass->Code_AddAll(BaiduDex->dex);
 			}
 		}
 	}else{
 		LOGD("GVM is null");
 	}
+	/**/
+	pthread_t thread;
+	pthread_create(&thread,NULL,Baidu_DumpToFile,NULL);
 }
 #endif
