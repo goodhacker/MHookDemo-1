@@ -81,6 +81,27 @@ public:
 	}
 /*
 ************************************************************
+*				getNextOffset
+*获取下一个偏移
+*	这里指最小大于此Offset
+************************************************************
+*/
+	u4	getNextOffset(u4 inOffset){
+		size_t m_offset = 0xFFFFFFFF;
+		IDS.Reset();
+		while(IDS.Get() != NULL){
+			if(IDS.Get()->offset > inOffset){
+				if(m_offset > IDS.Get()->offset){
+					m_offset = IDS.Get()->offset;
+				}
+			}
+			IDS.Next();
+		}
+		if(m_offset == 0xFFFFFFFF)return 0;
+		return m_offset;
+	}
+/*
+************************************************************
 *				getTypeOffset
 *获取子模块结构体
 ************************************************************

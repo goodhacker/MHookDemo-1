@@ -39,14 +39,14 @@ public:
 	Dex_Debug(DexFile* inDex,Dex_Maps* inMap){
 		DEXLOG("[Parse]Dex_Debug");
 		mapsItem* inMapsItem = inMap->getTypeItem(kDexTypeDebugInfoItem);
-		mapsItem* nextMaps = inMap->getTypeItem(kDexTypeCodeItem);
 		if(inMapsItem == NULL)return;
 		u4	mMemStart =(u4)inDex->pHeader + inMapsItem->offset;
 		u1* mMem =(u1*)mMemStart;
 		DebugList* _debug = NULL;
 		debug = (DebugList*)Alloc(sizeof(DebugList));
 		debug->BS.SetLoad((u4)inDex->pHeader,inMapsItem->offset);
-		debug->BS.MemSize = nextMaps->offset -inMapsItem->offset;
+		debug->BS.MemSize = inMap->getNextOffset(inMapsItem->offset) - inMapsItem->offset;
+		DEXLOG("Dex_Debug size %p ",debug->BS.MemSize );
 	/*	for(int m_i = 0;m_i < inMapsItem->size;m_i++){
 			DebugList* _List = (DebugList*)Alloc(sizeof(DebugList));
 			_List->BS.SetLoad((u4)inDex->pHeader,(u4)mMem);
