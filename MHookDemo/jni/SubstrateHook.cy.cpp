@@ -33,7 +33,7 @@ bool My_dvmLoadNativeCode(char* pathName, void* classLoader, char** detail){
 	//获取SO配置信息,和Hook应用名单
 	LOGD("My_dvmLoadNativeCode :%s",pathName);
 	char* mConfig = getConfig();
-	LOGD("Config:%s",mConfig);
+	LOGD("mConfig:%s",mConfig);
 	//判断加载的SO是否存在配置包名，
 	//加载SO必须存在Jni_Onload否则忽视
 	//设置包名来判断是否已经被Hook

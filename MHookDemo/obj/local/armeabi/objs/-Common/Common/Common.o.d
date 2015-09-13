@@ -46,7 +46,9 @@ obj/local/armeabi/objs/-Common/Common/Common.o: jni/Common/Common.cpp \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/endian.h \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sys/endian.h \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/machine/endian.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/ctype.h
+ D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/ctype.h \
+ jni/HFile/NativeLog.h \
+ D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/android/log.h
 
 D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/stdio.h:
 
@@ -143,3 +145,7 @@ D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sys/
 D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/machine/endian.h:
 
 D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/ctype.h:
+
+jni/HFile/NativeLog.h:
+
+D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/android/log.h:

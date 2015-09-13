@@ -1,7 +1,6 @@
 package ls.mhookdemo;
 import java.io.*;
 import java.util.*;
-
 import ls.client.TimeLog;
 import ls.hook.Root;
 import ls.mhookdemo.R;
@@ -13,10 +12,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.widget.AdapterView.OnItemClickListener;
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 
+@TargetApi(Build.VERSION_CODES.GINGERBREAD)
 public class MainActivity extends Activity {
 	private List<PackageInfo> listdatas = new ArrayList<PackageInfo>();
 	private ListView mlistview ;
@@ -32,10 +34,10 @@ public class MainActivity extends Activity {
 		TimeLog.Log();
 		
 		Root.upgradeRootPermission(getPackageCodePath());
-		FILE_PATH = "/sdcard/MHookDemo/";
+		FILE_PATH = "/sdcard/";
 		File mfile = new File(FILE_PATH);
 		if(!mfile.exists()){
-			mfile.mkdir();
+			mfile.mkdirs();
 		}
 		FILE_PATH += "Config.txt";
 		pManager = getPackageManager();

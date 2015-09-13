@@ -180,6 +180,41 @@ str_ModMem* ModMem = NULL;
 		}
 		return mCount;
 	}
+/*
+************************************************************
+*获取有多少个内存块
+************************************************************
+*/
+	static void SaveFile(char* appName,char* inFile,void* inAddr,size_t inLen){
+		char* filePath = (char*)malloc(1024);
+		memset(filePath,0,1024);
+		sprintf(filePath,"/sdcard/DumpDex/%s",inFile);
+		FILE* mfd=fopen(filePath,"wb");
+		//查找可写文件路径
+		if(!mfd){
+			DEXLOG("[Dump]Fail SD Path:%s",filePath);
+			DEXLOG("[Dump]SD Open file fail!");
+			memset(filePath,0,1024);
+			if(appName != NULL){
+				sprintf(filePath,"/data/data/%s/%s",appName,inFile);
+				mfd=fopen(filePath,"wb");
+				if(!mfd){
+					DEXLOG("[Dump]Fail SD Path:%s",filePath);
+					DEXLOG("[Dump]SD Open file fail!");
+					free(filePath);
+					return;
+				}
+			}else{
+				DEXLOG("[Dump]Fail appName Is Null");
+				free(filePath);
+				return ;
+			}
+		}
+		fwrite(inAddr,1,inLen,mfd);
+		fclose(mfd);
+		DEXLOG("[Dump]Dump File Path:%s",filePath);
+		free(filePath);
+	}
 };
 //
 #endif

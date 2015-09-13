@@ -57,7 +57,7 @@ obj/local/armeabi/objs/SubstrateHook.cy/SubstrateHook.cy.o: \
  jni/Common/Common.H jni/Hook/Hook_JNI.H jni/Hook/Hook_dvm.H \
  jni/Substrate.h jni/HFile/NativeLog.h \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/android/log.h \
- jni/Common/Utils.H jni/Shell/Shell.H jni/Shell/Baidu_Shell.H \
+ jni/Common/Utils.H jni/Shell/Shell.H jni/Shell/UNKnown_Shell.H \
  jni/Dump_Dex/DexParse.H jni/Dump_Dex/Dump_Dex.H \
  jni/Dump_Dex/Module_Mem.H \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/ctype.h \
@@ -70,7 +70,8 @@ obj/local/armeabi/objs/SubstrateHook.cy/SubstrateHook.cy.o: \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/time.h \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sched.h \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/linux/sched.h \
- jni/Hook/Hook_libc.H jni/Shell/Shell.H jni/HFile/NativeLog.h \
+ jni/Shell/Baidu_Shell.H jni/Shell/Ali_Shell.H jni/Hook/Hook_libc.H \
+ jni/Shell/Shell.H jni/HFile/NativeLog.h \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/fcntl.h \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/linux/fadvise.h \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/linux/fcntl.h \
@@ -201,7 +202,7 @@ jni/Common/Utils.H:
 
 jni/Shell/Shell.H:
 
-jni/Shell/Baidu_Shell.H:
+jni/Shell/UNKnown_Shell.H:
 
 jni/Dump_Dex/DexParse.H:
 
@@ -246,6 +247,10 @@ D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/time
 D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sched.h:
 
 D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/linux/sched.h:
+
+jni/Shell/Baidu_Shell.H:
+
+jni/Shell/Ali_Shell.H:
 
 jni/Hook/Hook_libc.H:
 

@@ -2,6 +2,7 @@
 #include <unistd.h>
 #include <sys/stat.h>
 #include <ctype.h>
+#include "HFile/NativeLog.h"
 /*
 ************************************************************
 * 获取进程名字
@@ -32,21 +33,34 @@ char* getpidName(pid_t inpid){
 ************************************************************
 */
  char* getConfig(){
-	FILE* fd =fopen("/sdcard/MHookDemo/Config.txt","r");
+	FILE* fd =fopen("/sdcard/Config.txt","r");
 	//判断文件是否打开成功*没有SD的程序不能成功
-	if(fd == NULL){
-		if(fd == NULL){
-			return NULL;
+	char* mConfig = NULL;
+	if(fd != NULL){
+		char* mConfig = (char*)malloc(10240);
+		memset(mConfig,0,10240);
+		fgets(mConfig,10240,fd);
+		fclose(fd);
+		size_t mConfigSize = strlen(mConfig);
+		if(mConfigSize == 0){
+			free(mConfig);
+			mConfig = NULL;
 		}
 	}
-	char* mConfig = (char*)malloc(10240);
-	memset(mConfig,0,10240);
-	fgets(mConfig,10240,fd);
-	fclose(fd);
-	size_t mConfigSize = strlen(mConfig);
-	if(mConfigSize == 0){
-		free(mConfig);
-		return NULL;
+
+	if(mConfig != NULL)return mConfig;
+	fd =fopen("/data/local/Config.txt","r");
+	//判断文件是否打开成功*没有SD的程序不能成功
+	if(fd != NULL){
+		mConfig = (char*)malloc(10240);
+		memset(mConfig,0,10240);
+		fgets(mConfig,10240,fd);
+		fclose(fd);
+		size_t mConfigSize = strlen(mConfig);
+		if(mConfigSize == 0){
+			free(mConfig);
+			mConfig = NULL;
+		}
 	}
 	return mConfig;
 }
