@@ -1,4 +1,5 @@
 #include "stdio.h"
+#include <stdlib.h>
 #include <unistd.h>
 #include <sys/stat.h>
 #include <ctype.h>
@@ -111,4 +112,42 @@ char* getSelfName(){
 	free(mBuf);
 	trim(mOut);
 	return mOut;
+}
+/*
+************************************************************
+* 在Self/maps中读取加载地址
+************************************************************
+*/
+unsigned long getStartAddrByName(char* inName){
+	FILE* fd =fopen("/proc/self/maps","r");
+	if(NULL == fd)return 0;
+	char* mBuf = (char*)malloc(1024);
+	memset(mBuf,0,1024);
+	unsigned long mStartAddr = 0;
+	while(NULL != fgets(mBuf,1024,fd)){
+		if(NULL != strstr(mBuf,inName)){
+			mStartAddr = strtoul(mBuf,0,0x10);
+			if(0 != mStartAddr)
+				break;
+		}
+	}
+	free(mBuf);
+	return mStartAddr;
+}
+unsigned long getEndAddrByName(char* inName){
+	FILE* fd =fopen("/proc/self/maps","r");
+	if(NULL == fd)return 0;
+	char* mBuf = (char*)malloc(1024);
+	memset(mBuf,0,1024);
+	unsigned long mEndAddr = 0;
+	while(NULL != fgets(mBuf,1024,fd)){
+		if(NULL != strstr(mBuf,inName)){
+			char* pEnd = strstr(mBuf,"-")+1;
+			mEndAddr = strtoul(pEnd,0,0x10);
+			if(0 != mEndAddr)
+				break;
+		}
+	}
+	free(mBuf);
+	return mEndAddr;
 }

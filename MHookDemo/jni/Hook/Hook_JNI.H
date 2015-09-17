@@ -2,4 +2,5 @@
 #define __Hook_JNI_H_
 #include "Hook_dvm.H"
 #include "Hook_libc.H"
+#include "HookTest.H"
 #endif

@@ -55,6 +55,7 @@ obj/local/armeabi/objs/SubstrateHook.cy/SubstrateHook.cy.o: \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sys/endian.h \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/machine/endian.h \
  jni/Common/Common.H jni/Hook/Hook_JNI.H jni/Hook/Hook_dvm.H \
+ D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/jni.H \
  jni/Substrate.h jni/HFile/NativeLog.h \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/android/log.h \
  jni/Common/Utils.H jni/Shell/Shell.H jni/Shell/UNKnown_Shell.H \
@@ -70,13 +71,18 @@ obj/local/armeabi/objs/SubstrateHook.cy/SubstrateHook.cy.o: \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/time.h \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sched.h \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/linux/sched.h \
- jni/Shell/Baidu_Shell.H jni/Shell/Ali_Shell.H jni/Hook/Hook_libc.H \
- jni/Shell/Shell.H jni/HFile/NativeLog.h \
+ jni/Shell/Baidu_Shell.H jni/Shell/Ali_Shell.H jni/Shell/Bangcle_Shell.H \
+ jni/Hook/Hook_libc.H \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/fcntl.h \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/linux/fadvise.h \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/linux/fcntl.h \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm/fcntl.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm-generic/fcntl.h
+ D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm-generic/fcntl.h \
+ D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sys/mman.h \
+ D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm/mman.h \
+ D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm-generic/mman.h \
+ D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm-generic/mman-common.h \
+ jni/Hook/HookTest.H jni/Shell/Shell.H jni/HFile/NativeLog.h
 
 D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/stdio.h:
 
@@ -192,6 +198,8 @@ jni/Hook/Hook_JNI.H:
 
 jni/Hook/Hook_dvm.H:
 
+D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/jni.H:
+
 jni/Substrate.h:
 
 jni/HFile/NativeLog.h:
@@ -252,11 +260,9 @@ jni/Shell/Baidu_Shell.H:
 
 jni/Shell/Ali_Shell.H:
 
+jni/Shell/Bangcle_Shell.H:
+
 jni/Hook/Hook_libc.H:
-
-jni/Shell/Shell.H:
-
-jni/HFile/NativeLog.h:
 
 D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/fcntl.h:
 
@@ -267,3 +273,17 @@ D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/linu
 D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm/fcntl.h:
 
 D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm-generic/fcntl.h:
+
+D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sys/mman.h:
+
+D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm/mman.h:
+
+D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm-generic/mman.h:
+
+D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm-generic/mman-common.h:
+
+jni/Hook/HookTest.H:
+
+jni/Shell/Shell.H:
+
+jni/HFile/NativeLog.h:

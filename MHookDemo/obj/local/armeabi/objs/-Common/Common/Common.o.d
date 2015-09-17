@@ -18,6 +18,12 @@ obj/local/armeabi/objs/-Common/Common/Common.o: jni/Common/Common.cpp \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm/posix_types.h \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm-generic/posix_types.h \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sys/sysmacros.h \
+ D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/stdlib.h \
+ D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/string.h \
+ D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/malloc.h \
+ D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/alloca.h \
+ D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/strings.h \
+ D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/memory.h \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/unistd.h \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sys/select.h \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sys/time.h \
@@ -32,8 +38,6 @@ obj/local/armeabi/objs/-Common/Common/Common.o: jni/Common/Common.cpp \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sys/limits.h \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/linux/limits.h \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sys/syslimits.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/string.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/malloc.h \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/linux/signal.h \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm/signal.h \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm-generic/signal-defs.h \
@@ -88,6 +92,18 @@ D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm-
 
 D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sys/sysmacros.h:
 
+D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/stdlib.h:
+
+D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/string.h:
+
+D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/malloc.h:
+
+D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/alloca.h:
+
+D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/strings.h:
+
+D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/memory.h:
+
 D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/unistd.h:
 
 D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sys/select.h:
@@ -115,10 +131,6 @@ D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sys/
 D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/linux/limits.h:
 
 D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sys/syslimits.h:
-
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/string.h:
-
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/malloc.h:
 
 D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/linux/signal.h:
 

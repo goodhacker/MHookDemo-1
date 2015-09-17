@@ -20,7 +20,7 @@ MSConfig(MSFilterLibrary, "/system/lib/libdvm.so");
 #define dvmLoadNativeCode	"_Z17dvmLoadNativeCodePKcP6ObjectPPc"
 #define Final_JNI_OnLoad	"JNI_OnLoad"
 //JNIEXPORT jint JNI_OnLoad(JavaVM* vm, void *reserved)
-void* (*_JNI_OnLoad)(JavaVM* vm, void *reserved);
+void* (*_JNI_OnLoad)(JavaVM* vm, void *reserved) = NULL;
 void* My_JNI_OnLoad(JavaVM* vm, void *reserved){
 	//通过Hook获取到JavaVM，保存JavaVM
 	LOGD("My_JNI_OnLoad is Run %p",vm);
@@ -30,14 +30,22 @@ void* My_JNI_OnLoad(JavaVM* vm, void *reserved){
 //Hook dvmLoadNativeCode
 bool (*_dvmLoadNativeCode)(char* pathName, void* classLoader, char** detail);
 bool My_dvmLoadNativeCode(char* pathName, void* classLoader, char** detail){
-	//获取SO配置信息,和Hook应用名单
-	LOGD("My_dvmLoadNativeCode :%s",pathName);
 	char* mConfig = getConfig();
-	LOGD("mConfig:%s",mConfig);
+	//获取SO配置信息,和Hook应用名单
+	LOGD("My_dvmLoadNativeCode :%s %s",pathName,mConfig);
 	//判断加载的SO是否存在配置包名，
 	//加载SO必须存在Jni_Onload否则忽视
 	//设置包名来判断是否已经被Hook
 	setencryptClass(pathName);
+	if(NULL == _JNI_OnLoad){
+		MSImageRef image = dlopen(pathName, RTLD_NOW);
+		if(image != NULL){
+			Jni_Onload_Addr= MSFindSymbol(image,Final_JNI_OnLoad);
+			if(Jni_Onload_Addr != NULL){
+				MSHookFunction(Jni_Onload_Addr,(void*)&My_JNI_OnLoad,(void**)&_JNI_OnLoad);
+			}
+		}
+	}
 	if((AppName == NULL)&&(mConfig != NULL)){
 		char *delim = ",";
 		char* msrc = (char*)malloc(strlen(mConfig)+1);
@@ -47,6 +55,7 @@ bool My_dvmLoadNativeCode(char* pathName, void* classLoader, char** detail){
 		if(*p != NULL){
 			do{
 				if(strstr(pathName,p) != NULL){
+					p = strdup(p);
 					break;
 				}
 			}while(p = strtok(NULL, delim));
@@ -54,22 +63,10 @@ bool My_dvmLoadNativeCode(char* pathName, void* classLoader, char** detail){
 		}
 		free(mConfig);
 		if(p != NULL){
-			LOGD("dvmLoadNativeCode Hook_Main");
-			LOGD("AppName:%s",AppName);
-			//判断是否存在JNI_OnLoad
-			//必须存在JNI_OnLoad，
-			MSImageRef image = dlopen(pathName, RTLD_NOW);
-			if(image != NULL){
-				Jni_Onload_Addr= MSFindSymbol(image,Final_JNI_OnLoad);
-				if(Jni_Onload_Addr != NULL){
-					LOGD("Jni_Onload_Addr:%p %p",image,Jni_Onload_Addr);
-					//设置AppName,在这里设置是为防止Hook_DVM多次运行，
-					AppName =strdup(p);
-					MSHookFunction(Jni_Onload_Addr,(void*)&My_JNI_OnLoad,(void**)&_JNI_OnLoad);
-					//Hook有关DEX API
-					Hook_DVM();
-				}
-			}
+			//设置AppName,在这里设置是为防止Hook_DVM多次运行，
+			AppName =p;
+			LOGD("dvmLoadNativeCode Hook_Main %s",AppName);
+			Hook_DVM();
 		}
 	}
 	return _dvmLoadNativeCode(pathName,classLoader,detail);

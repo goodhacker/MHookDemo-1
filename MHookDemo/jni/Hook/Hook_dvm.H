@@ -3,16 +3,21 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <sys/stat.h>
+#include "jni.H"
 #include "Substrate.h"
 #include "HFile/NativeLog.h"
 #include "Common/Utils.H"
 #include "Shell/Shell.H"
 //dvm  Hook 段
-#define libdvm			"/system/lib/libdvm.so"
-#define dexFileParse	"_Z12dexFileParsePKhji"
-#define dvmDexFileOpenFromFd "_Z20dvmDexFileOpenFromFdiPP6DvmDex"
-#define dvmDexFileOpenPartial "_Z21dvmDexFileOpenPartialPKviPP6DvmDex"
-
+#define libdvm					"/system/lib/libdvm.so"
+#define dexFileParse			"_Z12dexFileParsePKhji"
+#define dvmResolveClass			"dvmResolveClass"
+#define dvmDexFileOpenFromFd 	"_Z20dvmDexFileOpenFromFdiPP6DvmDex"
+#define dvmDexFileOpenPartial 	"_Z21dvmDexFileOpenPartialPKviPP6DvmDex"
+//
+void* OldLoadDexAddr = NULL;
+size_t OldLoadDexLen = NULL;
+bool Dex_Dyload = false;
 //调用外部Dump_DexFile
 extern void Dump_DexFile(void* inAddr,size_t inLen,void* inDex);
 //__________________________________________________________________________________________
@@ -21,15 +26,20 @@ extern JavaVM* GVM;
 //
 static void* (*_dexFileParse)(int *, unsigned int, int);
 static void* My_dexFileParse(int *inAddr, unsigned int length, int parseFlags){
-	LOGD("LibCall dexFileParse:inDex:%p,length:%p",inAddr,length);
-	BeforeParse_UnShell(inAddr,length);
-	void* Out_DexFile = _dexFileParse(inAddr,length,parseFlags);
-	LOGD("LibCall dexFileParse:DexFile:%p",Out_DexFile);
-	AfterParse_UnShell(Out_DexFile);
+	//已使用分析函数，判定为动态加载
+	Dex_Dyload = true;
+	void* Out_DexFile = NULL;
 	//屏蔽长度过小的长度
-/*	if(length > 0x2A00){
-		Dump_DexFile(inAddr,length,Out_DexFile);
-	}/**/
+	if(length > 0x2000){
+		//先查找到原始Dex加载地址
+		LOGD("LibCall dexFileParse:inDex:%p,length:%p",inAddr,length);
+		BeforeParse_UnShell(inAddr,length);
+		Out_DexFile = _dexFileParse(inAddr,length,parseFlags);
+		LOGD("LibCall dexFileParse:DexFile:%p",Out_DexFile);
+		AfterParse_UnShell(Out_DexFile);
+	}else{
+		Out_DexFile = _dexFileParse(inAddr,length,parseFlags);
+	}
 	//Dump_DexFile(inAddr,length,Out_DexFile);
 	return Out_DexFile;
 }
@@ -39,12 +49,15 @@ int My_dvmDexFileOpenFromFd(int fd, void* ppDvmDex){
 	LOGD("LibCall My_dvmDexFileOpenFromFd %p",GETLR());
 	return _dvmDexFileOpenFromFd(fd,ppDvmDex);
 }
-//	dvmDexFileOpenPartial
-int (*_dvmDexFileOpenPartial)(const void* addr, int len, void* ppDvmDex);
-int My_dvmDexFileOpenPartial(const void* addr, int len, void* ppDvmDex){
-	LOGD("LibCall _dvmDexFileOpenPartial");
-	return _dvmDexFileOpenPartial(addr,len,ppDvmDex);
+//	dvmDexFileOpenPartial(const ClassObject* referrer,u4 classIdx,bool fromUnverifiedConstant);
+int (*_dvmResolveClass)(const void* referrer, int classIdx, bool ppDfromUnverifiedConstantvmDex);
+int My_dvmResolveClass(const void* referrer, int classIdx, bool ppDfromUnverifiedConstantvmDex){
+	LOGD("LibCall My_dvmResolveClass %p %p %p",referrer,classIdx,ppDfromUnverifiedConstantvmDex);
+
+
+	return _dvmResolveClass(referrer,classIdx,ppDfromUnverifiedConstantvmDex);
 }
+//	dvmResolveClass
 /**
  *			Hook_DVM
  *	开始Hook LibDvm相关库函数
@@ -52,8 +65,19 @@ int My_dvmDexFileOpenPartial(const void* addr, int len, void* ppDvmDex){
  */
 int Hook_DVM(){
 	LOGD("Hook_DVM StartHook");
+	//打开libdvm.so
 	MSImageRef image = MSGetImageByName(libdvm);
 	void* mFun = NULL;
+	//开始获取Dex原始地址，此Dex是系统启动加载的Dex,即是原包中包含的Dex
+	//获取Dex开线程，若10S内没有使用dexFileParse函数，则表示没有使用动态加载技术。
+	if(NULL == OldLoadDexAddr){
+		OldLoadDexAddr = (void*)getStartAddrByName("/data/dalvik-cache/data");
+		OldLoadDexLen = getEndAddrByName("/data/dalvik-cache/data") - (u4)OldLoadDexAddr;
+		LOGD("Hook_DVM OldLoadDexAddr: %p %p",OldLoadDexAddr,OldLoadDexLen);
+		//开线程10S内未使用Dexparse则判断为无自动加载模块
+
+
+	}
 	if(image != NULL){
 		//Hook解析函数
 		mFun = MSFindSymbol(image,dexFileParse);
@@ -70,6 +94,12 @@ int Hook_DVM(){
 		if(mFun != NULL){
 //			MSHookFunction(mFun,(void*)&My_dvmDexFileOpenPartial,(void**)&_dvmDexFileOpenPartial);
 		}
+		mFun = MSFindSymbol(image,dvmResolveClass);
+		if(mFun != NULL){
+//			直接打印dvmResolveClass头数据，判断是否被Hook
+			MSHookFunction(mFun,(void*)&My_dvmResolveClass,(void**)&_dvmResolveClass);
+		}
+
 	}
 	return 0;
 }

@@ -5,11 +5,15 @@
 #include "UNKnown_Shell.H"
 #include "Baidu_Shell.H"
 #include "Ali_Shell.H"
+#include "Bangcle_Shell.H"
 #define UNKnown					0
 #define Baidu_Jiagu				1
 #define Ali_Jiagu				2
+#define Bangcle_Jiagu			3
+
 #define Final_Baidu_Jiagu		"libbaiduprotect"
 #define Final_Ali_Jiagu			"libmobisec"
+#define Final_Bangcle_Jiagu		"libsecexe"
 
 /*
 ************************************************************
@@ -21,11 +25,14 @@
 static int encryptClas = UNKnown;
 void setencryptClass(char* inLoadSo){
 	if(strstr(inLoadSo,Final_Baidu_Jiagu)){
-		LOGD("加固方式：百度加固");
+//		LOGD("加固方式：百度加固");
 		encryptClas = Baidu_Jiagu;
 	}else if(strstr(inLoadSo,Final_Ali_Jiagu)){
-		LOGD("加固方式：阿里加固");
+//		LOGD("加固方式：阿里加固");
 		encryptClas = Ali_Jiagu;
+	}else if(strstr(inLoadSo,Final_Bangcle_Jiagu)){
+//		LOGD("加固方式：梆梆加固");
+		encryptClas = Bangcle_Jiagu;
 	}
 }
 /*
@@ -43,7 +50,9 @@ void BeforeParse_UnShell(void* inAddr,size_t inLen){
 		BeforeParse_Baidu(inAddr,inLen);
 	}else if(encryptClas == Ali_Jiagu){
 		LOGD("BeforeParse_UnShell：阿里加固");
-
+		BeforeParse_Ali(inAddr,inLen);
+	}else if(encryptClas == Bangcle_Jiagu){
+		LOGD("BeforeParse_UnShell：梆梆加固");
 	}
 }
 /*
@@ -62,6 +71,9 @@ void AfterParse_UnShell(void* inDex){
 		AfterParse_Baidu(inDex);
 	}else if(encryptClas == Ali_Jiagu){
 		LOGD("AfterParse_UnShell：阿里加固");
+		AfterParse_Ali(inDex);
+	}else if(encryptClas == Bangcle_Jiagu){
+		LOGD("AfterParse_UnShell：梆梆加固");
 
 	}
 }
