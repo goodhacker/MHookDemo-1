@@ -2,27 +2,10 @@
 #define __DexTypes_H_
 #include <stdio.h>
 #include <unistd.h>
-#include "HFile/NativeLog.h"
-#include "Dump_Dex.H"
-#include "Module_Mem.H" 
-#include "DexUtil.H"
+#include "DexFile/Dex.H"
+#include "DexFile/LDex_Types_Header.H"
 #include "DexMaps.H"
-//__________________________________________________________
-//存放typeItem
-typedef struct typeItem{
-	struct typeItem* next;
-	u4	 type;
-}typeItem;
-//存放typeList
-//位置空间在Code中
-//需要保存加载地址等信息，所以加载Base段
-typedef struct typeList{
-	struct typeList* next;
-	Base	BS;
-	struct typeItem* item;
-	u4		Size;
-}typeList;
-class Dex_Types : DexUtil{
+class Dex_Types : LDex_Util{
 public:
 	FastLink<typeItem> IDS;
 	FastLink<typeList> List;

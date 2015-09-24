@@ -2,7 +2,94 @@
 #define __FastLink_H_
 #include "stdio.h"
 #include <unistd.h>
-#include "Dump_Dex/DexUtil.H"
+#include "DexFile/LDex_Util.H"
+//
+/*
+ *			单向链接基本类
+ * 1.Offset_Load表示内存加载地址
+ * 2.Offset_File表示文件偏移地址
+ * 3.next指向下一个链表
+ * 4.MemSize表示内存宽度
+ */
+typedef struct Base{
+	u4	MemSize;
+	u4	Offset_Load;
+	u4	Base_Load;
+	u4	Offset_File;
+	u4	Base_File;
+/*
+************************************************************
+*			GetLoad
+*获取加载内存地址*
+************************************************************
+*/
+	u4 GetLoad(){
+		return Base_Load+Offset_Load;
+	}
+/*
+************************************************************
+*			GetLoad
+*获取加载内存地址*
+************************************************************
+*/
+	void SetLoad(u4 inBase,u4 inOffset){
+		Base_Load = inBase;
+		if(inOffset > inBase){
+			Offset_Load = inOffset - inBase;
+		}else{
+			Offset_Load = inOffset;
+		}
+	}
+/*
+************************************************************
+*			GetLoad
+*获取加载内存地址*
+************************************************************
+*/
+	void SetOffset(char* inAddr,char* inBase){
+		if(inAddr < inBase){
+//			DEXLOG("[ERR]设置偏移地址失败");
+			return ;
+		}
+		Offset_File = (u4)(inAddr-inBase);
+	}
+/*
+************************************************************
+*			SetBaseLoad
+*设置加载内存基准地址*
+************************************************************
+*/
+	void SetBaseLoad(u4 inOffset){
+		Base_Load = inOffset;
+	}
+/*
+************************************************************
+*			SetLoadOffset
+*设置内存偏移地址*
+************************************************************
+*/
+	void SetLoadOffset(u4 inOffset){
+		Offset_Load = inOffset;
+	}
+/*
+************************************************************
+*			SetFileOffset
+*设置文件偏移地址*
+************************************************************
+*/
+	void SetFileOffset(u4 inOffset){
+		Offset_File = inOffset;
+	}
+/*
+************************************************************
+*			SetMemSize
+*设置内存宽度*
+************************************************************
+*/
+	void SetMemSize(u4 inMemSize){
+		MemSize = inMemSize;
+	}
+}Base;
 /*
 ************************************************************
 *				Link

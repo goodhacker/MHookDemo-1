@@ -2,11 +2,8 @@
 #define __DexHeader_H_
 #include <stdio.h>
 #include <unistd.h>
-#include "HFile/NativeLog.h"
-#include "Dump_Dex.H"
-#include "Module_Mem.H" 
-#include "DexUtil.H"
-class Dex_Header:DexUtil{
+#include "DexFile/Dex.H"
+class Dex_Header:LDex_Util{
 public:
 	DexHeader* Header = NULL;
 /*

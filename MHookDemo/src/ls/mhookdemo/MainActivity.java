@@ -16,9 +16,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.widget.AdapterView.OnItemClickListener;
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 
-@TargetApi(Build.VERSION_CODES.GINGERBREAD)
 public class MainActivity extends Activity {
 	private List<PackageInfo> listdatas = new ArrayList<PackageInfo>();
 	private ListView mlistview ;

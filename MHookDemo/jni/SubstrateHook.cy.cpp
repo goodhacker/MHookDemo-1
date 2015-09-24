@@ -5,9 +5,10 @@
 #include "Common/Common.H"
 #include "Hook/Hook_JNI.H"
 #include "Shell/Shell.H"
-#include "HFile/NativeLog.h"
 #include <dlfcn.h>
 #include <fcntl.h>
+#define DEXLOG(...) ((void)__android_log_print(ANDROID_LOG_DEBUG, "LsSub_DEX", __VA_ARGS__))
+
 //存放读取的配置文件
 char* Config = NULL;
 char* AppName = NULL;
@@ -23,7 +24,7 @@ MSConfig(MSFilterLibrary, "/system/lib/libdvm.so");
 void* (*_JNI_OnLoad)(JavaVM* vm, void *reserved) = NULL;
 void* My_JNI_OnLoad(JavaVM* vm, void *reserved){
 	//通过Hook获取到JavaVM，保存JavaVM
-	LOGD("My_JNI_OnLoad is Run %p",vm);
+	DEXLOG("My_JNI_OnLoad is Run %p",vm);
 	GVM = vm;
 	return _JNI_OnLoad(vm,reserved);
 }
@@ -32,7 +33,7 @@ bool (*_dvmLoadNativeCode)(char* pathName, void* classLoader, char** detail);
 bool My_dvmLoadNativeCode(char* pathName, void* classLoader, char** detail){
 	char* mConfig = getConfig();
 	//获取SO配置信息,和Hook应用名单
-	LOGD("My_dvmLoadNativeCode :%s %s",pathName,mConfig);
+	DEXLOG("My_dvmLoadNativeCode :%s %s",pathName,mConfig);
 	//判断加载的SO是否存在配置包名，
 	//加载SO必须存在Jni_Onload否则忽视
 	//设置包名来判断是否已经被Hook
@@ -65,7 +66,7 @@ bool My_dvmLoadNativeCode(char* pathName, void* classLoader, char** detail){
 		if(p != NULL){
 			//设置AppName,在这里设置是为防止Hook_DVM多次运行，
 			AppName =p;
-			LOGD("dvmLoadNativeCode Hook_Main %s",AppName);
+			DEXLOG("dvmLoadNativeCode Hook_Main %s",AppName);
 			Hook_DVM();
 		}
 	}
@@ -75,7 +76,6 @@ bool My_dvmLoadNativeCode(char* pathName, void* classLoader, char** detail){
  *			MSInitialize
  *	程序入口点，
  * 		一定是最开始运行，但是不一定是进程中最开始运行
- *
  */
 MSInitialize
 {
@@ -91,7 +91,7 @@ MSInitialize
 }
 JNIEXPORT jint JNI_OnLoad(JavaVM* vm, void *reserved) //这是JNI_OnLoad的声明，必须按照这样的方式声明
 {
-	LOGD("Substrate JNI_OnLoad");
+	DEXLOG("Substrate JNI_OnLoad");
 	//保存全局JavaVM
 	GVM = vm;
 	//注册时在JNIEnv中实现的，所以必须首先获取它

@@ -1,5 +1,8 @@
 #ifndef __Utils_H_
 #define __Utils_H_
+//
+#include <android/log.h>
+#define DEXLOG(...) ((void)__android_log_print(ANDROID_LOG_DEBUG, "LsSub_DEX", __VA_ARGS__))
 //获取LRS
 long GETLR(){
 	long mLR = 0;

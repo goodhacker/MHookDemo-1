@@ -7,4 +7,5 @@ extern char* getSelfName();
 extern char* getSelfCmdline();
 extern unsigned long getStartAddrByName(char* inName);
 extern unsigned long getEndAddrByName(char* inName);
+
 #endif

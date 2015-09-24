@@ -1,13 +1,13 @@
 #ifndef __Baidu_Shell_H_
 #define __Baidu_Shell_H_
-#include "Dump_Dex/DexParse.H"
+#include "DexFile/LDexFile.H"
 #include <sys/time.h>
 #include <unistd.h>
 #include <pthread.h>
 using namespace Dex;
 extern JavaVM* GVM;
 extern char* AppName;
-DexParse* BaiduDex = NULL;
+LDexFile* BaiduDexFile = NULL;
 /*
 *									百度加固说明
 *1.此脱壳为脱百度 2代和3代结合版本
@@ -28,15 +28,15 @@ DexParse* BaiduDex = NULL;
 static void (*$BaidDu_A_e)(JNIEnv*,jobject,jobject);
 static void $My_BaidDu_A_e(JNIEnv *jni, jobject obj,jobject inStr)
 {
-	LOGD("My_BaidDu_A_e %p %p %p",jni,obj,inStr);
-	LOGD("My_BaidDu_A_e %s ", jstringTostring(jni,(jstring)inStr));
+	DEXLOG("My_BaidDu_A_e %p %p %p",jni,obj,inStr);
+	DEXLOG("My_BaidDu_A_e %s ", jstringTostring(jni,(jstring)inStr));
 }
 //解密Hook
 static void (*$BaidDu_A_d)(JNIEnv*,jobject,jobject);
 static void $My_BaidDu_A_d(JNIEnv *jni, jobject obj,jobject inStr)
 {
-	LOGD("My_BaidDu_A_d %p %p %p",jni,obj,inStr);
-	LOGD("My_BaidDu_A_d %s ", jstringTostring(jni,(jstring)inStr));
+	DEXLOG("My_BaidDu_A_d %p %p %p",jni,obj,inStr);
+	DEXLOG("My_BaidDu_A_d %s ", jstringTostring(jni,(jstring)inStr));
 }
 //将传入参数，直接解密
 static void RestoreCode_1(JNIEnv* env,char* pstr){
@@ -53,7 +53,7 @@ static void RestoreCode_1(JNIEnv* env,char* pstr){
  *
  */
 void* Baidu_DumpToFile(void* inp){
-	BaiduDex->DumpToFile(AppName,DexUtil::GetTimeName("Demo3"));
+	BaiduDexFile->DumpToFile(AppName,LDex_Util::GetTimeName("Demo3"));
 	return NULL;
 }
 /**
@@ -62,10 +62,10 @@ void* Baidu_DumpToFile(void* inp){
  *至于解析还是放到系统解析完毕后在解析
  */
 void BeforeParse_Baidu(void* inAddr,size_t inLen){
-	LOGD("BeforeParse_Baidu");
-	BaiduDex = new DexParse();
-	BaiduDex->loadAddr = inAddr;
-	BaiduDex->Size = inLen;
+	DEXLOG("BeforeParse_Baidu");
+	BaiduDexFile = new LDexFile();
+	BaiduDexFile->loadAddr = inAddr;
+	BaiduDexFile->Size = inLen;
 }
 /**
  *AfterParse_Baidu	-> 系统解析之后调用
@@ -73,16 +73,16 @@ void BeforeParse_Baidu(void* inAddr,size_t inLen){
  *
  */
 void AfterParse_Baidu(void* inDex){
-	LOGD("AfterParse_Baidu");
-	BaiduDex->dex = (DexFile*)inDex;
+	DEXLOG("AfterParse_Baidu");
+	BaiduDexFile->dex = (DexFile*)inDex;
 	//解密时候数据分段必须非常犀利,不能额报错产生,解析全部Ids头,主要是获取ClassDef
 	//然后遍历onCreate001,有onCreate001则直接使用解密函数进行解密
-	BaiduDex->Parse();
+	BaiduDexFile->Parse();
 	//判断是否存在修复类，就显示修复
 	JNIEnv* env = NULL; //注册时在JNIEnv中实现的，所以必须首先获取它
 	if(GVM != NULL){
 		if(GVM->GetEnv((void**)&env, JNI_VERSION_1_4) != JNI_OK){
-			LOGD("获取 JNIEnv 失败");
+			DEXLOG("获取 JNIEnv 失败");
 		}else{
 			//判断第三代加固主要类是否存在
 			jclass cls1 = env->FindClass("com/baidu/protect/A");
@@ -90,26 +90,26 @@ void AfterParse_Baidu(void* inDex){
 				//判断解密类是否存在
 				jmethodID clsmid = env->GetStaticMethodID(cls1,"d","(Ljava/lang/String;)V");
 				if(clsmid == NULL){
-					LOGD("com/baidu/protect/A;->d");
+					DEXLOG("com/baidu/protect/A;->d");
 				}else{
 					MSJavaHookMethod(env,cls1,clsmid,(void*)&$My_BaidDu_A_d,(void**)&$BaidDu_A_d);
 				}
 				//判断加密类是否存在
 				clsmid = env->GetStaticMethodID(cls1,"e","(Ljava/lang/String;)V");
 				if(clsmid == NULL){
-					LOGD("com/baidu/protect/A;->e");
+					DEXLOG("com/baidu/protect/A;->e");
 				}else{
 					MSJavaHookMethod(env,cls1,clsmid,(void*)&$My_BaidDu_A_e,(void**)&$BaidDu_A_e);
 				}
 				//遍历METHODS,获取需要解析的类，还原代码，
-				Dex_Methods* method = BaiduDex->methods;
-				Dex_Types* types = BaiduDex->types;
-				Dex_String* string = BaiduDex->string;
+				LDex_Method* method = BaiduDexFile->DexMethod;
+				LDex_Types* types = BaiduDexFile->DexTypes;
+				LDex_String* string = BaiduDexFile->DexString;
 				//获取onCreate方法名
 				size_t onCreate = string->getIDSNo("onCreate");
 				size_t onCreate001 = string->getIDSNo("onCreate001");
-				LOGD("onCreate ：%d",onCreate);
-				LOGD("onCreate001 ：%d",onCreate001);
+				DEXLOG("onCreate ：%d",onCreate);
+				DEXLOG("onCreate001 ：%d",onCreate001);
 				//遍历查找方法名为onCreate001的method
 				method->IDS.Reset();
 				while(NULL != method->IDS.Get()){
@@ -119,7 +119,7 @@ void AfterParse_Baidu(void* inDex){
 						//从类名中获取字符串
 						size_t inType = types->getIdxNoType(classIdx);
 						char* mString = string->getString(inType);
-						LOGD("onCreate001 :%s",mString);
+						DEXLOG("onCreate001 :%s",mString);
 						RestoreCode_1(env,mString);
 					}
 					method->IDS.Next();
@@ -134,11 +134,11 @@ void AfterParse_Baidu(void* inDex){
 				memcpy(strOncreat001,str1,sizeof(stringItem));/**/
 				/**/
 				//更新全部代码
-				BaiduDex->Dexclass->Code_AddAll(BaiduDex->dex);
+				BaiduDexFile->DexClass->Code_AddAll(BaiduDexFile->dex);
 			}
 		}
 	}else{
-		LOGD("GVM is null");
+		DEXLOG("GVM is null");
 	}
 	/**/
 	pthread_t thread;

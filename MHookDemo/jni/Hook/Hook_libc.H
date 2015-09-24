@@ -9,7 +9,7 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include "Substrate.h"
-#include "HFile/NativeLog.h"
+#include "Common/Utils.H"
 //libc
 #define str_linker			"/system/bin/linker"
 #define str_libc			"/system/lib/libc.so"
@@ -27,41 +27,41 @@
 //open	int open(const char*pathname,int flags);
 void* (*_open)(const char * path,int flags);
 void* My_open(const char * path,int flags){
-	LOGD("LibCall open Path:%s,Mode:%d",path,flags);
+	DEXLOG("LibCall open Path:%s,Mode:%d",path,flags);
 	return _open(path,flags);
 }
 //fopen
 void* (*_fopen)(const char * path,const char * mode);
 void* My_fopen(const char * path,const char * mode){
-	LOGD("LibCall fopen Path:%s,Mode:%s",path,mode);
+	DEXLOG("LibCall fopen Path:%s,Mode:%s",path,mode);
 	return _fopen(path,mode);
 }
 //mmap
 void*(*_mmap)(void *addr, size_t len, int prot, int flags, int fd, off_t offset);
 void* My_mmap(void *addr, size_t len, int prot, int flags, int fd, off_t offset){
 	void* Result =_mmap(addr,len,prot,flags,fd,offset);
-	LOGD("LibCall _mmap %08x %08x %08x %08x %08x %08x",addr,len,prot,flags,fd,offset);
-	LOGD("LibCall _mmap Result %08x ",Result);
+	DEXLOG("LibCall _mmap %08x %08x %08x %08x %08x %08x",addr,len,prot,flags,fd,offset);
+	DEXLOG("LibCall _mmap Result %08x ",Result);
 	return Result;
 }
 //ptrace
 int (*_ptrace)(int request, int pid, int addr, int data);
 int My_ptrace(int request, int pid, int addr, int data){
 	int mres = _ptrace(request,pid,addr,data);
-	LOGD("LibCall _ptrace in %08x %08x %08x %08x %08x %08x",request,pid,addr,data);
-	LOGD("LibCall _ptrace res %08x ",mres);
+	DEXLOG("LibCall _ptrace in %08x %08x %08x %08x %08x %08x",request,pid,addr,data);
+	DEXLOG("LibCall _ptrace res %08x ",mres);
 	return mres;
 }
 //free
 void (*_free)(void *ptr);
 void My_free(void *ptr){
-	LOGD("LibCall _free %08x",ptr);
+	DEXLOG("LibCall _free %08x",ptr);
 	free(ptr);
 }
 // int munmap(void *start,size_t length);
 int (*_munmap)(void *start,size_t length);
 int My_munmap(void *start,size_t length){
-	LOGD("LibCall _munmap %08x %08x",start,length);
+	DEXLOG("LibCall _munmap %08x %08x",start,length);
 	return _munmap(start,length);
 }
 //unsigned int strlen(char *s）;

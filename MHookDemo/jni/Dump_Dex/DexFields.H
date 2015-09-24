@@ -2,18 +2,9 @@
 #define __DexFields_H_
 #include <stdio.h>
 #include <unistd.h>
-#include "HFile/NativeLog.h"
-#include "Dump_Dex.H"
-#include "Module_Mem.H" 
-#include "DexUtil.H"
-//__________________________________________________________
-typedef struct FieldsItem{
-	struct FieldsItem* next;
-	u4  classIdx;           /* index into typeIds list for defining class */
-	u4  typeIdx;            /* index into typeIds for field type */
-	u4  nameIdx;            /* index into stringIds for field name */
-}FieldsItem;
-class Dex_Fileds : DexUtil{
+#include "DexFile/Dex.H"
+#include "DexFile/LDex_Filed_Header.H"
+class Dex_Fileds : LDex_Util{
 public:
 	FastLink<FieldsItem> IDS;
 /*

@@ -2,28 +2,10 @@
 #define __Dex_Encoded_H_
 #include <stdio.h>
 #include <unistd.h>
-#include "HFile/NativeLog.h"
-#include "Dump_Dex.H"
-#include "Module_Mem.H" 
-#include "DexUtil.H"
-//__________________________________________________________
-typedef struct Encoded_Item{
-	struct Encoded_Item* next;
-	u4	type;
-	u4	HValue;
-	u4	Value;
-	u4 	KeyLen;
-	u4 	ValueLen;
-}Encoded_Item;
-typedef struct Encoded_List{
-	struct Encoded_List* next;
-	Base	BS;
-	Encoded_Item* item;
-	size_t Itemsize;
-}Encoded_List;
-
+#include "DexFile/Dex.H"
+#include "DexFile/LDex_Encoded_Header.H"
 //
-class Dex_Encoded : DexUtil{
+class Dex_Encoded : LDex_Util{
 public:
 	FastLink<Encoded_List> CodeList;
 /*

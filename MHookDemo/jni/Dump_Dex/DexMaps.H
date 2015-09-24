@@ -2,29 +2,14 @@
 #define __DexMaps_H_
 #include <stdio.h>
 #include <unistd.h>
-#include "HFile/NativeLog.h"
-#include "Dump_Dex.H"
-#include "Module_Mem.H" 
-#include "DexUtil.H"
-//__________________________________________________________
-typedef struct mapsItem{
-	struct mapsItem* next;
-	u4	type;       		 /*Section type*/
- 	u4	unused;				/*unused*/
-	u4	size;        		/* section size*/
-	u4	offset;     		/* section offset */
-}mapsItem;
-//
-typedef struct maplist{
-	struct mapsItem* item;
-	size_t mapSize;
-}maplist;
+#include "DexFile/Dex.H"
+#include "DexFile/LDex_Map_Header.H"
 /*
 ************************************************************
 *				Dex_Maps*
 ************************************************************
 */
-class Dex_Maps : DexUtil{
+class Dex_Maps : LDex_Util{
 public:
 	FastLink<mapsItem> IDS;
 /*

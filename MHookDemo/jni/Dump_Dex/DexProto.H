@@ -2,19 +2,10 @@
 #define __DexProto_H_
 #include <stdio.h>
 #include <unistd.h>
-#include "HFile/NativeLog.h"
-#include "Dump_Dex.H"
-#include "Module_Mem.H" 
-#include "DexUtil.H"
+#include "DexFile/Dex.H"
+#include "DexFile/LDex_Proto_Header.H"
 #include "DexTypes.H"
-//__________________________________________________________
-typedef struct ProtoItem{
-	struct ProtoItem* next;
-	u4	shortyIdx;          /* index into stringIds for shorty descriptor */
-	u4	returnTypeIdx;      /* index into typeIds list for return type */
-	u4	parametersOff;      /* file offset to type_list for parameter types */
-}ProtoItem;
-class Dex_Proto : DexUtil{
+class Dex_Proto : LDex_Util{
 public:
 	FastLink<ProtoItem> IDS;
 /*

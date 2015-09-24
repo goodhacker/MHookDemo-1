@@ -18,7 +18,7 @@ extern char* AppName;
 void* Ali_DumpToFile(void* inp){
 	/**/
 	sleep(10);
-	UnknowDex->DumpToFile(AppName,DexUtil::GetTimeName("Ali2"));
+	UnknowDex->DumpToFile(AppName,LDex_Util::GetTimeName("Ali2"));
 	return NULL;
 }
 
@@ -26,7 +26,7 @@ void* Ali_DumpToFile(void* inp){
 *	BeforeParse_Ali	->系统解析之前调用*
 */
 void BeforeParse_Ali(void* inAddr,size_t inLen){
-	Mod_Mem::SaveFile(AppName,DexUtil::GetTimeName("Ali1"),inAddr,inLen);
+	Mod_Mem::SaveFile(AppName,LDex_Util::GetTimeName("Ali1"),inAddr,inLen);
 	AliDex = new DexParse();
 	AliDex->loadAddr = inAddr;
 	AliDex->Size = inLen;

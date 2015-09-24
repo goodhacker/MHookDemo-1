@@ -2,24 +2,11 @@
 #define __DexString_H_
 #include <stdio.h>
 #include <unistd.h>
-#include "HFile/NativeLog.h"
-#include "Dump_Dex.H"
-#include "Module_Mem.H" #include "DexMaps.H"
-#include "DexUtil.H"
-#include "Common/FastLink.H"
+#include "DexFile/Dex.H"#include "DexMaps.H"
+#include "DexFile/LDex_String_Header.H"
 namespace Dex{
 //字符串保存列表
-typedef struct stringItem{
-	struct stringItem* next;
-	Base	BS;
-	//
-	char* 	str;
-	u4		L128Len;
-	u4		L128Code;
-	u4		strLen;
-	u4	 	size;
-}stringItem;
-class Dex_String : DexUtil{
+class Dex_String : LDex_Util{
 #define STR_StringIds		"StringIDS"
 #define STR_StringCode		"StringCode"
 public:

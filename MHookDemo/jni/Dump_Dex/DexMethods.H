@@ -2,21 +2,11 @@
 #define __DexMethods_H_
 #include <stdio.h>
 #include <unistd.h>
-#include "HFile/NativeLog.h"
-#include "Dump_Dex.H"
-#include "Module_Mem.H" 
-#include "DexUtil.H"
-//__________________________________________________________
-typedef struct MethodsItem{
-	struct MethodsItem* next;
-	u4  classIdx;           /* index into typeIds list for defining class */
-	u4  protoIdx;           /* index into protoIds for method prototype */
-	u4  nameIdx;            /* index into stringIds for method name */
-}MethodsItem;
-class Dex_Methods : DexUtil{
+#include "DexFile/Dex.H"
+#include "DexFile/LDex_Method_Header.H"
+class Dex_Methods : LDex_Util{
 public:
 	FastLink<MethodsItem> IDS;
-
 /*
 ************************************************************
 *				Dex_Methods

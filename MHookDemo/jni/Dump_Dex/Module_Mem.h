@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <sys/stat.h>
 #include <ctype.h>
+#include "Common/Utils.H"
 //__________________________________________________________
 //内存分割模块
 typedef struct str_ModMem{

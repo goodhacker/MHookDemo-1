@@ -3,7 +3,6 @@
 #include <unistd.h>
 #include <sys/stat.h>
 #include <ctype.h>
-#include "HFile/NativeLog.h"
 /*
 ************************************************************
 * 获取进程名字

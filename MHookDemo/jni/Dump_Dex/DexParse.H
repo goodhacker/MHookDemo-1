@@ -2,11 +2,7 @@
 #define __DexParse_H_
 #include <stdio.h>
 #include <unistd.h>
-#include "HFile/NativeLog.h"
-#include "Dump_Dex.H"
-#include "Module_Mem.H" 
-
-#include "Common/FastLink.H"
+#include "DexFile/Dex.H"
 //
 #include "DexHeader.H"
 #include "DexString.H"
@@ -28,7 +24,7 @@
 *5.但是特殊加固需要特殊处理
 */
 namespace Dex{
-class DexParse : DexUtil{
+class DexParse : LDex_Util{
 public:
 	void* 	loadAddr = NULL;
 	size_t	Size = NULL;

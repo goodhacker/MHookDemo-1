@@ -1,5 +1,5 @@
-obj/local/armeabi/objs/-Dump_Dex/Dump_Dex/Dump_Dex.o: \
- jni/Dump_Dex/Dump_Dex.cpp \
+Y:/GitHub/MHookDemo/MHookDemo//obj/local/armeabi/objs/-Dump_Dex/Dump_Dex/Dump_Dex.o: \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/Dump_Dex.cpp \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sys/time.h \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sys/cdefs.h \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sys/cdefs_elf.h \
@@ -45,22 +45,41 @@ obj/local/armeabi/objs/-Dump_Dex/Dump_Dex/Dump_Dex.o: \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/time.h \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sched.h \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/linux/sched.h \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/Dex.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/Dex_SystemDefine.H \
+ D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/android/log.h \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Util.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/Common/FastLink.H \
+ D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/stdio.h \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/L_IO/Module_Mem.H \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sys/stat.h \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/linux/stat.h \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/endian.h \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sys/endian.h \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/machine/endian.h \
- jni/HFile/NativeLog.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/android/log.h \
- jni/Dump_Dex/Dump_Dex.H jni/Dump_Dex/Module_Mem.H \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/stdio.h \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/ctype.h \
- jni/Dump_Dex/DexParse.H jni/Common/FastLink.H jni/Dump_Dex/DexUtil.H \
- jni/Dump_Dex/DexHeader.H jni/Dump_Dex/DexUtil.H jni/Dump_Dex/DexString.H \
- jni/Dump_Dex/DexMaps.H jni/Dump_Dex/DexTypes.H jni/Dump_Dex/DexProto.H \
- jni/Dump_Dex/DexFields.H jni/Dump_Dex/DexMethods.H \
- jni/Dump_Dex/Dex_Encoded.H jni/Dump_Dex/Dex_Annot.H \
- jni/Dump_Dex/DexDebug.H jni/Dump_Dex/DexClass.H
+ Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/DexParse.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/DexHeader.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/DexString.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/DexMaps.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Map_Header.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_String_Header.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/DexTypes.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Types_Header.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/DexProto.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Proto_Header.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/DexFields.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Filed_Header.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/DexMethods.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Method_Header.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/Dex_Encoded.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Encoded_Header.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/Dex_Annot.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Annot_Header.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/DexDebug.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Debug_Header.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/DexClass.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Class_Header.H
 
 D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sys/time.h:
 
@@ -152,6 +171,20 @@ D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sche
 
 D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/linux/sched.h:
 
+Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/Dex.H:
+
+Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/Dex_SystemDefine.H:
+
+D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/android/log.h:
+
+Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Util.H:
+
+Y:/GitHub/MHookDemo/MHookDemo//jni/Common/FastLink.H:
+
+D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/stdio.h:
+
+Y:/GitHub/MHookDemo/MHookDemo//jni/L_IO/Module_Mem.H:
+
 D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sys/stat.h:
 
 D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/linux/stat.h:
@@ -162,44 +195,48 @@ D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sys/
 
 D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/machine/endian.h:
 
-jni/HFile/NativeLog.h:
-
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/android/log.h:
-
-jni/Dump_Dex/Dump_Dex.H:
-
-jni/Dump_Dex/Module_Mem.H:
-
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/stdio.h:
-
 D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/ctype.h:
 
-jni/Dump_Dex/DexParse.H:
+Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/DexParse.H:
 
-jni/Common/FastLink.H:
+Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/DexHeader.H:
 
-jni/Dump_Dex/DexUtil.H:
+Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/DexString.H:
 
-jni/Dump_Dex/DexHeader.H:
+Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/DexMaps.H:
 
-jni/Dump_Dex/DexUtil.H:
+Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Map_Header.H:
 
-jni/Dump_Dex/DexString.H:
+Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_String_Header.H:
 
-jni/Dump_Dex/DexMaps.H:
+Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/DexTypes.H:
 
-jni/Dump_Dex/DexTypes.H:
+Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Types_Header.H:
 
-jni/Dump_Dex/DexProto.H:
+Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/DexProto.H:
 
-jni/Dump_Dex/DexFields.H:
+Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Proto_Header.H:
 
-jni/Dump_Dex/DexMethods.H:
+Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/DexFields.H:
 
-jni/Dump_Dex/Dex_Encoded.H:
+Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Filed_Header.H:
 
-jni/Dump_Dex/Dex_Annot.H:
+Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/DexMethods.H:
 
-jni/Dump_Dex/DexDebug.H:
+Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Method_Header.H:
 
-jni/Dump_Dex/DexClass.H:
+Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/Dex_Encoded.H:
+
+Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Encoded_Header.H:
+
+Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/Dex_Annot.H:
+
+Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Annot_Header.H:
+
+Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/DexDebug.H:
+
+Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Debug_Header.H:
+
+Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/DexClass.H:
+
+Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Class_Header.H:

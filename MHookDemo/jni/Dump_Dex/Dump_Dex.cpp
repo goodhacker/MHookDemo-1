@@ -1,12 +1,8 @@
 ﻿#include <sys/time.h>
 #include <unistd.h>
 #include <pthread.h>
-#include <sys/stat.h>
-#include "HFile/NativeLog.h"
-#include "Dump_Dex.H"
-#include "Module_Mem.H"
+#include "DexFile/Dex.H"
 #include "DexParse.H"
-#include "DexUtil.H"
 #include "DexHeader.H"
 //外部保存APP包名
 extern char* AppName;
@@ -31,11 +27,11 @@ void* Dex_Parse(void* in){
 	DEXLOG("正在回写DexHeader数据，防止解析后加固修改Header,为了防止错误基本和数据用MAPoff里面数据!");
 	memcpy(Info->addr,Info->BackOldDex,0x70);
 	DEXLOG("下载Demo2!");
-	DexUtil::SaveFile(Info->addr,Info->len,AppName,DexUtil::GetTimeName("Demo2"));
+	LDex_Util::SaveFile(Info->addr,Info->len,AppName,LDex_Util::GetTimeName("Demo2"));
 	DEXLOG("下载Demo3，先解码DexFile然后合并!");
 	memcpy((void*)Info->Dex->pHeader,Info->BackOldDex,0x70);
 	Dex::DexParse* parse = (Dex::DexParse*)Info->DexParse;
-	parse->DumpToFile(AppName,DexUtil::GetTimeName("Demo3"));
+	parse->DumpToFile(AppName,LDex_Util::GetTimeName("Demo3"));
 	return NULL;
 }
 /*
@@ -47,7 +43,7 @@ void* Dex_Parse(void* in){
 */
 void Dump_DexFile(void* inAddr,size_t inLen,void* inDex){
 	DEXLOG("inDex:0x%08X,length:0x%08X,DexFile:0x%08X",inAddr,inLen,inDex);
-	if(!DexUtil::isDex(inAddr)){
+	if(!LDex_Util::isDex(inAddr)){
 		DEXLOG("[ERR]输入格式出现错误，无法识别DEX或DEY,程序自动退出!");
 		return;
 	}
@@ -57,15 +53,15 @@ void Dump_DexFile(void* inAddr,size_t inLen,void* inDex){
 	//开始Dump最原始导入数据，防止数据变化先Dump后运行程序
 	DEXLOG("开始自动脱壳!");
 	DEXLOG("Dump_DexFile@Dump Demo 1!");
-	DexUtil::SaveFile(inAddr,inLen,AppName,DexUtil::GetTimeName("Demo1"));
+	LDex_Util::SaveFile(inAddr,inLen,AppName,LDex_Util::GetTimeName("Demo1"));
 	DEXLOG("Dump_DexFile@创建子线程!");
 	DumpInfo* info = (DumpInfo*)malloc(sizeof(DumpInfo)+1);
 	memset(info,0,sizeof(DumpInfo)+1);
-	info->addr = DexUtil::GetBase(inAddr);
+	info->addr = LDex_Util::GetBase(inAddr);
 	info->len = inLen;
 	info->Dex = (DexFile*)inDex;
-	info->BackOldDex = DexUtil::Alloc(inLen);
-	memcpy(info->BackOldDex,DexUtil::GetBase(inAddr),0x70);
+	info->BackOldDex = LDex_Util::Alloc(inLen);
+	memcpy(info->BackOldDex,LDex_Util::GetBase(inAddr),0x70);
 	Dex::DexParse* parse = new Dex::DexParse(info->addr,info->Dex);
 	info->DexParse = (void*)parse;
 	pthread_t thread;

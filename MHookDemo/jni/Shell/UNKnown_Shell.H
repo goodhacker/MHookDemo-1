@@ -16,7 +16,7 @@ extern char* AppName;
 */
 void* UNKnow_DumpToFile(void* inp){
 	sleep(10);
-	UnknowDex->DumpToFile(AppName,DexUtil::GetTimeName("Unknow2"));
+	UnknowDex->DumpToFile(AppName,LDex_Util::GetTimeName("Unknow2"));
 	return NULL;
 }
 
@@ -24,7 +24,7 @@ void* UNKnow_DumpToFile(void* inp){
 *	BeforeParse_UNKnow	->系统解析之前调用*
 */
 void BeforeParse_UNKnow(void* inAddr,size_t inLen){
-	Mod_Mem::SaveFile(AppName,DexUtil::GetTimeName("Unknow1"),inAddr,inLen);
+	Mod_Mem::SaveFile(AppName,LDex_Util::GetTimeName("Unknow1"),inAddr,inLen);
 	UnknowDex = new DexParse();
 	UnknowDex->loadAddr = inAddr;
 	UnknowDex->Size = inLen;

@@ -1,5 +1,5 @@
-obj/local/armeabi/objs/SubstrateHook.cy/SubstrateHook.cy.o: \
- jni/SubstrateHook.cy.cpp \
+Y:/GitHub/MHookDemo/MHookDemo//obj/local/armeabi/objs/SubstrateHook.cy/SubstrateHook.cy.o: \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/SubstrateHook.cy.cpp \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/stdio.h \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sys/cdefs.h \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sys/cdefs_elf.h \
@@ -42,7 +42,7 @@ obj/local/armeabi/objs/SubstrateHook.cy/SubstrateHook.cy.o: \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm-generic/siginfo.h \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sys/sysconf.h \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/pathconf.h \
- jni/Substrate.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/Substrate.H \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/dlfcn.h \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/stdlib.h \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/alloca.h \
@@ -54,25 +54,74 @@ obj/local/armeabi/objs/SubstrateHook.cy/SubstrateHook.cy.o: \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/endian.h \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sys/endian.h \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/machine/endian.h \
- jni/Common/Common.H jni/Hook/Hook_JNI.H jni/Hook/Hook_dvm.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/Common/Common.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/Hook/Hook_JNI.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/Hook/Hook_dvm.H \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/jni.H \
- jni/Substrate.h jni/HFile/NativeLog.h \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/Substrate.h \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/Common/Utils.H \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/android/log.h \
- jni/Common/Utils.H jni/Shell/Shell.H jni/Shell/UNKnown_Shell.H \
- jni/Dump_Dex/DexParse.H jni/Dump_Dex/Dump_Dex.H \
- jni/Dump_Dex/Module_Mem.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/Shell/Shell.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/Shell/UNKnown_Shell.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/DexParse.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/Dex.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/Dex_SystemDefine.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Util.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/Common/FastLink.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/L_IO/Module_Mem.H \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/ctype.h \
- jni/Common/FastLink.H jni/Dump_Dex/DexUtil.H jni/Dump_Dex/DexHeader.H \
- jni/Dump_Dex/DexUtil.H jni/Dump_Dex/DexString.H jni/Dump_Dex/DexMaps.H \
- jni/Dump_Dex/DexTypes.H jni/Dump_Dex/DexProto.H jni/Dump_Dex/DexFields.H \
- jni/Dump_Dex/DexMethods.H jni/Dump_Dex/Dex_Encoded.H \
- jni/Dump_Dex/Dex_Annot.H jni/Dump_Dex/DexDebug.H jni/Dump_Dex/DexClass.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/DexHeader.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/DexString.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/DexMaps.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Map_Header.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_String_Header.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/DexTypes.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Types_Header.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/DexProto.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Proto_Header.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/DexFields.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Filed_Header.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/DexMethods.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Method_Header.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/Dex_Encoded.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Encoded_Header.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/Dex_Annot.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Annot_Header.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/DexDebug.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Debug_Header.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/DexClass.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Class_Header.H \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/pthread.h \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/time.h \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sched.h \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/linux/sched.h \
- jni/Shell/Baidu_Shell.H jni/Shell/Ali_Shell.H jni/Shell/Bangcle_Shell.H \
- jni/Hook/Hook_libc.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/Shell/Baidu_Shell.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDexFile.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/Dex.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Header.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Map.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Map_Header.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_String.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_String_Header.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Types.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Types_Header.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Proto.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Proto_Header.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Filed.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Filed_Header.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Method.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Method_Header.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Class.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Class_Header.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Annot.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Annot_Header.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Encoded.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Encoded_Header.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Debug.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Debug_Header.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/Shell/Ali_Shell.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/Shell/Bangcle_Shell.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/Hook/Hook_libc.H \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/fcntl.h \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/linux/fadvise.h \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/linux/fcntl.h \
@@ -82,7 +131,8 @@ obj/local/armeabi/objs/SubstrateHook.cy/SubstrateHook.cy.o: \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm/mman.h \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm-generic/mman.h \
  D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm-generic/mman-common.h \
- jni/Hook/HookTest.H jni/Shell/Shell.H jni/HFile/NativeLog.h
+ Y:/GitHub/MHookDemo/MHookDemo//jni/Hook/HookTest.H \
+ Y:/GitHub/MHookDemo/MHookDemo//jni/Shell/Shell.H
 
 D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/stdio.h:
 
@@ -168,7 +218,7 @@ D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sys/
 
 D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/pathconf.h:
 
-jni/Substrate.H:
+Y:/GitHub/MHookDemo/MHookDemo//jni/Substrate.H:
 
 D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/dlfcn.h:
 
@@ -192,61 +242,79 @@ D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sys/
 
 D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/machine/endian.h:
 
-jni/Common/Common.H:
+Y:/GitHub/MHookDemo/MHookDemo//jni/Common/Common.H:
 
-jni/Hook/Hook_JNI.H:
+Y:/GitHub/MHookDemo/MHookDemo//jni/Hook/Hook_JNI.H:
 
-jni/Hook/Hook_dvm.H:
+Y:/GitHub/MHookDemo/MHookDemo//jni/Hook/Hook_dvm.H:
 
 D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/jni.H:
 
-jni/Substrate.h:
+Y:/GitHub/MHookDemo/MHookDemo//jni/Substrate.h:
 
-jni/HFile/NativeLog.h:
+Y:/GitHub/MHookDemo/MHookDemo//jni/Common/Utils.H:
 
 D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/android/log.h:
 
-jni/Common/Utils.H:
+Y:/GitHub/MHookDemo/MHookDemo//jni/Shell/Shell.H:
 
-jni/Shell/Shell.H:
+Y:/GitHub/MHookDemo/MHookDemo//jni/Shell/UNKnown_Shell.H:
 
-jni/Shell/UNKnown_Shell.H:
+Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/DexParse.H:
 
-jni/Dump_Dex/DexParse.H:
+Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/Dex.H:
 
-jni/Dump_Dex/Dump_Dex.H:
+Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/Dex_SystemDefine.H:
 
-jni/Dump_Dex/Module_Mem.H:
+Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Util.H:
+
+Y:/GitHub/MHookDemo/MHookDemo//jni/Common/FastLink.H:
+
+Y:/GitHub/MHookDemo/MHookDemo//jni/L_IO/Module_Mem.H:
 
 D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/ctype.h:
 
-jni/Common/FastLink.H:
+Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/DexHeader.H:
 
-jni/Dump_Dex/DexUtil.H:
+Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/DexString.H:
 
-jni/Dump_Dex/DexHeader.H:
+Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/DexMaps.H:
 
-jni/Dump_Dex/DexUtil.H:
+Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Map_Header.H:
 
-jni/Dump_Dex/DexString.H:
+Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_String_Header.H:
 
-jni/Dump_Dex/DexMaps.H:
+Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/DexTypes.H:
 
-jni/Dump_Dex/DexTypes.H:
+Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Types_Header.H:
 
-jni/Dump_Dex/DexProto.H:
+Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/DexProto.H:
 
-jni/Dump_Dex/DexFields.H:
+Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Proto_Header.H:
 
-jni/Dump_Dex/DexMethods.H:
+Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/DexFields.H:
 
-jni/Dump_Dex/Dex_Encoded.H:
+Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Filed_Header.H:
 
-jni/Dump_Dex/Dex_Annot.H:
+Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/DexMethods.H:
 
-jni/Dump_Dex/DexDebug.H:
+Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Method_Header.H:
 
-jni/Dump_Dex/DexClass.H:
+Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/Dex_Encoded.H:
+
+Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Encoded_Header.H:
+
+Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/Dex_Annot.H:
+
+Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Annot_Header.H:
+
+Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/DexDebug.H:
+
+Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Debug_Header.H:
+
+Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/DexClass.H:
+
+Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Class_Header.H:
 
 D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/pthread.h:
 
@@ -256,13 +324,59 @@ D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sche
 
 D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/linux/sched.h:
 
-jni/Shell/Baidu_Shell.H:
+Y:/GitHub/MHookDemo/MHookDemo//jni/Shell/Baidu_Shell.H:
 
-jni/Shell/Ali_Shell.H:
+Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDexFile.H:
 
-jni/Shell/Bangcle_Shell.H:
+Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/Dex.H:
 
-jni/Hook/Hook_libc.H:
+Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Header.H:
+
+Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Map.H:
+
+Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Map_Header.H:
+
+Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_String.H:
+
+Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_String_Header.H:
+
+Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Types.H:
+
+Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Types_Header.H:
+
+Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Proto.H:
+
+Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Proto_Header.H:
+
+Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Filed.H:
+
+Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Filed_Header.H:
+
+Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Method.H:
+
+Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Method_Header.H:
+
+Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Class.H:
+
+Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Class_Header.H:
+
+Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Annot.H:
+
+Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Annot_Header.H:
+
+Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Encoded.H:
+
+Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Encoded_Header.H:
+
+Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Debug.H:
+
+Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Debug_Header.H:
+
+Y:/GitHub/MHookDemo/MHookDemo//jni/Shell/Ali_Shell.H:
+
+Y:/GitHub/MHookDemo/MHookDemo//jni/Shell/Bangcle_Shell.H:
+
+Y:/GitHub/MHookDemo/MHookDemo//jni/Hook/Hook_libc.H:
 
 D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/fcntl.h:
 
@@ -282,8 +396,6 @@ D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm-
 
 D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm-generic/mman-common.h:
 
-jni/Hook/HookTest.H:
+Y:/GitHub/MHookDemo/MHookDemo//jni/Hook/HookTest.H:
 
-jni/Shell/Shell.H:
-
-jni/HFile/NativeLog.h:
+Y:/GitHub/MHookDemo/MHookDemo//jni/Shell/Shell.H:

@@ -2,23 +2,9 @@
 #define __DexDebug_H_
 #include <stdio.h>
 #include <unistd.h>
-#include "HFile/NativeLog.h"
-#include "Dump_Dex.H"
-#include "Module_Mem.H"
-#include "DexUtil.H"
-struct DebugItem{
-	DebugItem* 	next;
-	u4	param_name;
-};
-//说明Size_Reg不表示DebugItem长度
-struct DebugList{
-	DebugList* 	next;
-	Base 	BS;
-	struct DebugItem* Item;
-	u4	number;
-	u4	Size_Reg;
-};
-class Dex_Debug:DexUtil{
+#include "DexFile/Dex.H"
+#include "DexFile/LDex_Debug_Header.H"
+class Dex_Debug:LDex_Util{
 public:
 	DebugList* debug = NULL;
 /*
