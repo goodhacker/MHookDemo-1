@@ -2,12 +2,15 @@ package ls.hook;
 
 import java.io.DataOutputStream;
 
+import android.webkit.WebView;
+
 public class Root {
 /**
 * JAVA
 * 应用程序运行命令获取 Root权限，设备必须已破解(获得ROOT权限)
 * @return 应用程序是/否获取Root权限
 */
+	WebView yesy; 
 	public static boolean upgradeRootPermission(String pkgCodePath) {
 		Process process = null ;
         DataOutputStream os = null ;
@@ -55,7 +58,7 @@ public class Root {
 		return true ;
 	}
 /**
- * C
+ * 
  * 应用程序运行命令获取 Root权限，设备必须已破解(获得ROOT权限)
  * @return 应用程序是/否获取Root权限
  */

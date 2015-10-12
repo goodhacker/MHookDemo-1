@@ -5,8 +5,6 @@
 #define SubAddr2(arg0,arg1)		((u4)arg0-(u4)arg1)
 #define SubAddr3(arg0,arg1,arg2)		((u4)arg0-(u4)arg1-(u4)arg2)
 #define Ali(arg0,arg1)			(((u4)arg0+((u4)arg1-1))&(~((u4)arg1-1)))
-//
-
 /*
 ************************************************************
 *			DexUtil

@@ -30,7 +30,7 @@ class  LDexFile: LDex_Util{
 public:
 //初始化变量
 	void* 		loadAddr = NULL;
-	size_t		Size = NULL;
+	size_t		Size = 0;
 	DexFile*	dex = NULL;
 	Mod_Mem*	mem = NULL;
 //定义结构
@@ -92,7 +92,10 @@ public:
 		DexTypes->DatatoFile(mem,DexMap);
 		//proto(需要TypeList偏移地址)
 		DexProto->DatatoFile(mem,DexHeader,DexMap,DexTypes);
+		DEXLOG("[File]Annot");
+
 		DexAnnot->AnnotToData(mem,DexMap);
+
 		DexAnnot->AnnotSetToData(mem,DexMap);
 		DexAnnot->AnnotSRLToData(mem,DexMap);
 		DexAnnot->AnnotDirToData(mem,DexMap);
@@ -156,14 +159,14 @@ public:
 		DexMethod = new LDex_Method(dex,DexMap);
 		//将Annot分开处理、使用Annot类进行解析
 		//Annot中包含kDexTypeAnnotationSetRefList、kDexTypeAnnotationSetItem、kDexTypeAnnotationItem、kDexTypeAnnotationsDirectoryItem
-//		DexAnnot = new LDex_Annot(dex,DexMap);
+		DexAnnot = new LDex_Annot(dex,DexMap);
 		//下面首先要判断是否存在，然后再去初始化
 		//Encoded、Debug、Dex_Code
 		if(DexMap->getTypeItem(kDexTypeEncodedArrayItem) != NULL){
-//			DexEncoded = new LDex_Encoded(dex,DexMap);
+			DexEncoded = new LDex_Encoded(dex,DexMap);
 		}
 		if(DexMap->getTypeItem(kDexTypeDebugInfoItem) != NULL){
-//			DexDebug = new LDex_Debug(dex,DexMap);
+			DexDebug = new LDex_Debug(dex,DexMap);
 		}
 		//包含了 Class_Def、Class_Code、Code
 		DexClass = new LDex_Class();

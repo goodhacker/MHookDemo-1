@@ -19,7 +19,6 @@
 * 					annotation element
 */
 //annotation element
-
 typedef struct Annot_Element{
 	struct Annot_Element* next;
 	Base	BS;

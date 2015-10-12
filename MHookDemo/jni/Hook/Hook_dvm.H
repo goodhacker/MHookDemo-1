@@ -28,10 +28,10 @@ static void* My_dexFileParse(int *inAddr, unsigned int length, int parseFlags){
 	//已使用分析函数，判定为动态加载
 	Dex_Dyload = true;
 	void* Out_DexFile = NULL;
+	DEXLOG("LibCall dexFileParse:inDex:%p,length:%p",inAddr,length);
 	//屏蔽长度过小的长度
 	if(length > 0x2000){
 		//先查找到原始Dex加载地址
-		DEXLOG("LibCall dexFileParse:inDex:%p,length:%p",inAddr,length);
 		BeforeParse_UnShell(inAddr,length);
 		Out_DexFile = _dexFileParse(inAddr,length,parseFlags);
 		DEXLOG("LibCall dexFileParse:DexFile:%p",Out_DexFile);
@@ -104,7 +104,7 @@ int Hook_DVM(){
 		mFun = MSFindSymbol(image,dvmResolveClass);
 		if(mFun != NULL){
 //			直接打印dvmResolveClass头数据，判断是否被Hook
-			MSHookFunction(mFun,(void*)&My_dvmResolveClass,(void**)&_dvmResolveClass);
+//			MSHookFunction(mFun,(void*)&My_dvmResolveClass,(void**)&_dvmResolveClass);
 		}
 	}
 	return 0;

@@ -71,6 +71,7 @@ typedef signed long long    SLong;
 #else
 	#define DEX_INLINE
 #endif
+
 /* DEX file magic number */
 #define DEX_MAGIC       	"dex\n"
 /* version, encoded in 4 bytes of ASCII */
@@ -82,8 +83,9 @@ typedef signed long long    SLong;
 /*
  * 160-bit SHA-1 digest.
  */
-enum { kSHA1DigestLen = 20,
-       kSHA1DigestOutputLen = kSHA1DigestLen*2 +1 };
+enum {
+	kSHA1DigestLen = 20,
+	kSHA1DigestOutputLen = kSHA1DigestLen*2 +1 };
 /* general constants */
 enum {
     kDexEndianConstant = 0x12345678,    /* the endianness indicator */

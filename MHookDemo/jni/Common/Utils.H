@@ -30,17 +30,19 @@ char* jstringTostring(JNIEnv* env, jstring jstr)
 }
 jstring pcharToJstring(JNIEnv* env, const char* pat, const char* encoding)
 {
+	jstring res;
     jstring jencoding;
     jbyteArray bytes = (env)->NewByteArray(strlen(pat));
     jclass  gStringClass= (env)->FindClass("java/lang/String");
     jmethodID  gmidStringInit= (env)->GetMethodID(gStringClass, "<init>", "([BLjava/lang/String;)V");
-
     (env)->SetByteArrayRegion(bytes, 0, strlen(pat), (jbyte*)pat);
     if (encoding == NULL)
         jencoding= (env)->NewStringUTF("utf-8");
     else
         jencoding=(env)->NewStringUTF(encoding);
-
-    return (jstring)(env)->NewObject(gStringClass, gmidStringInit, bytes, jencoding);
+    res = (jstring)(env)->NewObject(gStringClass, gmidStringInit, bytes, jencoding);
+    env->DeleteLocalRef(bytes);
+    env->DeleteLocalRef(jencoding);
+    return res;
 }
 #endif

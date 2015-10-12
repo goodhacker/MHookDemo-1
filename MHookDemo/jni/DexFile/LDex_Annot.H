@@ -41,13 +41,17 @@ public:
 			switch(mEleItem->ValueLen){
 			case 4:
 				mEleItem->Value+= *(mAddr+3)<<24;
+				/* no break */
 			case 3:
 				mEleItem->Value += *(mAddr+2)<<16;
+				/* no break */
 			case 2:
 				mEleItem->Value += *(mAddr+1)<<8;
+				/* no break */
 			case 1:
 				mEleItem->Value += *mAddr&0xFF;
 				mAddr+=mEleItem->ValueLen;
+			break;
 			}
 //			Parse("%08x：%08x",mEleItem->Type,mEleItem->Value);
 			mEleItem->BS.MemSize = SubAddr3(mAddr,inDex->pHeader,mEleItem->BS.Offset_Load);
@@ -105,7 +109,7 @@ public:
 							Annot_Element* mEle = NULL;
 							mAnnotAddr = readLeb128(mAnnotAddr,&k_Size);
 //							DEXLOG("DexAnnot kDex3  %p  ",k_Size);
-							if(mSonList->Ele_Size != NULL)
+							if(mSonList->Ele_Size != 0)
 								mSonList->Item  = DexAnnot_Element(inDex,mAnnotAddr,k_Size);
 							mAnnotAddr += Link::GetSize(mList->Item);
 						}else{
@@ -127,13 +131,17 @@ public:
 					switch(mList->EleValue_Len){
 					case 4:
 						mList->Ele_Value += *(mAnnotAddr+3)<<24;
+						/* no break */
 					case 3:
 						mList->Ele_Value += *(mAnnotAddr+2)<<16;
+						/* no break */
 					case 2:
 						mList->Ele_Value += *(mAnnotAddr+1)<<8;
+						/* no break */
 					case 1:
 						mList->Ele_Value += *mAnnotAddr & 0xFF;
 						mAnnotAddr+=mList->EleValue_Len;
+						break;
 					}
 				}
 				mAnnot->List = (Annot_List*)Link::AddToLast(mAnnot->List,mList);
@@ -320,15 +328,18 @@ public:
 //				DEXLOG("[File]AnnotElementToData 传入Array");
 			break;
 			case 4:
-				*(mAddr+3) = (inEle->Value>>24) ;
+				*(mAddr+3) = (inEle->Value>>24);
+				/* no break */
 			case 3:
 				*(mAddr+2) = (inEle->Value>>16);
+				/* no break */
 			case 2:
-
 				*(mAddr+1) = (inEle->Value>>8);
+				/* no break */
 			case 1:
 				*mAddr = inEle->Value;
 				mAddr += inEle->ValueLen;
+				break;
 			}
 			inEle = inEle->next;
 		}
@@ -347,6 +358,7 @@ public:
 		}
 		//获取Annot模块内存，没有就新建
 		str_ModMem* modList = inMem->getByName("AnnotItem");
+		return ;
 		if(NULL == modList){
 			modList = inMem->newNameMem("AnnotItem",AlignAdd(Link::GetSize(annot),0x04));
 		}

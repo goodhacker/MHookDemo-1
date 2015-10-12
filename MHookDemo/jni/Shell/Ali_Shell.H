@@ -1,11 +1,10 @@
 #ifndef __Ali_Shell_H_
 #define __Ali_Shell_H_
-#include "Dump_Dex/DexParse.H"
 #include <sys/time.h>
 #include <unistd.h>
 #include <pthread.h>
-using namespace Dex;
-DexParse* AliDex = NULL;
+#include "DexFile/LDexFile.H"
+LDexFile* AliDex = NULL;
 extern JavaVM* GVM;
 extern char* AppName;
 /*
@@ -18,7 +17,7 @@ extern char* AppName;
 void* Ali_DumpToFile(void* inp){
 	/**/
 	sleep(10);
-	UnknowDex->DumpToFile(AppName,LDex_Util::GetTimeName("Ali2"));
+	AliDex->DumpToFile(AppName,LDex_Util::GetTimeName("Ali2"));
 	return NULL;
 }
 
@@ -27,7 +26,7 @@ void* Ali_DumpToFile(void* inp){
 */
 void BeforeParse_Ali(void* inAddr,size_t inLen){
 	Mod_Mem::SaveFile(AppName,LDex_Util::GetTimeName("Ali1"),inAddr,inLen);
-	AliDex = new DexParse();
+	AliDex = new LDexFile();
 	AliDex->loadAddr = inAddr;
 	AliDex->Size = inLen;
 }

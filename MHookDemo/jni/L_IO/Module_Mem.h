@@ -134,20 +134,20 @@ str_ModMem* ModMem = NULL;
 		FILE* mfd=fopen(filePath,"wb");
 		//查找可写文件路径
 		if(!mfd){
-//			DEXLOG("[Dump]Fail SD Path:%s",filePath);
-//			DEXLOG("[Dump]SD Open file fail!");
+			DEXLOG("[Dump]Fail SD Path:%s",filePath);
+			DEXLOG("[Dump]SD Open file fail!");
 			memset(filePath,0,1024);
 			if(appName != NULL){
 				sprintf(filePath,"/data/data/%s/%s",appName,inFile);
 				mfd=fopen(filePath,"wb");
 				if(!mfd){
-//					DEXLOG("[Dump]Fail SD Path:%s",filePath);
-//					DEXLOG("[Dump]SD Open file fail!");
+					DEXLOG("[Dump]Fail SD Path:%s",filePath);
+					DEXLOG("[Dump]SD Open file fail!");
 					free(filePath);
 					return;
 				}
 			}else{
-//				DEXLOG("[Dump]Fail appName Is Null");
+				DEXLOG("[Dump]Fail appName Is Null");
 				free(filePath);
 				return ;
 			}
@@ -155,16 +155,16 @@ str_ModMem* ModMem = NULL;
 		str_ModMem* mMod = ModMem;
 		while(mMod != NULL){
 			if(mMod->name != NULL){
-//				DEXLOG("[Dump]正在下载:%s",mMod->name);
+				DEXLOG("[Dump]正在下载:%s",mMod->name);
 			}else{
-//				DEXLOG("[Dump]正在下载:NULL");
+				DEXLOG("[Dump]正在下载:NULL");
 			}
 			fwrite(mMod->Addr,1,mMod->Length,mfd);
 			mMod = mMod->next;
 		}
 		//释放至于资源
 		fclose(mfd);
-//		DEXLOG("[Dump]Dump File Path:%s",filePath);
+		DEXLOG("[Dump]Dump File Path:%s",filePath);
 		free(filePath);
 	}
 /*
@@ -192,27 +192,27 @@ str_ModMem* ModMem = NULL;
 		FILE* mfd=fopen(filePath,"wb");
 		//查找可写文件路径
 		if(!mfd){
-//			DEXLOG("[Dump]Fail SD Path:%s",filePath);
-//			DEXLOG("[Dump]SD Open file fail!");
+			DEXLOG("[Dump]Fail SD Path:%s",filePath);
+			DEXLOG("[Dump]SD Open file fail!");
 			memset(filePath,0,1024);
 			if(appName != NULL){
 				sprintf(filePath,"/data/data/%s/%s",appName,inFile);
 				mfd=fopen(filePath,"wb");
 				if(!mfd){
-//					DEXLOG("[Dump]Fail SD Path:%s",filePath);
-//					DEXLOG("[Dump]SD Open file fail!");
+					DEXLOG("[Dump]Fail SD Path:%s",filePath);
+					DEXLOG("[Dump]SD Open file fail!");
 					free(filePath);
 					return;
 				}
 			}else{
-//				DEXLOG("[Dump]Fail appName Is Null");
+				DEXLOG("[Dump]Fail appName Is Null");
 				free(filePath);
 				return ;
 			}
 		}
 		fwrite(inAddr,1,inLen,mfd);
 		fclose(mfd);
-//		DEXLOG("[Dump]Dump File Path:%s",filePath);
+		DEXLOG("[Dump]Dump File Path:%s",filePath);
 		free(filePath);
 	}
 };

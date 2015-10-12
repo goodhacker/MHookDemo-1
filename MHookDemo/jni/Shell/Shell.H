@@ -85,10 +85,10 @@ void AfterParse_UnShell(void* inDex){
 ************************************************************
 */
 void noDynLoad_UnShell(void* inAddr,size_t inLen){
-	sleep(1);
-	Mod_Mem::SaveFile(AppName,LDex_Util::GetTimeName("Unknow1"),inAddr,inLen);
-	sleep(30);
-	Mod_Mem::SaveFile(AppName,LDex_Util::GetTimeName("Unknow2"),inAddr,inLen);
+//	sleep(1);
+//	Mod_Mem::SaveFile(AppName,LDex_Util::GetTimeName("Unknow1"),inAddr,inLen);
+//	sleep(30);
+//	Mod_Mem::SaveFile(AppName,LDex_Util::GetTimeName("Unknow2"),inAddr,inLen);
 
 }
 #endif

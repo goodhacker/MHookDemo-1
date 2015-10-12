@@ -184,7 +184,6 @@ public:
 		u1* mCodeAddr =(u1*)((u4)inDex->pHeader + inMapClassCode->offset);
 		//遍历全部的DexClassData
 		for(int m_i =0;m_i < inMapClassCode->size;m_i++){
-			DEXLOG("Dex_ClassCode %d",m_i);
 			DexClassData* mList = (DexClassData*)Alloc(sizeof(DexClassData));
 			//获取加载偏移
 			mList->BS.Offset_Load = (u4)mCodeAddr -(u4)inDex->pHeader;

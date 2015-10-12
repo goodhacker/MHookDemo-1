@@ -6,11 +6,11 @@
  */
 #ifndef DEX_H_
 #define DEX_H_
-
 #include "DexFile/Dex_SystemDefine.H"
+//日志
 #include <android/log.h>
 #define DEXLOG(...) ((void)__android_log_print(ANDROID_LOG_DEBUG, "LsSub_DEX", __VA_ARGS__))
-//
+//基本头文件
 #include "DexFile/LDex_Util.H"
 #include "Common/FastLink.H"
 #include "L_IO/Module_Mem.H"
@@ -22,7 +22,6 @@ typedef struct DumpInfo{
 	void* BackOldDex;
 	void* DexParse;
 }DumpInfo;
-
 /* DEX_H_ */
 #endif
 /* DEX_H_ */

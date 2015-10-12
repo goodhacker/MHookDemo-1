@@ -1,401 +1,325 @@
-Y:/GitHub/MHookDemo/MHookDemo//obj/local/armeabi/objs/SubstrateHook.cy/SubstrateHook.cy.o: \
- Y:/GitHub/MHookDemo/MHookDemo//jni/SubstrateHook.cy.cpp \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/stdio.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sys/cdefs.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sys/cdefs_elf.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/android/api-level.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sys/types.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/stdint.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/machine/wchar_limits.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/linux/types.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm/types.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm-generic/types.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm-generic/int-ll64.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm/bitsperlong.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm-generic/bitsperlong.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/linux/posix_types.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/linux/stddef.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/linux/compiler.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm/posix_types.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm-generic/posix_types.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sys/sysmacros.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/unistd.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sys/select.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sys/time.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/linux/time.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/signal.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/errno.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/linux/errno.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm/errno.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm-generic/errno.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm-generic/errno-base.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/limits.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sys/limits.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/linux/limits.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sys/syslimits.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/string.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/malloc.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/linux/signal.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm/signal.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm-generic/signal-defs.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm/siginfo.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm-generic/siginfo.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sys/sysconf.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/pathconf.h \
- Y:/GitHub/MHookDemo/MHookDemo//jni/Substrate.H \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/dlfcn.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/stdlib.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/alloca.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/strings.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/memory.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/jni.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sys/stat.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/linux/stat.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/endian.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sys/endian.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/machine/endian.h \
- Y:/GitHub/MHookDemo/MHookDemo//jni/Common/Common.H \
- Y:/GitHub/MHookDemo/MHookDemo//jni/Hook/Hook_JNI.H \
- Y:/GitHub/MHookDemo/MHookDemo//jni/Hook/Hook_dvm.H \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/jni.H \
- Y:/GitHub/MHookDemo/MHookDemo//jni/Substrate.h \
- Y:/GitHub/MHookDemo/MHookDemo//jni/Common/Utils.H \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/android/log.h \
- Y:/GitHub/MHookDemo/MHookDemo//jni/Shell/Shell.H \
- Y:/GitHub/MHookDemo/MHookDemo//jni/Shell/UNKnown_Shell.H \
- Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/DexParse.H \
- Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/Dex.H \
- Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/Dex_SystemDefine.H \
- Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Util.H \
- Y:/GitHub/MHookDemo/MHookDemo//jni/Common/FastLink.H \
- Y:/GitHub/MHookDemo/MHookDemo//jni/L_IO/Module_Mem.H \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/ctype.h \
- Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/DexHeader.H \
- Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/DexString.H \
- Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/DexMaps.H \
- Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Map_Header.H \
- Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_String_Header.H \
- Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/DexTypes.H \
- Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Types_Header.H \
- Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/DexProto.H \
- Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Proto_Header.H \
- Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/DexFields.H \
- Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Filed_Header.H \
- Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/DexMethods.H \
- Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Method_Header.H \
- Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/Dex_Encoded.H \
- Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Encoded_Header.H \
- Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/Dex_Annot.H \
- Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Annot_Header.H \
- Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/DexDebug.H \
- Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Debug_Header.H \
- Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/DexClass.H \
- Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Class_Header.H \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/pthread.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/time.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sched.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/linux/sched.h \
- Y:/GitHub/MHookDemo/MHookDemo//jni/Shell/Baidu_Shell.H \
- Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDexFile.H \
- Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/Dex.H \
- Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Header.H \
- Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Map.H \
- Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Map_Header.H \
- Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_String.H \
- Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_String_Header.H \
- Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Types.H \
- Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Types_Header.H \
- Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Proto.H \
- Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Proto_Header.H \
- Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Filed.H \
- Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Filed_Header.H \
- Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Method.H \
- Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Method_Header.H \
- Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Class.H \
- Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Class_Header.H \
- Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Annot.H \
- Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Annot_Header.H \
- Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Encoded.H \
- Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Encoded_Header.H \
- Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Debug.H \
- Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Debug_Header.H \
- Y:/GitHub/MHookDemo/MHookDemo//jni/Shell/Ali_Shell.H \
- Y:/GitHub/MHookDemo/MHookDemo//jni/Shell/Bangcle_Shell.H \
- Y:/GitHub/MHookDemo/MHookDemo//jni/Hook/Hook_libc.H \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/fcntl.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/linux/fadvise.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/linux/fcntl.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm/fcntl.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm-generic/fcntl.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sys/mman.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm/mman.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm-generic/mman.h \
- D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm-generic/mman-common.h \
- Y:/GitHub/MHookDemo/MHookDemo//jni/Hook/HookTest.H \
- Y:/GitHub/MHookDemo/MHookDemo//jni/Shell/Shell.H
+obj/local/armeabi/objs/SubstrateHook.cy/SubstrateHook.cy.o: \
+ jni/SubstrateHook.cy.cpp \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/stdio.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/sys/cdefs.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/sys/cdefs_elf.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/android/api-level.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/sys/types.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/stdint.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/machine/wchar_limits.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/linux/types.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/asm/types.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/asm-generic/types.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/asm-generic/int-ll64.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/asm/bitsperlong.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/asm-generic/bitsperlong.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/linux/posix_types.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/linux/stddef.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/linux/compiler.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/asm/posix_types.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/asm-generic/posix_types.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/sys/sysmacros.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/unistd.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/sys/select.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/sys/time.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/linux/time.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/signal.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/errno.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/linux/errno.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/asm/errno.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/asm-generic/errno.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/asm-generic/errno-base.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/limits.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/sys/limits.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/linux/limits.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/sys/syslimits.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/string.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/malloc.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/xlocale.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/asm/sigcontext.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/linux/signal.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/asm/signal.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/asm-generic/signal-defs.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/asm/siginfo.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/asm-generic/siginfo.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/sys/ucontext.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/sys/user.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/sys/sysconf.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/pathconf.h \
+ jni/Substrate.H \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/dlfcn.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/stdlib.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/alloca.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/strings.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/memory.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/jni.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/sys/stat.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/linux/stat.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/endian.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/sys/endian.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/machine/endian.h \
+ jni/Common/Common.H jni/Hook/Hook_JNI.H jni/Hook/Hook_dvm.H \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/jni.H \
+ jni/Substrate.h jni/Common/Utils.H \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/android/log.h \
+ jni/Shell/Shell.H jni/Shell/UNKnown_Shell.H \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/pthread.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/time.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/sched.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/linux/sched.h \
+ jni/DexFile/LDexFile.H jni/DexFile/Dex.H jni/DexFile/Dex_SystemDefine.H \
+ jni/DexFile/LDex_Util.H jni/Common/FastLink.H jni/L_IO/Module_Mem.H \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/ctype.h \
+ jni/DexFile/LDex_Header.H jni/DexFile/LDex_Map.H \
+ jni/DexFile/LDex_Map_Header.H jni/DexFile/LDex_String.H \
+ jni/DexFile/LDex_String_Header.H jni/DexFile/LDex_Types.H \
+ jni/DexFile/LDex_Types_Header.H jni/DexFile/LDex_Proto.H \
+ jni/DexFile/LDex_Proto_Header.H jni/DexFile/LDex_Filed.H \
+ jni/DexFile/LDex_Filed_Header.H jni/DexFile/LDex_Method.H \
+ jni/DexFile/LDex_Method_Header.H jni/DexFile/LDex_Class.H \
+ jni/DexFile/LDex_Class_Header.H jni/DexFile/LDex_Annot.H \
+ jni/DexFile/LDex_Annot_Header.H jni/DexFile/LDex_Encoded.H \
+ jni/DexFile/LDex_Encoded_Header.H jni/DexFile/LDex_Debug.H \
+ jni/DexFile/LDex_Debug_Header.H jni/Shell/Baidu_Shell.H \
+ jni/Shell/Ali_Shell.H jni/Shell/Bangcle_Shell.H jni/Hook/Hook_libc.H \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/fcntl.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/linux/fadvise.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/linux/fcntl.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/asm/fcntl.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/asm-generic/fcntl.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/linux/uio.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/sys/mman.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/asm/mman.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/asm-generic/mman.h \
+ D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/asm-generic/mman-common.h \
+ jni/Hook/HookTest.H jni/Shell/Shell.H
 
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/stdio.h:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/stdio.h:
 
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sys/cdefs.h:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/sys/cdefs.h:
 
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sys/cdefs_elf.h:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/sys/cdefs_elf.h:
 
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/android/api-level.h:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/android/api-level.h:
 
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sys/types.h:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/sys/types.h:
 
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/stdint.h:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/stdint.h:
 
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/machine/wchar_limits.h:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/machine/wchar_limits.h:
 
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/linux/types.h:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/linux/types.h:
 
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm/types.h:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/asm/types.h:
 
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm-generic/types.h:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/asm-generic/types.h:
 
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm-generic/int-ll64.h:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/asm-generic/int-ll64.h:
 
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm/bitsperlong.h:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/asm/bitsperlong.h:
 
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm-generic/bitsperlong.h:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/asm-generic/bitsperlong.h:
 
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/linux/posix_types.h:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/linux/posix_types.h:
 
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/linux/stddef.h:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/linux/stddef.h:
 
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/linux/compiler.h:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/linux/compiler.h:
 
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm/posix_types.h:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/asm/posix_types.h:
 
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm-generic/posix_types.h:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/asm-generic/posix_types.h:
 
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sys/sysmacros.h:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/sys/sysmacros.h:
 
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/unistd.h:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/unistd.h:
 
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sys/select.h:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/sys/select.h:
 
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sys/time.h:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/sys/time.h:
 
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/linux/time.h:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/linux/time.h:
 
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/signal.h:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/signal.h:
 
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/errno.h:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/errno.h:
 
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/linux/errno.h:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/linux/errno.h:
 
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm/errno.h:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/asm/errno.h:
 
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm-generic/errno.h:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/asm-generic/errno.h:
 
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm-generic/errno-base.h:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/asm-generic/errno-base.h:
 
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/limits.h:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/limits.h:
 
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sys/limits.h:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/sys/limits.h:
 
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/linux/limits.h:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/linux/limits.h:
 
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sys/syslimits.h:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/sys/syslimits.h:
 
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/string.h:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/string.h:
 
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/malloc.h:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/malloc.h:
 
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/linux/signal.h:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/xlocale.h:
 
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm/signal.h:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/asm/sigcontext.h:
 
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm-generic/signal-defs.h:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/linux/signal.h:
 
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm/siginfo.h:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/asm/signal.h:
 
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm-generic/siginfo.h:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/asm-generic/signal-defs.h:
 
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sys/sysconf.h:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/asm/siginfo.h:
 
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/pathconf.h:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/asm-generic/siginfo.h:
 
-Y:/GitHub/MHookDemo/MHookDemo//jni/Substrate.H:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/sys/ucontext.h:
 
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/dlfcn.h:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/sys/user.h:
 
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/stdlib.h:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/sys/sysconf.h:
 
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/alloca.h:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/pathconf.h:
 
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/strings.h:
+jni/Substrate.H:
 
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/memory.h:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/dlfcn.h:
 
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/jni.h:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/stdlib.h:
 
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sys/stat.h:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/alloca.h:
 
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/linux/stat.h:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/strings.h:
 
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/endian.h:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/memory.h:
 
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sys/endian.h:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/jni.h:
 
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/machine/endian.h:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/sys/stat.h:
 
-Y:/GitHub/MHookDemo/MHookDemo//jni/Common/Common.H:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/linux/stat.h:
 
-Y:/GitHub/MHookDemo/MHookDemo//jni/Hook/Hook_JNI.H:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/endian.h:
 
-Y:/GitHub/MHookDemo/MHookDemo//jni/Hook/Hook_dvm.H:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/sys/endian.h:
 
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/jni.H:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/machine/endian.h:
 
-Y:/GitHub/MHookDemo/MHookDemo//jni/Substrate.h:
+jni/Common/Common.H:
 
-Y:/GitHub/MHookDemo/MHookDemo//jni/Common/Utils.H:
+jni/Hook/Hook_JNI.H:
 
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/android/log.h:
+jni/Hook/Hook_dvm.H:
 
-Y:/GitHub/MHookDemo/MHookDemo//jni/Shell/Shell.H:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/jni.H:
 
-Y:/GitHub/MHookDemo/MHookDemo//jni/Shell/UNKnown_Shell.H:
+jni/Substrate.h:
 
-Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/DexParse.H:
+jni/Common/Utils.H:
 
-Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/Dex.H:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/android/log.h:
 
-Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/Dex_SystemDefine.H:
+jni/Shell/Shell.H:
 
-Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Util.H:
+jni/Shell/UNKnown_Shell.H:
 
-Y:/GitHub/MHookDemo/MHookDemo//jni/Common/FastLink.H:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/pthread.h:
 
-Y:/GitHub/MHookDemo/MHookDemo//jni/L_IO/Module_Mem.H:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/time.h:
 
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/ctype.h:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/sched.h:
 
-Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/DexHeader.H:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/linux/sched.h:
 
-Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/DexString.H:
+jni/DexFile/LDexFile.H:
 
-Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/DexMaps.H:
+jni/DexFile/Dex.H:
 
-Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Map_Header.H:
+jni/DexFile/Dex_SystemDefine.H:
 
-Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_String_Header.H:
+jni/DexFile/LDex_Util.H:
 
-Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/DexTypes.H:
+jni/Common/FastLink.H:
 
-Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Types_Header.H:
+jni/L_IO/Module_Mem.H:
 
-Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/DexProto.H:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/ctype.h:
 
-Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Proto_Header.H:
+jni/DexFile/LDex_Header.H:
 
-Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/DexFields.H:
+jni/DexFile/LDex_Map.H:
 
-Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Filed_Header.H:
+jni/DexFile/LDex_Map_Header.H:
 
-Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/DexMethods.H:
+jni/DexFile/LDex_String.H:
 
-Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Method_Header.H:
+jni/DexFile/LDex_String_Header.H:
 
-Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/Dex_Encoded.H:
+jni/DexFile/LDex_Types.H:
 
-Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Encoded_Header.H:
+jni/DexFile/LDex_Types_Header.H:
 
-Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/Dex_Annot.H:
+jni/DexFile/LDex_Proto.H:
 
-Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Annot_Header.H:
+jni/DexFile/LDex_Proto_Header.H:
 
-Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/DexDebug.H:
+jni/DexFile/LDex_Filed.H:
 
-Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Debug_Header.H:
+jni/DexFile/LDex_Filed_Header.H:
 
-Y:/GitHub/MHookDemo/MHookDemo//jni/Dump_Dex/DexClass.H:
+jni/DexFile/LDex_Method.H:
 
-Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Class_Header.H:
+jni/DexFile/LDex_Method_Header.H:
 
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/pthread.h:
+jni/DexFile/LDex_Class.H:
 
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/time.h:
+jni/DexFile/LDex_Class_Header.H:
 
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sched.h:
+jni/DexFile/LDex_Annot.H:
 
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/linux/sched.h:
+jni/DexFile/LDex_Annot_Header.H:
 
-Y:/GitHub/MHookDemo/MHookDemo//jni/Shell/Baidu_Shell.H:
+jni/DexFile/LDex_Encoded.H:
 
-Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDexFile.H:
+jni/DexFile/LDex_Encoded_Header.H:
 
-Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/Dex.H:
+jni/DexFile/LDex_Debug.H:
 
-Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Header.H:
+jni/DexFile/LDex_Debug_Header.H:
 
-Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Map.H:
+jni/Shell/Baidu_Shell.H:
 
-Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Map_Header.H:
+jni/Shell/Ali_Shell.H:
 
-Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_String.H:
+jni/Shell/Bangcle_Shell.H:
 
-Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_String_Header.H:
+jni/Hook/Hook_libc.H:
 
-Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Types.H:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/fcntl.h:
 
-Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Types_Header.H:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/linux/fadvise.h:
 
-Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Proto.H:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/linux/fcntl.h:
 
-Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Proto_Header.H:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/asm/fcntl.h:
 
-Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Filed.H:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/asm-generic/fcntl.h:
 
-Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Filed_Header.H:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/linux/uio.h:
 
-Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Method.H:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/sys/mman.h:
 
-Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Method_Header.H:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/asm/mman.h:
 
-Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Class.H:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/asm-generic/mman.h:
 
-Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Class_Header.H:
+D:/PATH/Android/android-ndk-r10e/platforms/android-21/arch-arm/usr/include/asm-generic/mman-common.h:
 
-Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Annot.H:
+jni/Hook/HookTest.H:
 
-Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Annot_Header.H:
-
-Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Encoded.H:
-
-Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Encoded_Header.H:
-
-Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Debug.H:
-
-Y:/GitHub/MHookDemo/MHookDemo//jni/DexFile/LDex_Debug_Header.H:
-
-Y:/GitHub/MHookDemo/MHookDemo//jni/Shell/Ali_Shell.H:
-
-Y:/GitHub/MHookDemo/MHookDemo//jni/Shell/Bangcle_Shell.H:
-
-Y:/GitHub/MHookDemo/MHookDemo//jni/Hook/Hook_libc.H:
-
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/fcntl.h:
-
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/linux/fadvise.h:
-
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/linux/fcntl.h:
-
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm/fcntl.h:
-
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm-generic/fcntl.h:
-
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/sys/mman.h:
-
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm/mman.h:
-
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm-generic/mman.h:
-
-D:/PATH/Android/android-ndk-r10x64/platforms/android-L/arch-arm/usr/include/asm-generic/mman-common.h:
-
-Y:/GitHub/MHookDemo/MHookDemo//jni/Hook/HookTest.H:
-
-Y:/GitHub/MHookDemo/MHookDemo//jni/Shell/Shell.H:
+jni/Shell/Shell.H:
