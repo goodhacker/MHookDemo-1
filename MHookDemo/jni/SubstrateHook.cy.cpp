@@ -24,7 +24,7 @@ MSConfig(MSFilterLibrary, "/system/lib/libdvm.so");
 void* (*_JNI_OnLoad)(JavaVM* vm, void *reserved) = NULL;
 void* My_JNI_OnLoad(JavaVM* vm, void *reserved){
 	//通过Hook获取到JavaVM，保存JavaVM
-	DEXLOG("My_JNI_OnLoad is Run %p",vm);
+//	DEXLOG("My_JNI_OnLoad is Run %p",vm);
 	GVM = vm;
 	return _JNI_OnLoad(vm,reserved);
 }
@@ -33,7 +33,7 @@ bool (*_dvmLoadNativeCode)(char* pathName, void* classLoader, char** detail);
 bool My_dvmLoadNativeCode(char* pathName, void* classLoader, char** detail){
 	char* mConfig = getConfig();
 	//获取SO配置信息,和Hook应用名单
-	DEXLOG("My_dvmLoadNativeCode :%s %s",pathName,mConfig);
+//	DEXLOG("My_dvmLoadNativeCode :%s %s",pathName,mConfig);
 	//判断加载的SO是否存在配置包名，
 	//加载SO必须存在Jni_Onload否则忽视
 	//设置包名来判断是否已经被Hook
@@ -66,7 +66,7 @@ bool My_dvmLoadNativeCode(char* pathName, void* classLoader, char** detail){
 		if(p != NULL){
 			//设置AppName,在这里设置是为防止Hook_DVM多次运行，
 			AppName =p;
-			DEXLOG("dvmLoadNativeCode Hook_Main %s",AppName);
+//			DEXLOG("dvmLoadNativeCode Hook_Main %s",AppName);
 			Hook_DVM();
 		}
 	}
@@ -89,7 +89,8 @@ MSInitialize
 		}
 	}
 }
-JNIEXPORT jint JNI_OnLoad(JavaVM* vm, void *reserved) //这是JNI_OnLoad的声明，必须按照这样的方式声明
+//这是JNI_OnLoad的声明，必须按照这样的方式声明
+JNIEXPORT jint JNI_OnLoad(JavaVM* vm, void *reserved)
 {
 	DEXLOG("Substrate JNI_OnLoad");
 	//保存全局JavaVM

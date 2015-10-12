@@ -22,6 +22,7 @@ static bool isRestore = false;
 * 	Lcom/baidu/protect/A;->d(Ljava/lang/String;)V 	->	解密方法
 * 	Lcom/baidu/protect/A;->e(Ljava/lang/String;)V 	->	加密方法
 *	Lcom/qsq/qianshengqian/XXXXX;->onCreate001(Landroid/os/Bundle;)V"  ->	加解密传入参数
+*
 */
 //_________________________________________________________________________________________________________________
 //加密Hook
@@ -30,7 +31,7 @@ static void $My_BaidDu_A_e(JNIEnv *env, jobject obj,jobject mJsrt)
 {
 //	DEXLOG("My_BaidDu_A_e %p %p %p",jni,obj,inStr);
 	DEXLOG("My_BaidDu_A_e %s ", jstringTostring(env,(jstring)mJsrt));
-	$BaidDu_A_e(env,obj,mJsrt);
+//	$BaidDu_A_e(env,obj,mJsrt);
 }
 //解密Hook
 static void (*$BaidDu_A_d)(JNIEnv*,jobject,jobject)= NULL;
@@ -38,7 +39,7 @@ static void $My_BaidDu_A_d(JNIEnv *env, jobject obj,jobject mJsrt)
 {
 //	DEXLOG("My_BaidDu_A_d %p %p %p",jni,obj,inStr);
 	DEXLOG("My_BaidDu_A_d %s ", jstringTostring(env,(jstring)mJsrt));
-	$BaidDu_A_d(env,obj,mJsrt);
+//	$BaidDu_A_d(env,obj,mJsrt);
 }
 //将传入参数，直接解密
 static void RestoreCode(JNIEnv* env,char* pstr){
@@ -104,17 +105,17 @@ void AfterParse_Baidu(void* inDex){
 					MSJavaHookMethod(env,cls1,clsmid,(void*)&$My_BaidDu_A_d,(void**)&$BaidDu_A_d);
 				}
 			}
-			return ;
 			//判断是否被还原
 			if(isRestore){
 				return ;
+			}else {
+				isRestore = true;
 			}
-			isRestore = true;
 			//遍历METHODS,获取需要解析的类，还原代码，
 			LDex_Method* DexMethod = BaiduDexFile->DexMethod;
 			LDex_Types* DexTypes = BaiduDexFile->DexTypes;
 			LDex_String* DexString = BaiduDexFile->DexString;
-			//获取onCreate方法名
+			//获取onCreate，onCreate001方法名，字符的StringIDS
 			size_t onCreate = DexString->getIDSNo("onCreate");
 			size_t onCreate001 = DexString->getIDSNo("onCreate001");
 			DEXLOG("onCreate ：%d",onCreate);
@@ -134,7 +135,6 @@ void AfterParse_Baidu(void* inDex){
 				DexMethod->IDS.Next();
 			}
 			DEXLOG("恢复成功，开始获取代码");
-			return ;
 			//更新全部代码
 			BaiduDexFile->DexClass->Code_AddAll(BaiduDexFile->dex);
 			DEXLOG("代码获取完毕");
@@ -147,7 +147,7 @@ void AfterParse_Baidu(void* inDex){
 	/**/
 	pthread_t thread;
 	pthread_create(&thread,NULL,Baidu_DumpToFile,env);
-	sleep(30);
+//	sleep(10);
 //	pthread_create(&thread,NULL,Baidu_DumpToFile,NULL);
 }
 #endif

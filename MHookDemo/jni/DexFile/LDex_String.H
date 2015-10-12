@@ -26,7 +26,6 @@ public:
 		IDS.Reset();
 		size_t m_No = 0;
 		while(IDS.Get() != NULL){
-
 			if(strcmp(IDS.Get()->str,pstr) == 0){
 				return m_No;
 			}
