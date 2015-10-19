@@ -7,6 +7,7 @@
 #include "Substrate.h"
 #include "Common/Utils.H"
 #include "Shell/Shell.H"
+
 //dvm  Hook 段
 #define libdvm					"/system/lib/libdvm.so"
 #define dexFileParse			"_Z12dexFileParsePKhji"
@@ -29,8 +30,8 @@ static void* My_dexFileParse(int *inAddr, unsigned int length, int parseFlags){
 	Dex_Dyload = true;
 	void* Out_DexFile = NULL;
 	DEXLOG("LibCall dexFileParse:inDex:%p,length:%p",inAddr,length);
-	//屏蔽长度过小的长度
-	if(length > 0x2000){
+	//屏蔽长度过小的长度，主要防止外壳多次加载
+	if(length > 0x10000){
 		//先查找到原始Dex加载地址
 		BeforeParse_UnShell(inAddr,length);
 		Out_DexFile = _dexFileParse(inAddr,length,parseFlags);
@@ -49,12 +50,46 @@ int My_dvmDexFileOpenFromFd(int fd, void* ppDvmDex){
 	return _dvmDexFileOpenFromFd(fd,ppDvmDex);
 }
 //	dvmDexFileOpenPartial(const ClassObject* referrer,u4 classIdx,bool fromUnverifiedConstant);
+
+typedef void (*fMyloadAllClasses)(unsigned int lr, void *pObj, void* pDvmDex);
+fMyloadAllClasses pMyloadAllClasses = NULL;
+DexFile* mDexFile = NULL;
 int (*_dvmResolveClass)(const void* referrer, int classIdx, bool ppDfromUnverifiedConstantvmDex);
 int My_dvmResolveClass(const void* referrer, int classIdx, bool ppDfromUnverifiedConstantvmDex){
-	DEXLOG("LibCall My_dvmResolveClass %p %p %p",referrer,classIdx,ppDfromUnverifiedConstantvmDex);
+//	DEXLOG("LibCall My_dvmResolveClass %p %p %p",referrer,classIdx,ppDfromUnverifiedConstantvmDex);
 	//打印Dvmdex
-	u4* pDvmDex = (u4*)(referrer+40);
-	DEXLOG("LibCall pDvmDex  %p",*pDvmDex);
+//	u4* pDvmDex = (u4*)(referrer+40);
+//	DEXLOG("LibCall pDvmDex  %p",*pDvmDex);
+//	LR_PROC();
+	static int IsSaveed = false;
+/*	ClassObject *pObj = (ClassObject *)referrer;
+	if(NULL != referrer){
+		if (pMyloadAllClasses == NULL){
+			void *hDumpSo = dlopen("/data/local/tmp/libDexDumper.so", RTLD_NOW);
+			pMyloadAllClasses = (fMyloadAllClasses)dlsym(hDumpSo, "MyloadAllClasses");
+		}
+		if(pObj != 0 && pObj->descriptor != 0 && pMyloadAllClasses)
+		{
+			//LOGD("[%08x] %s", mDexFile, pObj->descriptor);
+			DvmDex* pDvmDex = pObj->pDvmDex;
+			if ( pDvmDex != 0)//mDexFile == 0 &&
+			{
+				mDexFile = pDvmDex->pDexFile;
+
+				//LOGD("[%08x] %s pMyloadAllClasses = %08x", mDexFile, pObj->descriptor, pMyloadAllClasses);
+				pMyloadAllClasses(lr, pObj, pDvmDex);
+
+				//kill(getpid(), 19);
+				//saveDextoFile(mDexFile, "/data/local/tmp/dump.dax");
+				//saveToFile((char *)mDexFile->baseAddr, 2658708, "/data/local/tmp/dump.dax");
+			}
+	}/**/
+
+
+
+
+
+
 	return _dvmResolveClass(referrer,classIdx,ppDfromUnverifiedConstantvmDex);
 }
 //	CheckDynLoad

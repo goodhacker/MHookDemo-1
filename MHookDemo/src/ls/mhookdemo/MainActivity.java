@@ -1,7 +1,6 @@
 package ls.mhookdemo;
 import java.io.*;
 import java.util.*;
-import ls.client.TimeLog;
 import ls.hook.Root;
 import ls.mhookdemo.R;
 import android.view.*;
@@ -29,7 +28,6 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);	
-		TimeLog.Log();
 		
 		Root.upgradeRootPermission(getPackageCodePath());
 		FILE_PATH = "/sdcard/";
@@ -79,7 +77,6 @@ public class MainActivity extends Activity {
 				}
 			}
 		});
-		TimeLog.Log();
 		button_reset.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
